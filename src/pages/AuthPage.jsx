@@ -1,8 +1,11 @@
+import SendOTP from "../components/SendOTP";
 
 function AuthPage() {
   return (
-    <div>AuthPage</div>
-  )
+    <div>
+      <SendOTP />
+    </div>
+  );
 }
 
-export default AuthPage
+export default AuthPage;

@@ -10,3 +10,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+button {
+  padding: 5px 10px;
+}
+input {
+  padding: 5px 10px;
+}
