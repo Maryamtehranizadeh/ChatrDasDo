@@ -1,9 +1,9 @@
-import SendOTP from "../components/SendOTP";
+import Login from "../components/Login";
 
 function AuthPage() {
   return (
     <div>
-      <SendOTP />
+      <Login />
     </div>
   );
 }

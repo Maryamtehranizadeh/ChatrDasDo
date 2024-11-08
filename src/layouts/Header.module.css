@@ -6,3 +6,8 @@
   align-items: center;
   padding: 30px;
 }
+.header button {
+  margin-right: 10px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}

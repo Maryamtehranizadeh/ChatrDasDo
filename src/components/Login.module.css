@@ -1,0 +1,33 @@
+.form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.form p {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.form span {
+  color: var(--p-color);
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+}
+.form input {
+  margin: 10px 0 20px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+.form button {
+  width: 100%;
+  color: var(--secondary-color);
+  border-radius: 5px;
+  background-color: var(--primary-color);
+}
