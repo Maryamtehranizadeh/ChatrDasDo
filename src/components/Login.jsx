@@ -1,6 +1,9 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
 import axios from "axios";
+import { baseURL } from "../config/api";
+
+const setCookie = (token) => (document.cookie = `${token}; max-age=1*24*60*60`);
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -8,14 +11,12 @@ function Login() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log(e.target.value);
-    console.log({ username, password });
     axios
-      .post("http://158.255.77.36/api/token/", {
+      .post(`${baseURL}token/`, {
         username,
         password,
       })
-      .then((response) => console.log(response))
+      .then((response) => setCookie(response.data.access))
       .catch((error) => console.log(error));
   };
 

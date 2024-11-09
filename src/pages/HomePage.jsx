@@ -1,9 +1,21 @@
-import React from 'react'
+import axios from "axios";
+import { baseURL } from "../config/api";
 
 function HomePage() {
+  //   axios
+  //     .get(`${baseURL}wings/`, {
+  //         headers:{"Content-Type":"application/json", "Authorization":"Token "
+
+  //         }
+  //     })
+  //     .then((response) => console.log(response))
+  //     .then((error) => console.log(error));
+
   return (
-    <div>HomePage</div>
-  )
+    <div>
+      <h1>Check our wings!</h1>
+    </div>
+  );
 }
 
-export default HomePage
+export default HomePage;
