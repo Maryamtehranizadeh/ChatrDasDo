@@ -2,10 +2,11 @@ import { useState } from "react";
 import styles from "./Login.module.css";
 import axios from "axios";
 import { baseURL } from "../config/api";
-
-const setCookie = (token) => (document.cookie = `${token}; max-age=1*24*60*60`);
+import { saveCookie, getCookie } from "../utils/cookie";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,17 +17,14 @@ function Login() {
         username,
         password,
       })
-      .then((response) => setCookie(response.data.access))
+      .then((response) => saveCookie(response.data.access))
       .catch((error) => console.log(error));
+    navigate("/dashboard");
   };
 
   return (
     <form onSubmit={submitHandler} className={styles.form}>
-      <p>Please Login</p>
-      <span>
-        To use Air Gear services, enter your phone number, you will receive a
-        verification code.
-      </span>
+      <span>To use Air Gear services, please login:</span>
       <label htmlFor="username">Your Username</label>
       <input
         id="username"

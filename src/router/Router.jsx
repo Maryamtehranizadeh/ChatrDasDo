@@ -5,6 +5,8 @@ import ItemDetails from "../pages/ItemDetails";
 import Admin from "../pages/Admin";
 import NotFound from "../pages/NotFound";
 import AuthPage from "../pages/AuthPage";
+import WingListPage from "../pages/WingListPage";
+import CertifierListPage from "../pages/CertifierListPage";
 
 function Router() {
   return (
@@ -15,6 +17,8 @@ function Router() {
       <Route path="/homepage/:id" element={<ItemDetails />} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/*" element={<NotFound />} />
+      <Route path="/winglist" element={<WingListPage />} />
+      <Route path="/certifiers" element={<CertifierListPage />} />
     </Routes>
   );
 }
