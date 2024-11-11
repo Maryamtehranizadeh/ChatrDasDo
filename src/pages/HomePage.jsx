@@ -1,5 +1,3 @@
-import { getWings } from "../utils/getWings";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 function HomePage() {

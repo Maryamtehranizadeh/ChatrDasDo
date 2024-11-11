@@ -10,4 +10,14 @@ const getCertifiers = () => {
   });
 };
 
-export { getCertifiers };
+const getWings = () => {
+  return axios.get(`${baseURL}wings/`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${getCookie()}`,
+    },
+  });
+};
+
+export { getWings, getCertifiers };
+

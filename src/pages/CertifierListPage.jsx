@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCertifiers } from "../utils/getCertifiers";
+import { getCertifiers } from "../utils/getAll";
 import { Link } from "react-router-dom";
 import styles from "./CertifierListPage.module.css";
 
