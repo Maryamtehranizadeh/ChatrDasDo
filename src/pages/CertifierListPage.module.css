@@ -1,19 +1,23 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
-    row-gap: 20px;
-  }
-  .container h1 {
-    color: var(--primary-color);
-  }
-  
-  .certifier {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 20px 40px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  row-gap: 20px;
+}
+.container h1 {
+  color: var(--primary-color);
+}
+
+.certifier {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 20px 40px;
+  cursor: pointer;
+}
+.certifier:hover {
+  border: 3px solid var(--border-color);
+  transition: ease-in 0.12s;
+}

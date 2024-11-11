@@ -16,6 +16,12 @@ function HomePage() {
           <button>Certifiers</button>
         </Link>
       </div>
+      <div>
+        <h3>Check our certificates!</h3>
+        <Link to="/certificates">
+          <button>Certificates</button>
+        </Link>
+      </div>
     </div>
   );
 }

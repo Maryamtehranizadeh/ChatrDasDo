@@ -19,5 +19,12 @@ const getWings = () => {
   });
 };
 
-export { getWings, getCertifiers };
-
+const getCertificates = () => {
+  return axios.get(`${baseURL}certificates/`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${getCookie()}`,
+    },
+  });
+};
+export { getWings, getCertifiers, getCertificates };

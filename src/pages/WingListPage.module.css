@@ -15,4 +15,9 @@
   border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 20px 40px;
+  cursor: pointer;
+}
+.wing:hover {
+  border: 3px solid var(--border-color);
+  transition: ease-in 0.12s;
 }

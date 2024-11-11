@@ -2,6 +2,7 @@ import { getWings } from "../utils/getAll";
 import { useQuery } from "@tanstack/react-query";
 import styles from "./WingListPage.module.css";
 import { Link } from "react-router-dom";
+import { getCookie } from "../utils/cookie";
 
 function WingListPage() {
   const { data, isLoading, isError, error } = useQuery({
@@ -21,11 +22,13 @@ function WingListPage() {
         <button>Add your Wing</button>
       </Link>
       {data?.data.map((wing) => (
-        <div key={wing.id} className={styles.wing}>
-          <h3>{wing.name}</h3>
-          <p>{wing.brand}</p>
-          <span>{wing.price}</span>
-        </div>
+        <Link to={`/wingdetails/${wing.id}`}>
+          <div key={wing.id} className={styles.wing}>
+            <h3>{wing.name}</h3>
+            <p>{wing.brand}</p>
+            <span>{wing.price}</span>
+          </div>
+        </Link>
       ))}
     </div>
   );

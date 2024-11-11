@@ -23,14 +23,16 @@ function CertifierListPage() {
         <button>Add a Certifier</button>
       </Link>
       {data?.data.map((certifier) => (
-        <div key={certifier.id} className={styles.certifier}>
-          <h3>{certifier.name}</h3>
-          <p>{certifier.contact_email}</p>
-          <span>{certifier.phone_number}</span>
-          <Link to={certifier.website}>
-            <button>Website</button>
-          </Link>
-        </div>
+        <Link to={`/certifierdetails/${certifier.id}`}>
+          <div key={certifier.id} className={styles.certifier}>
+            <h3>{certifier.name}</h3>
+            <p>{certifier.contact_email}</p>
+            <span>{certifier.phone_number}</span>
+            <Link to={certifier.website}>
+              <button>Website</button>
+            </Link>
+          </div>
+        </Link>
       ))}
     </div>
   );

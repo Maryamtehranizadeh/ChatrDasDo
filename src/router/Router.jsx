@@ -9,6 +9,9 @@ import WingListPage from "../pages/WingListPage";
 import CertifierListPage from "../pages/CertifierListPage";
 import AddCertifierPage from "../pages/AddCertifierPage";
 import AddWingPage from "../pages/AddWingPage";
+import CertificateListPage from "../pages/CertificateListPage";
+import WingDetails from "../pages/WingDetails";
+import CertifierDetails from "../pages/CertifierDetails";
 
 function Router() {
   return (
@@ -20,9 +23,12 @@ function Router() {
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/*" element={<NotFound />} />
       <Route path="/winglist" element={<WingListPage />} />
+      <Route path="/wingdetails/:id" element={<WingDetails />} />
       <Route path="/certifiers" element={<CertifierListPage />} />
+      <Route path="/certifierdetails/:id" element={<CertifierDetails />} />
       <Route path="/addwing" element={<AddWingPage />} />
       <Route path="/addcertifier" element={<AddCertifierPage />} />
+      <Route path="/certificates" element={<CertificateListPage />} />
     </Routes>
   );
 }
