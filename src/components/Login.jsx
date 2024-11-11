@@ -19,7 +19,7 @@ function Login() {
       })
       .then((response) => saveCookie(response.data.access))
       .catch((error) => console.log(error));
-    navigate("/dashboard");
+    navigate("/");
   };
 
   return (

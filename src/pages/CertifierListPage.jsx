@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCertifiers } from "../utils/getCertifiers";
 import { Link } from "react-router-dom";
+import styles from "./CertifierListPage.module.css";
 
 function CertifierListPage() {
   const { data, isLoading, isError, error } = useQuery({
@@ -16,10 +17,13 @@ function CertifierListPage() {
 
   console.log(data?.data);
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Welcome to our Certifiers' Page!</h1>
+      <Link to="/addcertifier">
+        <button>Add a Certifier</button>
+      </Link>
       {data?.data.map((certifier) => (
-        <div key={certifier.id}>
+        <div key={certifier.id} className={styles.certifier}>
           <h3>{certifier.name}</h3>
           <p>{certifier.contact_email}</p>
           <span>{certifier.phone_number}</span>
