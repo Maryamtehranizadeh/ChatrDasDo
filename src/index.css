@@ -1,7 +1,7 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  --primary-color: rgb(94, 84, 3);
+  --primary-color: rgb(166, 148, 11);
   --secondary-color: #fff;
   --border-color: silver;
   --p-color: grey;
@@ -25,4 +25,7 @@ input {
 a {
   text-decoration: none;
   color: inherit;
+}
+h1 {
+  color: var(--primary-color);
 }

@@ -14,7 +14,7 @@ function CertifierDetails() {
   return (
     <div>
       <h1>More details about this certifier:</h1>
-      <Link to="/certifierlist">
+      <Link to="/certifiers">
         <button>Back to the list</button>
       </Link>
       {isLoading ? (

@@ -5,7 +5,7 @@ function HomePage() {
     <div>
       <div>
         <h3>Check our wings!</h3>
-        <Link to="/winglist">
+        <Link to="/wings">
           <button>Wings</button>
         </Link>
       </div>

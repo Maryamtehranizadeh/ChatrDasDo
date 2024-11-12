@@ -8,15 +8,13 @@ function WingDetails() {
     queryKey: ["wings"],
     queryFn: getWings,
   });
-  console.log(data?.data);
   const { id } = useParams();
-  console.log(id);
   const thisWing = data?.data.find((wing) => wing.id === +id);
   console.log(thisWing);
   return (
     <div>
       <h1>More details about this wing:</h1>
-      <Link to="/winglist">
+      <Link to="/wings">
         <button>Back to the list</button>
       </Link>
       {isLoading ? (

@@ -15,7 +15,6 @@ function CertifierListPage() {
     return <h3>Error: {error.message}</h3>;
   }
 
-  console.log(data?.data);
   return (
     <div className={styles.container}>
       <h1>Welcome to our Certifiers' Page!</h1>

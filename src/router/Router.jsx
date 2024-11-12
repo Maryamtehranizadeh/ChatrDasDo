@@ -22,7 +22,7 @@ function Router() {
       <Route path="/homepage/:id" element={<ItemDetails />} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/*" element={<NotFound />} />
-      <Route path="/winglist" element={<WingListPage />} />
+      <Route path="/wings" element={<WingListPage />} />
       <Route path="/wingdetails/:id" element={<WingDetails />} />
       <Route path="/certifiers" element={<CertifierListPage />} />
       <Route path="/certifierdetails/:id" element={<CertifierDetails />} />
