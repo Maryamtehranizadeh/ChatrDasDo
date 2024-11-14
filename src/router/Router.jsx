@@ -12,6 +12,7 @@ import AddWingPage from "../pages/AddWingPage";
 import CertificateListPage from "../pages/CertificateListPage";
 import WingDetails from "../pages/WingDetails";
 import CertifierDetails from "../pages/CertifierDetails";
+import SignupPage from "../pages/SignupPage";
 
 function Router() {
   return (
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/admin" element={<Admin />} />
       <Route path="/homepage/:id" element={<ItemDetails />} />
       <Route path="/auth" element={<AuthPage />} />
+      <Route path="/signup" element={<SignupPage />} />
       <Route path="/*" element={<NotFound />} />
       <Route path="/wings" element={<WingListPage />} />
       <Route path="/wingdetails/:id" element={<WingDetails />} />

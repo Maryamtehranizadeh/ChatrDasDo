@@ -5,6 +5,7 @@
   --secondary-color: #fff;
   --border-color: silver;
   --p-color: grey;
+  --error-color: tomato;
 }
 
 * {
@@ -20,6 +21,10 @@ button {
 }
 input {
   padding: 5px 10px;
+}
+input:focus {
+  outline: none;
+  border: 2px solid var(--primary-color)  !important;
 }
 
 a {

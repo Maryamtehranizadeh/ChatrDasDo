@@ -4,6 +4,7 @@ import axios from "axios";
 import { baseURL } from "../config/api";
 import { saveCookie, getCookie } from "../utils/cookie";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
@@ -17,7 +18,10 @@ function Login() {
         username,
         password,
       })
-      .then((response) => saveCookie(response.data.access))
+      .then((response) => {
+        console.log(response);
+        saveCookie(response.data.access);
+      })
       .catch((error) => console.log(error));
     navigate("/");
   };
@@ -42,6 +46,12 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button type="submit">Login</button>
+      <span style={{ margin: "10px" }}>
+        Do not have an account? please{" "}
+        <Link to="/signup" style={{ color: " var(--primary-color)" }}>
+          Sign Up here!
+        </Link>
+      </span>
     </form>
   );
 }
