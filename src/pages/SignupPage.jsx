@@ -3,13 +3,18 @@ import styles from "./SignupPage.module.css";
 import { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { baseURL } from "../config/api";
 
 function SignupPage() {
+  const [predictedCode, setPredictedCode] = useState("");
   const [form, setForm] = useState({
-    name: "",
-    lastname: "",
-    email: "",
+    first_name: "",
+    last_name: "",
+    club: "",
     country: "",
+    countryCode: "",
+    phone_number: "",
+    email: "",
     username: "",
     password: "",
     rePassword: "",
@@ -24,21 +29,51 @@ function SignupPage() {
     queryFn: fetchCountries,
   });
 
-  //   const countryOptions = countries?.map((country) => ({
-  //     value: country.cca2,
-  //     label: country.name.common,
-  //   }));
-  //   console.log(countries);
-
   const changeHandler = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
+    if (event.target.name === "country") {
+      const selectedCountry = countries.find(
+        (country) => country.cca2 === event.target.value
+      );
+      if (selectedCountry) {
+        const code =
+          selectedCountry.idd?.root +
+          (selectedCountry.idd?.suffixes?.[0] || "");
+        setPredictedCode(code);
+        setForm((previousForm) => ({
+          ...previousForm,
+          [event.target.name]: event.target.value,
+          countryCode: code,
+        }));
+      } else {
+        setForm((previousForm) => ({
+          ...previousForm,
+          [event.target.name]: event.target.value,
+          countryCode: "",
+        }));
+      }
+    } else {
+      setForm((previousForm) => ({
+        ...previousForm,
+        [event.target.name]: event.target.value,
+      }));
+    }
   };
+
   const submitHandler = (event) => {
     event.preventDefault();
     if (form.password !== form.rePassword) {
       toast.error("Passwords are not the same!");
     } else {
       console.log(form);
+      const { username, password, email } = form;
+      axios
+        .post(`${baseURL}register/`, {
+          username,
+          password,
+          email,
+        })
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error.message));
     }
   };
   return (
@@ -51,13 +86,15 @@ function SignupPage() {
 
       <div className={styles.twins}>
         <div className={styles.side}>
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" name="name" />
-          <label htmlFor="lastname">Last Name</label>
-          <input type="text" id="lastname" name="lastname" />
+          <label htmlFor="name">First Name</label>
+          <input type="text" id="name" name="first_name" />
+          <label htmlFor="last_name">Last Name </label>
+          <input type="text" id="last_name" name="last_name" />
           <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" />
-          <label htmlFor="country">Choose your country:</label>
+          <label htmlFor="club">Name of Club (Optional)</label>
+          <input type="text" id="club" name="club" />
+          <label htmlFor="country">Choose your country</label>
           <select id="country" name="country">
             <option value="">Select your country</option>
             {countries
@@ -74,6 +111,24 @@ function SignupPage() {
           </select>
         </div>
         <div className={styles.side}>
+          <label htmlFor="countryCode">Country Code</label>
+          <select
+            id="countryCode"
+            name="countryCode"
+            className={styles.countryCode}
+          >
+            <option value="">{predictedCode || "Code"}</option>
+            {countries
+              ?.sort((a, b) => a.name.common.localeCompare(b.name.common))
+              .map((country) => (
+                <option key={country.cca2} value={predictedCode || ""}>
+                  {country.idd?.root}
+                  {country.idd?.suffixes?.[0] || ""} - {country.cca2}
+                </option>
+              ))}
+          </select>
+          <label htmlFor="phone_number">Phone</label>
+          <input type="tel" id="phone_number" name="phone_number" />
           <label htmlFor="username">Your username</label>
           <input type="text" id="username" name="username" />
           <label htmlFor="password">Your password</label>

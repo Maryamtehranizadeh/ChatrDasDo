@@ -18,6 +18,6 @@
   cursor: pointer;
 }
 .wing:hover {
-  border: 3px solid var(--border-color);
+  border: 3px solid var(--primary-color);
   transition: ease-in 0.12s;
 }

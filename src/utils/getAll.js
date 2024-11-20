@@ -11,7 +11,7 @@ const getCertifiers = () => {
 };
 
 const getWings = () => {
-  return axios.get(`${baseURL}wings/`, {
+  return axios.get(`${baseURL}gears/`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Token ${getCookie()}`,

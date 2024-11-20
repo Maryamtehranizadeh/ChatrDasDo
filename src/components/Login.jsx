@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Login.module.css";
 import axios from "axios";
 import { baseURL } from "../config/api";
-import { saveCookie, getCookie } from "../utils/cookie";
+import { saveCookie } from "../utils/cookie";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
