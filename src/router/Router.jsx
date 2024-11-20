@@ -13,6 +13,8 @@ import CertificateListPage from "../pages/CertificateListPage";
 import WingDetails from "../pages/WingDetails";
 import CertifierDetails from "../pages/CertifierDetails";
 import SignupPage from "../pages/SignupPage";
+import GearListPage from "../pages/GearListPage";
+import InstrumentList from "../pages/InstrumentList";
 
 function Router() {
   return (
@@ -25,6 +27,8 @@ function Router() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/*" element={<NotFound />} />
       <Route path="/wings" element={<WingListPage />} />
+      <Route path="/instruments" element={<InstrumentList />} />
+      <Route path="/gears" element={<GearListPage />} />
       <Route path="/wingdetails/:id" element={<WingDetails />} />
       <Route path="/certifiers" element={<CertifierListPage />} />
       <Route path="/certifierdetails/:id" element={<CertifierDetails />} />

@@ -2,7 +2,6 @@ import { getWings } from "../utils/getAll";
 import { useQuery } from "@tanstack/react-query";
 import styles from "./WingListPage.module.css";
 import { Link } from "react-router-dom";
-import { getCookie } from "../utils/cookie";
 
 function WingListPage() {
   const { data, isLoading, isError, error } = useQuery({

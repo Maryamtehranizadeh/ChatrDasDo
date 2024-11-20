@@ -27,4 +27,14 @@ const getCertificates = () => {
     },
   });
 };
-export { getWings, getCertifiers, getCertificates };
+
+const getGearTypes = () => {
+  return axios.get(`${baseURL}gear-types/`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${getCookie()}`,
+    },
+  });
+};
+
+export { getWings, getCertifiers, getCertificates, getGearTypes };
