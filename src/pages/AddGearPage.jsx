@@ -2,10 +2,11 @@ import { useState } from "react";
 import { baseURL } from "../config/api";
 import { getCookie } from "../utils/cookie";
 import axios from "axios";
+import styles from "./AddGearPage.module.css";
 
-function AddWingPage() {
+function AddGearPage() {
   const [form, setForm] = useState({
-    wingName: "",
+    name: "",
     brand: "",
     explanation: "",
     price: 0,
@@ -45,14 +46,14 @@ function AddWingPage() {
     <form
       onChange={changeHandler}
       onSubmit={submitHandler}
-      style={{ display: "flex", flexDirection: "column" }}
+      className={styles.form}
     >
-      <h1> Add your wing here!</h1>
-      <label htmlFor="name">Name of the wing</label>
+      <h1> Add your item here!</h1>
+      <label htmlFor="name">Name of the wing, instrument, etc</label>
       <input type="text" id="name" name="name" />
       <label htmlFor="brand">Brand</label>
       <input type="text" id="brand" name="brand" />
-      <label htmlFor="explanation">More about the wing</label>
+      <label htmlFor="explanation">More about the item</label>
       <textarea type="text" id="explanation" name="explanation" />
       <label htmlFor="price">Price</label>
       <input type="number" id="price" name="price" />
@@ -67,9 +68,9 @@ function AddWingPage() {
       <input type="file" id="photo" name="photo" />
       <label htmlFor="user">User</label>
       <input type="text" id="user" name="user" />
-      <button type="submit">Add Wing</button>
+      <button type="submit">Add Gear</button>
     </form>
   );
 }
 
-export default AddWingPage;
+export default AddGearPage;

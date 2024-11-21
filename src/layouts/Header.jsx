@@ -12,9 +12,9 @@ function Header() {
         </Link>
       </div>
       <div>
-        <Link to="/admin">
+        {/* <Link to="/admin">
           <button>Admin Panel</button>
-        </Link>
+        </Link> */}
         <Link to="/auth">
           <button>Login</button>
         </Link>

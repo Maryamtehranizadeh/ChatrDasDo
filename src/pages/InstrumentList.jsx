@@ -1,9 +1,14 @@
-import React from 'react'
+import { Link } from "react-router-dom";
 
 function InstrumentList() {
   return (
-    <div>InstrumentList</div>
-  )
+    <div>
+      <h1>Welcome to our instruments' Page!</h1>
+      <Link to="/addgear">
+        <button>Add your Gear</button>
+      </Link>
+    </div>
+  );
 }
 
-export default InstrumentList
+export default InstrumentList;
