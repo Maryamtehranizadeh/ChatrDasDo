@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 function InstrumentList() {
   return (
     <div>
-      <h1>Welcome to our instruments' Page!</h1>
+      <h1>Flying Instruments</h1>
       <Link to="/addgear">
-        <button>Add your Gear</button>
+        <button>Click here to add your Item!</button>
       </Link>
     </div>
   );

@@ -13,8 +13,6 @@ function GearListPage() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-
-  //   console.log(data?.data);
   return (
     <div>
       <h1>Welcome to our Gears' Page!</h1>

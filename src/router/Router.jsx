@@ -28,7 +28,7 @@ function Router() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/*" element={<NotFound />} />
       <Route path="/wings" element={<WingListPage />} />
-      <Route path="/harnesses" element={<HarnessListPage />} />
+      <Route path="/harness" element={<HarnessListPage />} />
 
       <Route path="/instruments" element={<InstrumentList />} />
       <Route path="/gears" element={<GearListPage />} />

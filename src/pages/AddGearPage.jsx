@@ -9,6 +9,15 @@ import { useNavigate } from "react-router-dom";
 
 function AddGearPage() {
   const navigate = useNavigate();
+  const [form, setForm] = useState({
+    gear_type_id: "",
+    name: "",
+    brand: "",
+    properties: "",
+    price: 0,
+    currency: "",
+    // photo: null,
+  });
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear-types"],
     queryFn: getGearTypes,
@@ -19,15 +28,7 @@ function AddGearPage() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  const [form, setForm] = useState({
-    gear_type_id: "",
-    name: "",
-    brand: "",
-    properties: "",
-    price: 0,
-    currency: "",
-    // photo: null,
-  });
+
   const changeHandler = (event) => {
     setForm((previousForm) => ({
       ...previousForm,
