@@ -14,10 +14,14 @@ function GearListPage() {
     return <h3>Error: {error.message}</h3>;
   }
 
-  console.log(data?.data);
+  //   console.log(data?.data);
   return (
     <div>
       <h1>Welcome to our Gears' Page!</h1>
+      <Link to="/addgear">
+        <button>Add your Item, others may need it!</button>
+      </Link>
+      <hr />
       {data?.data.map((type) => (
         <Link to={`/${type.name}`}>
           <button key={type.id}>{type.name}</button>

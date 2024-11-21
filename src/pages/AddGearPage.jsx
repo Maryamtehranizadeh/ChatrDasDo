@@ -1,45 +1,62 @@
 import { useState } from "react";
 import { baseURL } from "../config/api";
-import { getCookie } from "../utils/cookie";
 import axios from "axios";
 import styles from "./AddGearPage.module.css";
+import { useQuery } from "@tanstack/react-query";
+import { getGearTypes } from "../utils/getAll";
+import { getCookie } from "../utils/cookie";
 
 function AddGearPage() {
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["gear-types"],
+    queryFn: getGearTypes,
+  });
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  if (isError) {
+    return <h3>Error: {error.message}</h3>;
+  }
   const [form, setForm] = useState({
+    gear_type_id: "",
     name: "",
     brand: "",
-    explanation: "",
+    properties: "",
     price: 0,
     currency: "",
-    photo: null,
-    user: "",
+    // photo: null,
   });
   const changeHandler = (event) => {
-    if (event.target.name !== "photo") {
-      setForm({ ...form, [event.target.name]: event.target.value });
-    } else {
-      setForm({ ...form, [event.target.name]: event.target.files[0] });
-    }
+    setForm((previousForm) => ({
+      ...previousForm,
+      [event.target.name]: event.target.value,
+    }));
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    const requestData = {
-      name: form.name,
-      brand: form.brand,
-      price: Number(form.price),
-      currency: form.currency,
-      user: form.user,
-    };
-    console.log(requestData);
+    console.log(form);
+    const { gear_type_id, name, brand, model, price, properties, currency } =
+      form;
     axios
-      .post(`${baseURL}wings/`, requestData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${getCookie()}`,
+      .post(
+        `${baseURL}gears/`,
+        {
+          gear_type_id,
+          name,
+          brand,
+          model,
+          price,
+          currency,
         },
-      })
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${getCookie()}`,
+          },
+        }
+      )
       .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error.message));
   };
 
   return (
@@ -49,12 +66,21 @@ function AddGearPage() {
       className={styles.form}
     >
       <h1> Add your item here!</h1>
+      <label htmlFor="category">Category</label>
+      <select name="gear_type_id" id="category">
+        <option value="none">Category</option>
+        {data?.data.map((type) => (
+          <option key={type.id} value={type.id}>
+            {type.name}
+          </option>
+        ))}
+      </select>
       <label htmlFor="name">Name of the wing, instrument, etc</label>
       <input type="text" id="name" name="name" />
       <label htmlFor="brand">Brand</label>
       <input type="text" id="brand" name="brand" />
-      <label htmlFor="explanation">More about the item</label>
-      <textarea type="text" id="explanation" name="explanation" />
+      <label htmlFor="model">Model</label>
+      <input type="text" name="model" id="model" />
       <label htmlFor="price">Price</label>
       <input type="number" id="price" name="price" />
       <label htmlFor="currency">Currency</label>
@@ -62,12 +88,13 @@ function AddGearPage() {
         <option value="none"></option>
         <option name="EUR">EUR</option>
         <option name="GBP">GBP</option>
+        <option name="IRR">IRR</option>
         <option name="USD">USD</option>
       </select>
-      <label htmlFor="photo">Photo</label>
-      <input type="file" id="photo" name="photo" />
-      <label htmlFor="user">User</label>
-      <input type="text" id="user" name="user" />
+      <label htmlFor="properties">More about the item</label>
+      <textarea type="text" id="properties" name="properties" />
+      {/* <label htmlFor="photo">Photo</label>
+      <input type="file" id="photo" name="photo" /> */}
       <button type="submit">Add Gear</button>
     </form>
   );

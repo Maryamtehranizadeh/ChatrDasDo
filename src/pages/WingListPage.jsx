@@ -17,12 +17,12 @@ function WingListPage() {
   return (
     <div className={styles.container}>
       <h1>Welcome to our Wings' Page!</h1>
-      <Link to="/addwing">
+      <Link to="/addgear">
         <button>Add your Wing</button>
       </Link>
       {data?.data.map((wing) => (
-        <Link to={`/wingdetails/${wing.id}`}>
-          <div key={wing.id} className={styles.wing}>
+        <Link to={`/wingdetails/${wing.id}`} key={wing.id}>
+          <div className={styles.wing}>
             <h3>{wing.name}</h3>
             <p>{wing.brand}</p>
             <span>{wing.price}</span>

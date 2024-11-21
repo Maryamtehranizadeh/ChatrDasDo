@@ -4,13 +4,19 @@ import { useQuery } from "@tanstack/react-query";
 import { getWings } from "../utils/getAll";
 
 function WingDetails() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["wings"],
     queryFn: getWings,
   });
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  if (isError) {
+    return <h3>Error: {error.message}</h3>;
+  }
   const { id } = useParams();
-  const thisWing = data?.data.find((wing) => wing.id === +id);
-  console.log(thisWing);
+
+  const thisWing = data?.data.find((wing) => wing.id === id);
   return (
     <div>
       <h1>More details about this wing:</h1>
