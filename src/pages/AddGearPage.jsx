@@ -5,8 +5,10 @@ import styles from "./AddGearPage.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getGearTypes } from "../utils/getAll";
 import { getCookie } from "../utils/cookie";
+import { useNavigate } from "react-router-dom";
 
 function AddGearPage() {
+  const navigate = useNavigate();
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear-types"],
     queryFn: getGearTypes,
@@ -34,7 +36,7 @@ function AddGearPage() {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(form);
+    // console.log(form);
     const { gear_type_id, name, brand, model, price, properties, currency } =
       form;
     axios
@@ -47,6 +49,7 @@ function AddGearPage() {
           model,
           price,
           currency,
+          properties,
         },
         {
           headers: {
@@ -55,8 +58,13 @@ function AddGearPage() {
           },
         }
       )
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error.message));
+      .then((response) => {
+        console.log(response.data.id);
+        const itemId = response.data.id;
+        console.log(itemId);
+        navigate(`/itemdetails/${itemId}`);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

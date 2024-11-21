@@ -21,7 +21,7 @@ function WingListPage() {
         <button>Add your Wing</button>
       </Link>
       {data?.data.map((wing) => (
-        <Link to={`/wingdetails/${wing.id}`} key={wing.id}>
+        <Link to={`/itemdetails/${wing.id}`} key={wing.id}>
           <div className={styles.wing}>
             <h3>{wing.name}</h3>
             <p>{wing.brand}</p>
