@@ -19,7 +19,6 @@ function Login() {
         password,
       })
       .then((response) => {
-        console.log(response);
         saveCookie(response.data.access);
       })
       .catch((error) => console.log(error));

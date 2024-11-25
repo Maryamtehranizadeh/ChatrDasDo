@@ -25,6 +25,7 @@ function WingListPage() {
           <div className={styles.wing}>
             <h3>{wing.name}</h3>
             <p>{wing.brand}</p>
+            <p>{wing.id}</p>
             <span>{wing.price}</span>
           </div>
         </Link>
