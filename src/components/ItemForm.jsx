@@ -45,10 +45,8 @@ function ItemForm({ changeHandler, submitHandler, form, setForm }) {
         <option name="IRR">IRR</option>
         <option name="USD">USD</option>
       </select>
-      <label htmlFor="properties">More about the item</label>
-      <textarea type="text" id="properties" name="properties" />
-      {/* <label htmlFor="photo">Photo</label>
-  <input type="file" id="photo" name="photo" /> */}
+      {/* <label htmlFor="properties">More about the item</label>
+      <textarea type="text" id="properties" name="properties" /> */}
       <button type="submit">Add Gear</button>
     </form>
   );

@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { baseURL } from "../config/api";
 import axios from "axios";
 import { getCookie } from "../utils/cookie";
-import { useNavigate } from "react-router-dom";
 import ItemForm from "../components/ItemForm";
+import styles from "./AddGearPage.module.css";
+import toast from "react-hot-toast";
+import PhotoModal from "../components/PhotoModal";
 
 function AddGearPage() {
-  const navigate = useNavigate();
+  const [isModal, setIsModal] = useState(false);
+  const [itemId, setItemId] = useState(null);
+  const [photos, setPhotos] = useState([]);
+
   const [form, setForm] = useState({
     gear_type_id: "",
     name: "",
@@ -17,7 +22,6 @@ function AddGearPage() {
   });
 
   const changeHandler = (event) => {
-    // console.log(event.target.value);
     setForm((previousForm) => ({
       ...previousForm,
       [event.target.name]: event.target.value,
@@ -25,9 +29,20 @@ function AddGearPage() {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    // console.log(form);
+
     const { gear_type_id, name, brand, model, price, properties, currency } =
       form;
+
+    Object.keys(form).forEach((key) => {
+      if (!form[key].trim()) {
+        if (key === "gear_type_id") {
+          toast.error("Please choose category!");
+        } else {
+          toast.error(`The field "${key}" is empty!`);
+        }
+      }
+    });
+
     axios
       .post(
         `${baseURL}gears/`,
@@ -48,21 +63,39 @@ function AddGearPage() {
         }
       )
       .then((response) => {
-        console.log(response);
-        const itemId = response.data.id;
-        console.log(itemId);
-        navigate(`/itemdetails/${itemId}`);
+        setIsModal(true);
+        setItemId(response.data.id);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
+  useEffect(() => {
+    if (photos.length > 0) {
+      console.log("Updated photos:", photos);
+    }
+  }, [photos]);
+
   return (
-    <ItemForm
-      form={form}
-      setForm={setForm}
-      changeHandler={changeHandler}
-      submitHandler={submitHandler}
-    />
+    <div>
+      <ItemForm
+        form={form}
+        setForm={setForm}
+        changeHandler={changeHandler}
+        submitHandler={submitHandler}
+      />
+
+      {isModal && (
+        <PhotoModal
+          setPhotos={setPhotos}
+          itemId={itemId}
+          photos={photos}
+          isModal={isModal}
+          setIsModal={setIsModal}
+        />
+      )}
+    </div>
   );
 }
 

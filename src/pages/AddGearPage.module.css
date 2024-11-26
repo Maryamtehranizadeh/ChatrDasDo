@@ -1,0 +1,12 @@
+input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--primary-color); /* Apply your custom primary color */
+    color: white; /* Set text color */
+    border-radius: 0.5rem; /* Rounded corners */
+    padding: 0.5rem 1rem; /* Padding for the button */
+    border: none; /* Remove the border */
+    cursor: pointer; /* Pointer cursor for better UX */
+  }
+  
+  input[type="file"]::-webkit-file-upload-button:hover {
+    opacity: 0.9; /* Add hover effect */
+  }
