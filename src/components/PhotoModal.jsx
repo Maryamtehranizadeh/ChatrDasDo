@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { baseURL } from "../config/api";
+import { getCookie } from "../utils/cookie";
 
 function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
   const navigate = useNavigate();
+
   const skipHandler = () => {
     setIsModal(false);
     navigate(`/itemdetails/${itemId}`);
@@ -25,6 +29,28 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
       console.log("Updated photos:", photos);
     }
   }, [photos]);
+
+  const addPhotoHandler = () => {
+    const formData = new FormData();
+    photos.forEach((photo, index) => {
+      formData.append("image", photo);
+    });
+
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
+    axios
+      .post(`${baseURL}gears/${itemId}/pictures/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Token ${getCookie()}`,
+        },
+      })
+      .then((response) => console.log(response.data))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
@@ -102,6 +128,7 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
         >
           {photos.length > 0 && (
             <button
+              onClick={addPhotoHandler}
               className="px-4 py-2 text-white rounded-lg hover:opacity-90"
               style={{
                 backgroundColor: "var(--primary-color)",

@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 function Header() {
+  const logoutHandler = () => {
+    console.log("logout");
+  };
   const navigate = useNavigate();
   return (
     <header className={styles.header}>
@@ -20,7 +23,7 @@ function Header() {
           <button>Login</button>
         </Link>
         <Link to="/auth">
-          <button>Logout</button>
+          <button onClick={logoutHandler}>Logout</button>
         </Link>
       </div>
     </header>
