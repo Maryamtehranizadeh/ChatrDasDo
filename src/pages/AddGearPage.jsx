@@ -71,11 +71,11 @@ function AddGearPage() {
       });
   };
 
-  useEffect(() => {
-    if (photos.length > 0) {
-      console.log("Updated photos:", photos);
-    }
-  }, [photos]);
+  // useEffect(() => {
+  //   if (photos.length > 0) {
+  //     console.log("Updated photos:", photos);
+  //   }
+  // }, [photos]);
 
   return (
     <div>

@@ -3,16 +3,19 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../config/api";
 import { getCookie } from "../utils/cookie";
+import { useQuery } from "@tanstack/react-query";
 
 function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
+  const [loadingButton, setLoadingButton] = useState(false);
   const navigate = useNavigate();
 
   const skipHandler = () => {
     setIsModal(false);
     navigate(`/itemdetails/${itemId}`);
   };
+
   const photoHandler = (event) => {
-    console.log(event.target.files);
+    // console.log(event.target.files);
     const selectedPhotos = event.target.files;
     setPhotos((previousPhotos) => [
       ...previousPhotos,
@@ -31,26 +34,35 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
   }, [photos]);
 
   const addPhotoHandler = () => {
-    const formData = new FormData();
-    photos.forEach((photo, index) => {
+    let allPostedPhotos = [];
+    setLoadingButton(true);
+    photos.forEach((photo) => {
+      const formData = new FormData();
       formData.append("image", photo);
+      //   for (let [key, value] of formData.entries()) {
+      //     console.log(`${key}:`, value);
+      //   }
+      axios
+        .post(`${baseURL}gears/${itemId}/pictures/`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Token ${getCookie()}`,
+          },
+        })
+        .then((response) => {
+          allPostedPhotos.push(response.data);
+          //   console.log(allPostedPhotos);
+          if (allPostedPhotos.length === photos.length) {
+            console.log(allPostedPhotos);
+            skipHandler();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     });
-
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
-    axios
-      .post(`${baseURL}gears/${itemId}/pictures/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Token ${getCookie()}`,
-        },
-      })
-      .then((response) => console.log(response.data))
-      .catch((error) => {
-        console.log(error);
-      });
   };
+
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
@@ -134,7 +146,7 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
                 backgroundColor: "var(--primary-color)",
               }}
             >
-              Add Photos
+              {loadingButton ? "Adding Photos..." : "Add Photos"}
             </button>
           )}
           {photos.length == 0 && (

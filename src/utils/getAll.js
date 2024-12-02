@@ -38,4 +38,32 @@ const getGearTypes = () => {
   });
 };
 
-export { getWings, getCertifiers, getCertificates, getGearTypes };
+const getGearPhotos = ({ queryKey }) => {
+  const [, id] = queryKey;
+  return axios.get(`${baseURL}gears/${id}/pictures`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${getCookie()}`,
+    },
+  });
+};
+// this function did not work
+
+const getItemDetails = ({ queryKey }) => {
+  const [, id] = queryKey;
+  return axios.get(`${baseURL}gears/${id}/`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${getCookie()}`,
+    },
+  });
+};
+
+export {
+  getWings,
+  getCertifiers,
+  getCertificates,
+  getGearTypes,
+  getGearPhotos,
+  getItemDetails,
+};

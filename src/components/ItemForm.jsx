@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { getGearTypes } from "../utils/getAll";
 import styles from "./ItemForm.module.css";
+import ItemFormExtraProperties from "./ItemFormExtraProperties";
+import { useState } from "react";
 
 function ItemForm({ changeHandler, submitHandler, form, setForm }) {
+  const [categoryId, setCategoryId] = useState("");
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear-types"],
     queryFn: getGearTypes,
@@ -13,6 +16,16 @@ function ItemForm({ changeHandler, submitHandler, form, setForm }) {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
+  // console.log(data?.data);
+
+  const typeHandler = (event) => {
+    // console.log(event.target.value);
+    const selectedCategory = event.target.value;
+    console.log(selectedCategory);
+    setCategoryId(selectedCategory);
+    console.log(categoryId);
+  };
+
   return (
     <form
       onChange={changeHandler}
@@ -21,11 +34,11 @@ function ItemForm({ changeHandler, submitHandler, form, setForm }) {
     >
       <h1> Add your item here!</h1>
       <label htmlFor="category">Category</label>
-      <select name="gear_type_id" id="category">
+      <select name="gear_type_id" id="category" onChange={typeHandler}>
         <option value="none">Category</option>
         {data?.data.map((type) => (
           <option key={type.id} value={type.id}>
-            {type.name}
+            {type.name} - {type.description}
           </option>
         ))}
       </select>
@@ -45,8 +58,9 @@ function ItemForm({ changeHandler, submitHandler, form, setForm }) {
         <option name="IRR">IRR</option>
         <option name="USD">USD</option>
       </select>
-      {/* <label htmlFor="properties">More about the item</label>
-      <textarea type="text" id="properties" name="properties" /> */}
+      {categoryId && (
+        <ItemFormExtraProperties data={data} categoryId={categoryId} />
+      )}
       <button type="submit">Add Gear</button>
     </form>
   );

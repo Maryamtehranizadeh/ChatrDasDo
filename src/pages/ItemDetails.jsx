@@ -4,21 +4,16 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { baseURL } from "../config/api";
 import { getCookie } from "../utils/cookie";
+import GearPhotos from "../components/GearPhotos";
+import { getItemDetails } from "../utils/getAll";
 
 function ItemDetails() {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear", id],
-    queryFn: () => {
-      return axios.get(`${baseURL}gears/${id}/`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${getCookie()}`,
-        },
-      });
-    },
+    queryFn: getItemDetails,
   });
 
   if (isLoading) {
@@ -28,13 +23,17 @@ function ItemDetails() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  console.log(data?.data);
+  // console.log(data?.data);
 
   return (
     <div>
       <h1>Details about {data.data.name}:</h1>
       <div>
         {/* <h3>Category:{data.data.gear_type}</h3> */}
+
+        <div>
+          <GearPhotos id={id} />
+        </div>
         <h4>{data.data.name}</h4>
         <h4>{data.data.model}</h4>
         <hr />
