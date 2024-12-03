@@ -11,6 +11,7 @@ function AddGearPage() {
   const [isModal, setIsModal] = useState(false);
   const [itemId, setItemId] = useState(null);
   const [photos, setPhotos] = useState([]);
+  const [properties, setProperties] = useState({});
 
   const [form, setForm] = useState({
     gear_type_id: "",
@@ -19,22 +20,38 @@ function AddGearPage() {
     properties: "",
     price: 0,
     currency: "",
+    properties: {},
   });
+  const formKeys = Object.keys(form);
+  const propertykeys = Object.keys(properties);
 
   const changeHandler = (event) => {
-    setForm((previousForm) => ({
-      ...previousForm,
+    setForm((prevForm) => ({
+      ...prevForm,
+      properties,
       [event.target.name]: event.target.value,
     }));
   };
+  // console.log(properties);
+  // console.log(form);
+  // console.log(propertykeys);
+  // console.log(formKeys);
+
+  for (let key in properties) {
+    if (key in form) {
+      delete form[key];
+    }
+  }
+
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(form);
 
     const { gear_type_id, name, brand, model, price, properties, currency } =
       form;
 
     Object.keys(form).forEach((key) => {
-      if (!form[key].trim()) {
+      if (!form[key]) {
         if (key === "gear_type_id") {
           toast.error("Please choose category!");
         } else {
@@ -71,19 +88,13 @@ function AddGearPage() {
       });
   };
 
-  // useEffect(() => {
-  //   if (photos.length > 0) {
-  //     console.log("Updated photos:", photos);
-  //   }
-  // }, [photos]);
-
   return (
     <div>
       <ItemForm
-        form={form}
-        setForm={setForm}
         changeHandler={changeHandler}
         submitHandler={submitHandler}
+        properties={properties}
+        setProperties={setProperties}
       />
 
       {isModal && (

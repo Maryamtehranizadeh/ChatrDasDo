@@ -1,22 +1,25 @@
-import { Label } from "@headlessui/react";
-import React from "react";
-
-function ItemFormExtraProperties({ data, categoryId }) {
-  console.log(categoryId);
-  console.log(data?.data);
+function ItemFormExtraProperties({
+  data,
+  categoryId,
+  properties,
+  setProperties,
+}) {
   const selectedCategory = data?.data.find(
     (category) => category.id === categoryId
   );
-  console.log(selectedCategory.extra_properties);
+  const changeHandler = (event) => {
+    console.log(event.target.value);
+  };
 
   return (
-    <div
+    <form
       style={{
         display: "flex",
         flexDirection: "column",
         justifyContent: "start",
         alignItems: "start",
       }}
+      onChange={changeHandler}
     >
       {selectedCategory.extra_properties.map((extra_property) => (
         <div
@@ -34,10 +37,16 @@ function ItemFormExtraProperties({ data, categoryId }) {
             type={extra_property.type}
             name={extra_property.name}
             id={extra_property.name}
+            onChange={(event) => {
+              setProperties((prevProperties) => ({
+                ...prevProperties,
+                [extra_property.name]: event.target.value,
+              }));
+            }}
           />
         </div>
       ))}
-    </div>
+    </form>
   );
 }
 

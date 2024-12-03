@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getGearTypes } from "../utils/getAll";
 import styles from "./ItemForm.module.css";
-import ItemFormExtraProperties from "./ItemFormExtraProperties";
 import { useState } from "react";
+import ItemFormExtraProperties from "./ItemFormExtraProperties";
 
-function ItemForm({ changeHandler, submitHandler, form, setForm }) {
+function ItemForm({ changeHandler, submitHandler, properties, setProperties }) {
   const [categoryId, setCategoryId] = useState("");
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear-types"],
@@ -19,12 +19,10 @@ function ItemForm({ changeHandler, submitHandler, form, setForm }) {
   // console.log(data?.data);
 
   const typeHandler = (event) => {
-    // console.log(event.target.value);
     const selectedCategory = event.target.value;
-    console.log(selectedCategory);
     setCategoryId(selectedCategory);
-    console.log(categoryId);
   };
+  
 
   return (
     <form
@@ -59,7 +57,12 @@ function ItemForm({ changeHandler, submitHandler, form, setForm }) {
         <option name="USD">USD</option>
       </select>
       {categoryId && (
-        <ItemFormExtraProperties data={data} categoryId={categoryId} />
+        <ItemFormExtraProperties
+          properties={properties}
+          setProperties={setProperties}
+          data={data}
+          categoryId={categoryId}
+        />
       )}
       <button type="submit">Add Gear</button>
     </form>
