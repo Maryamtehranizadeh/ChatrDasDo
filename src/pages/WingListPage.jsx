@@ -16,10 +16,9 @@ function WingListPage() {
   }
   return (
     <div className={styles.container}>
-      <h1>Welcome to our Wings' Page!</h1>
-      <Link to="/addgear">
-        <button>Add your Wing</button>
-      </Link>
+      {/* <Link to="/addgear">
+        <button>Add more Wings here</button>
+      </Link> */}
       {data?.data.map((wing) => (
         <Link to={`/itemdetails/${wing.id}`} key={wing.id}>
           <div className={styles.wing}>

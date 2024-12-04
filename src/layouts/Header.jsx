@@ -14,6 +14,13 @@ function Header() {
     logout();
     navigate("/auth");
   };
+  const dashboardHandler = () => {
+    if (loginToken) {
+      navigate("/dashboard");
+    } else {
+      navigate("/auth");
+    }
+  };
 
   return (
     <header className={styles.header}>
@@ -28,9 +35,7 @@ function Header() {
       <div>
         {loginToken ? (
           <>
-            <Link to="/dashboard">
-              <button>Dashboard</button>
-            </Link>
+            <button onClick={dashboardHandler}>Dashboard</button>
             <button onClick={logoutHandler}>Logout</button>
           </>
         ) : (
