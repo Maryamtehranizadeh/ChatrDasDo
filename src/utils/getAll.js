@@ -20,6 +20,15 @@ const getWings = () => {
   });
 };
 
+const getUsers = () => {
+  return axios.get(`${baseURL}users/`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${getCookie()}`,
+    },
+  });
+};
+
 const getCertificates = () => {
   return axios.get(`${baseURL}certificates/`, {
     headers: {
@@ -66,4 +75,5 @@ export {
   getGearTypes,
   getGearPhotos,
   getItemDetails,
+  getUsers,
 };

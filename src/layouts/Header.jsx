@@ -2,12 +2,19 @@ import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { getCookie } from "../utils/cookie";
+import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthProvider";
 
 function Header() {
-  const logoutHandler = () => {
-    console.log("logout");
-  };
   const navigate = useNavigate();
+  const { loginToken, logout } = useAuth();
+
+  const logoutHandler = () => {
+    logout();
+    navigate("/auth");
+  };
+
   return (
     <header className={styles.header}>
       <div>
@@ -19,12 +26,18 @@ function Header() {
         <Navbar />
       </div>
       <div>
-        <Link to="/auth">
-          <button>Login</button>
-        </Link>
-        <Link to="/auth">
-          <button onClick={logoutHandler}>Logout</button>
-        </Link>
+        {loginToken ? (
+          <>
+            <Link to="/dashboard">
+              <button>Dashboard</button>
+            </Link>
+            <button onClick={logoutHandler}>Logout</button>
+          </>
+        ) : (
+          <Link to="/auth">
+            <button>Login</button>
+          </Link>
+        )}
       </div>
     </header>
   );

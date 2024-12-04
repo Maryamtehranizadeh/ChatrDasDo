@@ -5,11 +5,13 @@ import { baseURL } from "../config/api";
 import { saveCookie } from "../utils/cookie";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
 function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { setLoginToken, loginToken, logout } = useAuth();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -19,11 +21,13 @@ function Login() {
         password,
       })
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         saveCookie(response.data.access);
+        navigate("/dashboard");
+        setLoginToken(response.data.access);
       })
       .catch((error) => console.log(error));
-    navigate("/");
+    // navigate("/dashboard");
   };
 
   return (
