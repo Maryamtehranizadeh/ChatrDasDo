@@ -6,6 +6,7 @@ import { saveCookie } from "../utils/cookie";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
+import toast from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
@@ -26,7 +27,9 @@ function Login() {
         navigate("/dashboard");
         setLoginToken(response.data.access);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.error(error.message);
+      });
     // navigate("/dashboard");
   };
 
