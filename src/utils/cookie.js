@@ -1,5 +1,5 @@
 const saveCookie = (token) =>
-  (document.cookie = `airToken=${token}; max-age=1*24*60*60`);
+  (document.cookie = `airToken=${token}; max-age=1*24*60*60; SameSite=None; Secure`);
 
 const getCookie = () => {
   return document.cookie
