@@ -44,9 +44,9 @@ function WingListPage() {
             <h3>{wing.name}</h3>
           </Link>
           <p>{wing.brand}</p>
-          <p>{wing.id}</p>
+          {/* <p>{wing.id}</p> */}
           <span>{wing.price}</span>
-          <button onClick={() => deleteHandler(wing.id)}>Delete</button>
+          <button onClick={() => deleteHandler(wing.id)} style={{border:"1px solid var(--primary-color)"}}>Delete</button>
         </div>
       ))}
     </div>

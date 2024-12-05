@@ -1,0 +1,67 @@
+/* General Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  color: var(--secondary-color);
+}
+
+.navbarBrand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  transition: color 0.3s ease;
+}
+
+.navLinks a:hover {
+  text-decoration: underline;
+}
+
+/* Hamburger Menu Button */
+.hamburger {
+  display: none;
+  font-size: 1.1rem;
+  /* background: none; */
+  /* border: none; */
+  /* color: var(--secondary-color); */
+  cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navLinks {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100px;
+    right: 120px;
+    background-color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .show {
+    display: flex;
+  }
+
+  .navLinks li {
+    margin: 0.5rem 0;
+  }
+}
