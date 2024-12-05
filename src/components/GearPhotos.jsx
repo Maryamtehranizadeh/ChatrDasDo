@@ -18,6 +18,15 @@ function GearPhotos({ id }) {
   }
   //   console.log(data?.data);
 
+  console.log(data.data);
+  if (data.data.length === 0)
+    return (
+      <div>
+        <h2>Item has no photos</h2>
+        <hr />
+      </div>
+    );
+
   return (
     <div style={{ display: "flex", columnGap: "20px" }}>
       {data?.data?.map((item) => (

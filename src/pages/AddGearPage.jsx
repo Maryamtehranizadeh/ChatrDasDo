@@ -22,8 +22,8 @@ function AddGearPage() {
     currency: "",
     properties: {},
   });
-  const formKeys = Object.keys(form);
-  const propertykeys = Object.keys(properties);
+  // const formKeys = Object.keys(form);
+  // const propertykeys = Object.keys(properties);
 
   const changeHandler = (event) => {
     setForm((prevForm) => ({
@@ -31,7 +31,15 @@ function AddGearPage() {
       properties,
       [event.target.name]: event.target.value,
     }));
+    // console.log(form);
+    // console.log(properties);
+    console.log(event.target.value);
   };
+
+  useEffect(() => {
+    console.log("Form updated:", form);
+    console.log("Properties updated:", properties);
+  }, [form, properties]);
   // console.log(properties);
   // console.log(form);
   // console.log(propertykeys);
@@ -47,8 +55,7 @@ function AddGearPage() {
     event.preventDefault();
     console.log(form);
 
-    const { gear_type_id, name, brand, model, price, properties, currency } =
-      form;
+    const { gear_type_id, name, brand, model, price, currency } = form;
 
     Object.keys(form).forEach((key) => {
       if (!form[key]) {

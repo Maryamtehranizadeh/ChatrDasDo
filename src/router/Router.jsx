@@ -21,13 +21,10 @@ import { Navigate } from "react-router-dom";
 
 function Router() {
   const { loginToken } = useAuth();
-  console.log(loginToken);
 
   return (
     <Routes>
       <Route index path="/" element={<HomePage />} replace />
-      {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-
       <Route
         path="/dashboard"
         element={loginToken ? <Dashboard /> : <Navigate to="/auth" />}
@@ -36,10 +33,8 @@ function Router() {
         path="/auth"
         element={!loginToken ? <AuthPage /> : <Navigate to="/dashboard" />}
       />
-
       <Route path="/admin" element={<Admin />} />
       <Route path="/homepage/:id" element={<ItemDetails />} />
-
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/*" element={<NotFound />} />
       <Route path="/wings" element={<WingListPage />} />

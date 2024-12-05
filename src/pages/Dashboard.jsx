@@ -15,7 +15,7 @@ function Dashboard() {
     return <h2>Error: {error.message}</h2>;
   }
 
-  console.log(data?.data);
+  // console.log(data?.data);
 
   return (
     <div style={{ margin: "20px" }}>
