@@ -64,7 +64,8 @@
   .twins {
     flex-direction: column;
   }
-  button {
-    width: 100%;
+
+  .form button {
+    width: 50%;
   }
 }
