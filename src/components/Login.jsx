@@ -28,7 +28,7 @@ function Login() {
         setLoginToken(response.data.access);
       })
       .catch((error) => {
-        toast.error(error);
+        toast.error(error.response.data.detail);
       });
     // navigate("/dashboard");
   };
