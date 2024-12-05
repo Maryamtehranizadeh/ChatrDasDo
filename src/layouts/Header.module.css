@@ -18,3 +18,12 @@
 .navbar a {
   margin-right: 30px;
 }
+
+@media (max-width: 768px) {
+  button {
+    font-size: 0.8rem;
+  }
+  .logo {
+    display: none;
+  }
+}

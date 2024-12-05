@@ -26,7 +26,9 @@ function Header() {
     <header className={styles.header}>
       <div>
         <Link to="/">
-          <h2>Air Gear | All in One</h2>
+          <h2>
+            Air Gear <span className={styles.logo}>| All in One</span>
+          </h2>
         </Link>
       </div>
       <div className={styles.navbar}>
