@@ -39,10 +39,6 @@
   padding: 5px 10px;
 }
 
-/* .form select:focus {
-  outline: none;
-  border: 2px solid var(--primary-color) !important;
-} */
 .form button {
   width: 30%;
   color: var(--secondary-color);
@@ -62,4 +58,10 @@
 .side {
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .twins {
+    flex-direction: column;
+  }
 }
