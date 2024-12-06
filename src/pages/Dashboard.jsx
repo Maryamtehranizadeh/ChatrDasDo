@@ -1,7 +1,7 @@
 import { getUsers } from "../utils/getAll";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import WingListPage from "./WingListPage";
+import WingList from "./components/WingList";
 
 function Dashboard() {
   const { data, isLoading, isError, error } = useQuery({
@@ -29,7 +29,7 @@ function Dashboard() {
       </Link>
       <div>
         <h1>My Gears</h1>
-        <WingListPage />
+        <WingList />
       </div>
     </div>
   );

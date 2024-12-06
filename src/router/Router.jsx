@@ -5,7 +5,7 @@ import ItemDetails from "../pages/ItemDetails";
 import Admin from "../pages/Admin";
 import NotFound from "../pages/NotFound";
 import AuthPage from "../pages/AuthPage";
-import WingListPage from "../pages/WingListPage";
+import WingList from "../components/WingList";
 import CertifierListPage from "../pages/CertifierListPage";
 import AddCertifierPage from "../pages/AddCertifierPage";
 import AddGearPage from "../pages/AddGearPage";
@@ -18,6 +18,7 @@ import HarnessListPage from "../pages/HarnessListPage";
 import Test from "../pages/Test";
 import { useAuth } from "../context/AuthProvider";
 import { Navigate } from "react-router-dom";
+import WingPage from "../pages/WingPage";
 
 function Router() {
   const { loginToken } = useAuth();
@@ -37,7 +38,7 @@ function Router() {
       <Route path="/homepage/:id" element={<ItemDetails />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/*" element={<NotFound />} />
-      <Route path="/wings" element={<WingListPage />} />
+      <Route path="/wings" element={<WingPage />} />
       <Route path="/harness" element={<HarnessListPage />} />
       <Route path="/test" element={<Test />} />
       <Route path="/instruments" element={<InstrumentList />} />
