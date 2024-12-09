@@ -5,7 +5,6 @@ import ItemDetails from "../pages/ItemDetails";
 import Admin from "../pages/Admin";
 import NotFound from "../pages/NotFound";
 import AuthPage from "../pages/AuthPage";
-import WingList from "../components/WingList";
 import CertifierListPage from "../pages/CertifierListPage";
 import AddCertifierPage from "../pages/AddCertifierPage";
 import AddGearPage from "../pages/AddGearPage";

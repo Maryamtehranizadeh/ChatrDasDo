@@ -1,10 +1,10 @@
 import { getWings } from "../utils/getAll";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import styles from "./WingListPage.module.css";
+import styles from "./WingList.module.css";
 import { Link } from "react-router-dom";
 import { deleteGear } from "../utils/deleteAll";
 
-function WingListPage() {
+function WingList() {
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError, error } = useQuery({
@@ -53,4 +53,4 @@ function WingListPage() {
   );
 }
 
-export default WingListPage;
+export default WingList;

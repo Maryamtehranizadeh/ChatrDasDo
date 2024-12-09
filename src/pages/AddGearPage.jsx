@@ -31,9 +31,8 @@ function AddGearPage() {
       properties,
       [event.target.name]: event.target.value,
     }));
-    // console.log(form);
-    // console.log(properties);
-    console.log(event.target.value);
+    
+    // console.log(event.target.value);
   };
 
   useEffect(() => {
@@ -53,7 +52,7 @@ function AddGearPage() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(form);
+    // console.log(form);
 
     const { gear_type_id, name, brand, model, price, currency } = form;
 

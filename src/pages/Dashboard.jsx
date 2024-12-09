@@ -1,7 +1,7 @@
 import { getUsers } from "../utils/getAll";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import WingList from "./components/WingList";
+import WingList from "../components/WingList";
 
 function Dashboard() {
   const { data, isLoading, isError, error } = useQuery({

@@ -4,15 +4,9 @@ function HomePage() {
   return (
     <div>
       <div>
-        <h3>Check our gears!</h3>
+        <h3>See all our gears!</h3>
         <Link to="/gears">
           <button>Gears</button>
-        </Link>
-      </div>
-      <div>
-        <h3>Check our wings!</h3>
-        <Link to="/wings">
-          <button>Wings</button>
         </Link>
       </div>
 

@@ -16,9 +16,8 @@ function GearPhotos({ id }) {
     // console.log(error);
     return <h3>Error: {error.message}</h3>;
   }
-  //   console.log(data?.data);
 
-  console.log(data.data);
+  // console.log(data.data);
   if (data.data.length === 0)
     return (
       <div>
