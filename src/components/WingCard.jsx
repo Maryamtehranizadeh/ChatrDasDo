@@ -1,14 +1,14 @@
-import { useQuery } from "@tanstack/react-query"
-import { getAllGears } from "../utils/getAll"
-import { pureBaseURL } from "../config/api"
-import { Link, useNavigate } from "react-router-dom"
-import { Navigate } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query";
+import { getAllGears } from "../utils/getAll";
+import { pureBaseURL } from "../config/api";
+import { Link, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function WingCard({ wing }) {
-  const navigate = useNavigate()
-  console.log(wing)
-  const { id } = wing
-  console.log(id)
+  const navigate = useNavigate();
+  //   console.log(wing)
+  const { id } = wing;
+  //   console.log(id)
   return (
     <div
       style={{
@@ -39,7 +39,7 @@ function WingCard({ wing }) {
         <button>Check more... </button>
       </Link>
     </div>
-  )
+  );
 }
 
-export default WingCard
+export default WingCard;

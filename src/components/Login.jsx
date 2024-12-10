@@ -1,28 +1,26 @@
-import { useState } from "react"
-import { useQuery } from "@tanstack/react-query"
-import styles from "./Login.module.css"
-import axios from "axios"
-import { baseURL } from "../config/api"
-import { saveCookie } from "../utils/cookie"
-import { useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom"
-import { useAuth } from "../context/AuthProvider"
-import { getUser } from "../utils/getAll"
-import toast from "react-hot-toast"
+import { useState } from "react";
+import styles from "./Login.module.css";
+import axios from "axios";
+import { baseURL } from "../config/api";
+import { saveCookie } from "../utils/cookie";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
+import toast from "react-hot-toast";
 
 function Login() {
-  const navigate = useNavigate()
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const { setLoginToken, loginToken, logout } = useAuth()
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { setLoginToken, loginToken, logout } = useAuth();
 
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!username) {
-      return toast.error("Please enter a valid username!")
+      return toast.error("Please enter a valid username!");
     }
     if (!password) {
-      return toast.error("Please enter a valid password!")
+      return toast.error("Please enter a valid password!");
     }
     axios
       .post(`${baseURL}token/`, {
@@ -30,15 +28,15 @@ function Login() {
         password,
       })
       .then((response) => {
-        // console.log(response)
-        saveCookie(response.data.access)
-        navigate("/dashboard")
-        setLoginToken(response.data.access)
+        console.log(response);
+        saveCookie(response.data.access);
+        navigate("/dashboard");
+        setLoginToken(response.data.access);
       })
       .catch((error) => {
-        toast.error(error.response.data?.detail)
-      })
-  }
+        toast.error(error.response.data?.detail);
+      });
+  };
 
   return (
     <form onSubmit={submitHandler} className={styles.form}>
@@ -67,7 +65,7 @@ function Login() {
         </Link>
       </span>
     </form>
-  )
+  );
 }
 
-export default Login
+export default Login;

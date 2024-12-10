@@ -1,20 +1,22 @@
-import { useQuery } from "@tanstack/react-query"
-import { getAllGears } from "../utils/getAll"
-import WingCard from "../components/WingCard"
+import { useQuery } from "@tanstack/react-query";
+import { getAllGears } from "../utils/getAll";
+import WingCard from "../components/WingCard";
 
 function WingPage() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["all-gears"],
     queryFn: getAllGears,
-  })
+    refetchOnMount: true,
+    staleTime: 0,
+  });
 
   if (isLoading) {
-    return <h1>Loading...</h1>
+    return <h1>Loading...</h1>;
   }
   if (isError) {
-    return <h3>Error: {error.message}</h3>
+    return <h3>Error: {error.message}</h3>;
   }
-  console.log(data?.data)
+  // console.log(data?.data)
 
   return (
     <div style={{ margin: "40px" }}>
@@ -42,7 +44,7 @@ function WingPage() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default WingPage
+export default WingPage;

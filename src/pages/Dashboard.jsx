@@ -1,25 +1,25 @@
-import { useEffect } from "react"
-import { getUser } from "../utils/getAll"
-import { useQuery } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
-import WingList from "../components/WingList"
-import { useNavigate } from "react-router-dom"
+import { getUser } from "../utils/getAll";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import WingList from "../components/WingList";
 
 function Dashboard() {
-  const navigate = useNavigate()
-
+  // console.log("dashboard re rendered");
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
-  })
+    refetchOnMount: true,
+    staleTime: 0,
+  });
   if (isLoading) {
-    return <h1>Loading...</h1>
+    return <h1>Loading...</h1>;
   }
   if (isError) {
-    return <h2>Error: {error.message}</h2>
+    return <h2>Error: {error.message}</h2>;
   }
 
-  // console.log(data?.data.id)
+  console.log(data.data.id);
+  console.log(data.data.email);
 
   return (
     <div style={{ margin: "20px" }}>
@@ -36,7 +36,7 @@ function Dashboard() {
         <WingList id={data.data.id} />
       </div>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

@@ -9,6 +9,8 @@ function ItemForm({ changeHandler, submitHandler, properties, setProperties }) {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear-types"],
     queryFn: getGearTypes,
+    refetchOnMount: true,
+    staleTime: 0,
   });
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -22,7 +24,6 @@ function ItemForm({ changeHandler, submitHandler, properties, setProperties }) {
     const selectedCategory = event.target.value;
     setCategoryId(selectedCategory);
   };
-  
 
   return (
     <form

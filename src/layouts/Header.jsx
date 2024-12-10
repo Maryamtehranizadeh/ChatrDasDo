@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthProvider";
 
 function Header() {
+  const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const { loginToken, logout } = useAuth();
 
@@ -16,6 +17,7 @@ function Header() {
   };
   const dashboardHandler = () => {
     if (loginToken) {
+      setRefresh((prev) => !prev);
       navigate("/dashboard");
     } else {
       navigate("/auth");

@@ -10,7 +10,6 @@ import { getItemDetails } from "../utils/getAll";
 function ItemDetails() {
   const { id } = useParams();
   // console.log(id);
-
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear", id],
     queryFn: getItemDetails,
