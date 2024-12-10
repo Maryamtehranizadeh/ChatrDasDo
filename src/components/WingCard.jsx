@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 import { getAllGears } from "../utils/getAll"
 import { pureBaseURL } from "../config/api"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 function WingCard({ wing }) {
+  const navigate = useNavigate()
   console.log(wing)
   const { id } = wing
   console.log(id)
@@ -33,8 +35,8 @@ function WingCard({ wing }) {
       <h4>
         {wing.price} {wing.currency}
       </h4>
-      <Link>
-        <button>Check more properties</button>
+      <Link to={`/itemdetails/${id}`}>
+        <button>Check more... </button>
       </Link>
     </div>
   )

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useQuery } from "@tanstack/react-query"
 import styles from "./Login.module.css"
 import axios from "axios"
 import { baseURL } from "../config/api"
@@ -6,6 +7,7 @@ import { saveCookie } from "../utils/cookie"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthProvider"
+import { getUser } from "../utils/getAll"
 import toast from "react-hot-toast"
 
 function Login() {
@@ -28,16 +30,14 @@ function Login() {
         password,
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         saveCookie(response.data.access)
         navigate("/dashboard")
         setLoginToken(response.data.access)
       })
       .catch((error) => {
-        toast.error(error.response.data.detail)
+        toast.error(error.response.data?.detail)
       })
-
-    // navigate("/dashboard");
   }
 
   return (

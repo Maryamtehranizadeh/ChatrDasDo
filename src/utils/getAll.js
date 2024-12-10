@@ -11,8 +11,9 @@ const getCertifiers = () => {
   })
 }
 
-const getWings = () => {
-  return axios.get(`${baseURL}gears/`, {
+const getMyGears = ({ queryKey }) => {
+  const [, id] = queryKey
+  return axios.get(`${baseURL}gears/?user=${id}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Token ${getCookie()}`,
@@ -28,7 +29,7 @@ const getAllGears = () => {
   })
 }
 
-const getUsers = () => {
+const getUser = () => {
   return axios.get(`${baseURL}users/`, {
     headers: {
       "Content-Type": "application/json",
@@ -76,12 +77,12 @@ const getItemDetails = ({ queryKey }) => {
 }
 
 export {
-  getWings,
+  getMyGears,
   getCertifiers,
   getCertificates,
   getGearTypes,
   getGearPhotos,
   getItemDetails,
-  getUsers,
+  getUser,
   getAllGears,
 }
