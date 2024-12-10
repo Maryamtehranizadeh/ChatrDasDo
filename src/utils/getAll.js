@@ -1,6 +1,6 @@
-import axios from "axios";
-import { baseURL } from "../config/api";
-import { getCookie } from "./cookie";
+import axios from "axios"
+import { baseURL } from "../config/api"
+import { getCookie } from "./cookie"
 
 const getCertifiers = () => {
   return axios.get(`${baseURL}certifiers/`, {
@@ -8,8 +8,8 @@ const getCertifiers = () => {
       "Content-Type": "application/json",
       Authorization: `Token ${getCookie()}`,
     },
-  });
-};
+  })
+}
 
 const getWings = () => {
   return axios.get(`${baseURL}gears/`, {
@@ -17,8 +17,16 @@ const getWings = () => {
       "Content-Type": "application/json",
       Authorization: `Token ${getCookie()}`,
     },
-  });
-};
+  })
+}
+
+const getAllGears = () => {
+  return axios.get(`${baseURL}gears/`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+}
 
 const getUsers = () => {
   return axios.get(`${baseURL}users/`, {
@@ -26,8 +34,8 @@ const getUsers = () => {
       "Content-Type": "application/json",
       Authorization: `Token ${getCookie()}`,
     },
-  });
-};
+  })
+}
 
 const getCertificates = () => {
   return axios.get(`${baseURL}certificates/`, {
@@ -35,38 +43,37 @@ const getCertificates = () => {
       "Content-Type": "application/json",
       Authorization: `Token ${getCookie()}`,
     },
-  });
-};
+  })
+}
 
 const getGearTypes = () => {
   return axios.get(`${baseURL}gear-types/`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Token ${getCookie()}`,
     },
-  });
-};
+  })
+}
 
 const getGearPhotos = ({ queryKey }) => {
-  const [, id] = queryKey;
+  const [, id] = queryKey
   return axios.get(`${baseURL}gears/${id}/pictures`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Token ${getCookie()}`,
     },
-  });
-};
+  })
+}
 // this function did not work
 
 const getItemDetails = ({ queryKey }) => {
-  const [, id] = queryKey;
+  const [, id] = queryKey
   return axios.get(`${baseURL}gears/${id}/`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Token ${getCookie()}`,
     },
-  });
-};
+  })
+}
 
 export {
   getWings,
@@ -76,4 +83,5 @@ export {
   getGearPhotos,
   getItemDetails,
   getUsers,
-};
+  getAllGears,
+}

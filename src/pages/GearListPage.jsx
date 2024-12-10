@@ -14,17 +14,20 @@ function GearListPage() {
     return <h3>Error: {error.message}</h3>;
   }
   return (
-    <div>
+    <div style={{margin:"40px"}}>
       <h1>Welcome to our Gears' Page!</h1>
       <Link to="/addgear">
         <button>Add your Item, others may need it!</button>
       </Link>
-      <hr />
+      <div style={{display:"flex", justifyContent:"space-between", margin:"40px"}}>
+      
       {data?.data.map((type) => (
-        <Link to={`/${type.name}`}>
-          <button key={type.id}>{type.name}</button>
+        <Link key={type.id} to={`/${type.name}`}>
+          <button >{type.name}</button>
         </Link>
       ))}
+      </div>
+      
     </div>
   );
 }

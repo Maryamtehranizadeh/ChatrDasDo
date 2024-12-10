@@ -1,44 +1,44 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { baseURL } from "../config/api";
-import { getCookie } from "../utils/cookie";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { baseURL } from "../config/api"
+import { getCookie } from "../utils/cookie"
+import { useQuery } from "@tanstack/react-query"
 
 function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
-  const [loadingButton, setLoadingButton] = useState(false);
-  const navigate = useNavigate();
+  const [loadingButton, setLoadingButton] = useState(false)
+  const navigate = useNavigate()
 
   const skipHandler = () => {
-    setIsModal(false);
-    navigate(`/itemdetails/${itemId}`);
-  };
+    setIsModal(false)
+    navigate(`/itemdetails/${itemId}`)
+  }
 
   const photoHandler = (event) => {
     // console.log(event.target.files);
-    const selectedPhotos = event.target.files;
+    const selectedPhotos = event.target.files
     setPhotos((previousPhotos) => [
       ...previousPhotos,
       ...Array.from(selectedPhotos),
-    ]);
-  };
+    ])
+  }
 
   const deleteHandler = (fileName) => {
-    setPhotos(photos.filter((photo) => photo.name !== fileName));
-  };
+    setPhotos(photos.filter((photo) => photo.name !== fileName))
+  }
 
   useEffect(() => {
     if (photos.length > 0) {
-      console.log("Updated photos:", photos);
+      console.log("Updated photos:", photos)
     }
-  }, [photos]);
+  }, [photos])
 
   const addPhotoHandler = () => {
-    let allPostedPhotos = [];
-    setLoadingButton(true);
+    let allPostedPhotos = []
+    setLoadingButton(true)
     photos.forEach((photo) => {
-      const formData = new FormData();
-      formData.append("image", photo);
+      const formData = new FormData()
+      formData.append("image", photo)
       //   for (let [key, value] of formData.entries()) {
       //     console.log(`${key}:`, value);
       //   }
@@ -50,18 +50,22 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
           },
         })
         .then((response) => {
-          allPostedPhotos.push(response.data);
+          allPostedPhotos.push(response.data)
           //   console.log(allPostedPhotos);
           if (allPostedPhotos.length === photos.length) {
-            console.log(allPostedPhotos);
-            skipHandler();
+            console.log(allPostedPhotos)
+            skipHandler()
           }
         })
         .catch((error) => {
-          console.log(error);
-        });
-    });
-  };
+          console.log(error)
+        })
+    })
+  }
+
+  const closeHandler = () => {
+    setIsModal(false)
+  }
 
   return (
     <div
@@ -150,22 +154,17 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
             </button>
           )}
           {photos.length == 0 && (
-            <button
-              onClick={skipHandler}
-              className="px-4 py-2 text-white rounded-lg hover:opacity-90"
-              style={{
-                color: "var(--primary-color)",
-                border: "1px solid var(--primary-color)",
-                margin: "auto",
-              }}
-            >
-              Maybe Later... Skip!
-            </button>
+            <div>
+              <button style={{ marginRight: "40px" }} onClick={skipHandler}>
+                Maybe Later... Skip!
+              </button>
+              <button onClick={closeHandler}>Close... Back to the form</button>
+            </div>
           )}
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default PhotoModal;
+export default PhotoModal

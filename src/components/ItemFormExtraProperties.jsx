@@ -5,11 +5,12 @@ function ItemFormExtraProperties({
   setProperties,
 }) {
   const selectedCategory = data?.data.find(
-    (category) => category.id === categoryId
-  );
+    (category) => category.id === categoryId,
+  )
+
   const changeHandler = (event) => {
-    console.log(event.target.value);
-  };
+    // console.log(event.target.value);
+  }
 
   return (
     <form
@@ -41,13 +42,13 @@ function ItemFormExtraProperties({
               setProperties((prevProperties) => ({
                 ...prevProperties,
                 [extra_property.name]: event.target.value,
-              }));
+              }))
             }}
           />
         </div>
       ))}
     </form>
-  );
+  )
 }
 
-export default ItemFormExtraProperties;
+export default ItemFormExtraProperties

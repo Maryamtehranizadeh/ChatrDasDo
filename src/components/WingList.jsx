@@ -1,39 +1,39 @@
-import { getWings } from "../utils/getAll";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import styles from "./WingList.module.css";
-import { Link } from "react-router-dom";
-import { deleteGear } from "../utils/deleteAll";
+import { getWings } from "../utils/getAll"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import styles from "./WingList.module.css"
+import { Link } from "react-router-dom"
+import { deleteGear } from "../utils/deleteAll"
 
 function WingList() {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["wings"],
     queryFn: getWings,
-  });
+  })
 
   const deleteMutation = useMutation({
     mutationFn: deleteGear,
     onSuccess: (response) => {
-      console.log(response);
+      console.log(response)
       // Invalidate and refetch the wings query to reflect the changes after deletion
-      queryClient.invalidateQueries(["wings"]);
+      queryClient.invalidateQueries(["wings"])
     },
-    onError: (err) => {
-      console.error("Error deleting gear:", err);
+    onError: (error) => {
+      console.error("Error deleting gear:", error)
     },
-  });
+  })
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
-      deleteMutation.mutate(id); // Pass the ID in the correct format for deleteGear
+      deleteMutation.mutate(id) // Pass the ID in the correct format for deleteGear
     }
-  };
+  }
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <h1>Loading...</h1>
   }
   if (isError) {
-    return <h3>Error: {error.message}</h3>;
+    return <h3>Error: {error.message}</h3>
   }
 
   return (
@@ -46,11 +46,16 @@ function WingList() {
           <p>{wing.brand}</p>
           {/* <p>{wing.id}</p> */}
           <span>{wing.price}</span>
-          <button onClick={() => deleteHandler(wing.id)} style={{border:"1px solid var(--primary-color)"}}>Delete</button>
+          <button
+            onClick={() => deleteHandler(wing.id)}
+            style={{ border: "1px solid var(--primary-color)" }}
+          >
+            Delete
+          </button>
         </div>
       ))}
     </div>
-  );
+  )
 }
 
-export default WingList;
+export default WingList
