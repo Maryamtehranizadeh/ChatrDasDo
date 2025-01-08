@@ -43,9 +43,14 @@ function Header() {
             <button onClick={logoutHandler}>Logout</button>
           </>
         ) : (
-          <Link to="/auth">
-            <button>Login</button>
-          </Link>
+          <>
+            <Link to="/auth">
+              <button>Login</button>
+            </Link>
+            <Link to="/signup">
+              <button>Sign Up</button>
+            </Link>
+          </>
         )}
       </div>
     </header>

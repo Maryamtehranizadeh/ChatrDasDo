@@ -58,10 +58,16 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button type="submit">Login</button>
-      <span style={{ margin: "10px" }}>
-        Do not have an account? please{" "}
+      <span style={{ margin: "20px" }}>
+        Do not have an account? Please{" "}
         <Link to="/signup" style={{ color: " var(--primary-color)" }}>
           Sign Up here!
+        </Link>
+      </span>
+      <span style={{ marginTop: "0px", marginLeft: "20px" }}>
+        Forgot your password? Please{" "}
+        <Link to="/reset-password" style={{ color: " var(--primary-color)" }}>
+          click here!
         </Link>
       </span>
     </form>

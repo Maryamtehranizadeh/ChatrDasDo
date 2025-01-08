@@ -6,7 +6,7 @@ const getCertifiers = () => {
   return axios.get(`${baseURL}certifiers/`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Token ${getCookie()}`,
+      // Authorization: `Token ${getCookie()}`,
     },
   });
 };

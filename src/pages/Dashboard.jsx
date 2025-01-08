@@ -23,7 +23,7 @@ function Dashboard() {
 
   return (
     <div style={{ margin: "20px" }}>
-      <h3>Dashboard | Welcome "{data?.data.email}"</h3>
+      <h1>Dashboard | Welcome "{data?.data.email}"</h1>
       <Link to="/addgear">
         <button
           style={{ border: "1px solid var( --primary-color)", margin: "20px" }}

@@ -8,8 +8,8 @@ function InstrumentList() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["specific-gear", id],
     queryFn: getSpecificGear,
-    // refetchOnMount: true,
-    // staleTime: 0,
+    refetchOnMount: true,
+    staleTime: 0,
   });
 
   if (isLoading) {
