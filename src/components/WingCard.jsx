@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 function WingCard({ wing }) {
   const navigate = useNavigate();
   //   console.log(wing)
-  const { id } = wing;
+  // const { id } = wing;
   //   console.log(id)
   return (
     <div
@@ -35,7 +35,7 @@ function WingCard({ wing }) {
       <h4>
         {wing.price} {wing.currency}
       </h4>
-      <Link to={`/itemdetails/${id}`}>
+      <Link to={`/itemdetails/${wing.id}`}>
         <button>Check more... </button>
       </Link>
     </div>

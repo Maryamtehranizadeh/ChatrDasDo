@@ -29,6 +29,15 @@ const getAllGears = () => {
   });
 };
 
+const getSpecificGear = ({ queryKey }) => {
+  const [, id] = queryKey;
+  return axios.get(`${baseURL}gears/?gear_type=${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 const getUser = () => {
   return axios.get(`${baseURL}users/`, {
     headers: {
@@ -60,7 +69,6 @@ const getGearPhotos = ({ queryKey }) => {
   return axios.get(`${baseURL}gears/${id}/pictures`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Token ${getCookie()}`,
     },
   });
 };
@@ -71,7 +79,6 @@ const getItemDetails = ({ queryKey }) => {
   return axios.get(`${baseURL}gears/${id}/`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Token ${getCookie()}`,
     },
   });
 };
@@ -85,4 +92,5 @@ export {
   getItemDetails,
   getUser,
   getAllGears,
+  getSpecificGear,
 };

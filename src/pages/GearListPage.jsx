@@ -2,6 +2,8 @@ import { getGearTypes } from "../utils/getAll";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
+//this has become a component
+
 function GearListPage() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear-types"],
@@ -16,20 +18,20 @@ function GearListPage() {
     return <h3>Error: {error.message}</h3>;
   }
   return (
-    <div style={{ margin: "40px" }}>
-      <h1>Welcome to our Gears' Page!</h1>
-      <Link to="/addgear">
-        <button>Add your Item, others may need it!</button>
-      </Link>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          margin: "40px",
-        }}
-      >
+    <div style={{ marginLeft: "40px" }}>
+      <div>
+        <Link to="/addgear">
+          <button>Add your Item, others may need it!</button>
+        </Link>
+      </div>
+      <h1>See all our gears!</h1>
+      <div>
         {data?.data.map((type) => (
-          <Link key={type.id} to={`/${type.name}`}>
+          <Link
+            style={{ marginRight: "20px" }}
+            key={type.id}
+            to={`/${type.name}`}
+          >
             <button>{type.name}</button>
           </Link>
         ))}

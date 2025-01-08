@@ -1,16 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+import { getAllGears } from "../utils/getAll";
 import WingCard from "../components/WingCard";
-import { getSpecificGear } from "../utils/getAll";
 
-//this has become a component
-
-function WingPage() {
-  const id = "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c";
+function Allgears() {
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["specific-gear", id],
-    queryFn: getSpecificGear,
-    // refetchOnMount: true,
-    // staleTime: 0,
+    queryKey: ["all-gears"],
+    queryFn: getAllGears,
+    refetchOnMount: true,
+    staleTime: 0,
   });
 
   if (isLoading) {
@@ -19,7 +16,9 @@ function WingPage() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  // console.log(data?.data)
+  //   console.log(data?.data);
+  const limitedData = data?.data.slice(0, 4);
+  console.log(limitedData);
 
   return (
     <div style={{ margin: "40px" }}>
@@ -30,7 +29,7 @@ function WingPage() {
           flexWrap: "wrap",
         }}
       >
-        {data?.data.map((wing) => (
+        {limitedData?.map((wing) => (
           <div
             key={wing.id}
             style={{
@@ -49,4 +48,4 @@ function WingPage() {
   );
 }
 
-export default WingPage;
+export default Allgears;
