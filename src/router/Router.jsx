@@ -18,6 +18,7 @@ import Test from "../pages/Test";
 import { useAuth } from "../context/AuthProvider";
 import { Navigate } from "react-router-dom";
 import WingPage from "../pages/WingPage";
+import AboutUs from "../pages/AboutUs";
 
 function Router() {
   const { loginToken } = useAuth();
@@ -48,6 +49,7 @@ function Router() {
       <Route path="/addgear" element={<AddGearPage />} />
       <Route path="/addcertifier" element={<AddCertifierPage />} />
       <Route path="/certificates" element={<CertificateListPage />} />
+      <Route path="/about-us" element={<AboutUs />} />
     </Routes>
   );
 }

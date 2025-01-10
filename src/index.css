@@ -32,8 +32,8 @@ textarea {
 }
 
 input:focus,
-textarea:focus,
-select:focus {
+select:focus,
+textarea:focus {
   outline: none;
   border: 2px solid var(--primary-color) !important;
 }

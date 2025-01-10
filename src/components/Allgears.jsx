@@ -18,7 +18,7 @@ function Allgears() {
   }
   //   console.log(data?.data);
   const limitedData = data?.data.slice(0, 4);
-  console.log(limitedData);
+  //   console.log(limitedData);
 
   return (
     <div style={{ margin: "40px" }}>
