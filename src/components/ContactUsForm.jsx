@@ -15,7 +15,7 @@ function ContactUsForm() {
       <input
         type="textarea"
         placeholder="Message"
-        style={{ paddingBottom: "300px" }}
+        style={{ paddingBottom: "200px" }}
       />
       <button
         type="submit"

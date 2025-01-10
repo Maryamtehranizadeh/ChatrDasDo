@@ -9,6 +9,8 @@ function AboutUs() {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-evenly",
+        alignItems: "center",
+        padding: "40px",
       }}
     >
       <WhoWeAre />

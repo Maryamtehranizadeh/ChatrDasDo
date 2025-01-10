@@ -19,6 +19,8 @@ import { useAuth } from "../context/AuthProvider";
 import { Navigate } from "react-router-dom";
 import WingPage from "../pages/WingPage";
 import AboutUs from "../pages/AboutUs";
+import TermsConditions from "../pages/TermsConditions";
+import SecuritySafety from "../pages/SecuritySafety";
 
 function Router() {
   const { loginToken } = useAuth();
@@ -50,6 +52,8 @@ function Router() {
       <Route path="/addcertifier" element={<AddCertifierPage />} />
       <Route path="/certificates" element={<CertificateListPage />} />
       <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/terms-and-conditions" element={<TermsConditions />} />
+      <Route path="/security-and-safety" element={<SecuritySafety />} />
     </Routes>
   );
 }
