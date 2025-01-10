@@ -20,7 +20,7 @@ function Navbar() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  console.log(data?.data);
+  // console.log(data?.data);
 
   const typeHandler = (event) => {
     const selectedCategory = event.target.value;
@@ -69,12 +69,14 @@ function Navbar() {
         <NavLink to="/addgear" onClick={() => setIsOpen(false)}>
           Sell your items
         </NavLink>
-
         <NavLink to="/requestgear" onClick={() => setIsOpen(false)}>
           Tell us what you need
         </NavLink>
         <NavLink to="/About-us" onClick={() => setIsOpen(false)}>
           Contact Us
+        </NavLink>
+        <NavLink to="/security-and-safety" onClick={() => setIsOpen(false)}>
+          Security and Safety
         </NavLink>
       </div>
     </nav>

@@ -5,11 +5,27 @@ import Navbar from "../components/Navbar";
 import { getCookie } from "../utils/cookie";
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthProvider";
+import { getUser } from "../utils/getAll";
+import { useQuery } from "@tanstack/react-query";
 
 function Header() {
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const { loginToken, logout } = useAuth();
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUser,
+    refetchOnMount: true,
+    staleTime: 0,
+  });
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  if (isError) {
+    return <h2>Error: {error.message}</h2>;
+  }
+  // console.log(data.data.id);
+  // console.log(data.data.first_name);
 
   const logoutHandler = () => {
     logout();
@@ -36,11 +52,19 @@ function Header() {
       <div className={styles.navbar}>
         <Navbar />
       </div>
-      <div>
+      <div style={{ display: "flex", flexDirection: "row" }}>
         {loginToken ? (
           <>
             <button onClick={dashboardHandler}>Dashboard</button>
             <button onClick={logoutHandler}>Logout</button>
+            <div>
+              <img
+                src="/src/public/user.png"
+                alt="User"
+                style={{ height: "30px", width: "30px", margin: "auto" }}
+              />
+              <p>{data.data.first_name}</p>
+            </div>
           </>
         ) : (
           <>

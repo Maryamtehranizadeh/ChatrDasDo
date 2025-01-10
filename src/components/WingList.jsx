@@ -4,6 +4,7 @@ import styles from "./WingList.module.css";
 import { Link } from "react-router-dom";
 import { deleteGear } from "../utils/deleteAll";
 import { useEffect } from "react";
+import { pureBaseURL } from "../config/api";
 
 function WingList({ id }) {
   // console.log(id)
@@ -39,22 +40,57 @@ function WingList({ id }) {
   }
   console.log(data?.data);
 
+  const editHandler = (id) => {
+    console.log("edit");
+  };
+
+  const certificateHandler = (id) => {
+    console.log("certificate");
+  };
+
   return (
     <div className={styles.container}>
       {data?.data.map((wing) => (
         <div className={styles.wing} key={wing.id}>
           <Link to={`/itemdetails/${wing.id}`}>
-            <h3>{wing.name}</h3>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <img
+                style={{ width: "70px", height: "70px", marginRight: "18px" }}
+                src={
+                  wing.pictures.length === 0
+                    ? `/src/public/logo.png`
+                    : `${pureBaseURL}${wing.pictures[0].link}`
+                }
+                alt="Gear"
+              />
+              <h3>{wing.name}</h3>
+            </div>
           </Link>
-          <p>{wing.brand}</p>
-          <p>User ID: {wing.user}</p>
-          <span>{wing.price}</span>
-          <button
-            onClick={() => deleteHandler(wing.id)}
-            style={{ border: "1px solid var(--primary-color)" }}
-          >
-            Delete
-          </button>
+          <div style={{ margin: "auto" }}>
+            <p>
+              {wing.brand} - {wing.price} {wing.currency}
+            </p>
+          </div>
+          <div>
+            <button
+              onClick={() => certificateHandler(wing.id)}
+              style={{ marginRight: "20px" }}
+            >
+              Add Certificates
+            </button>
+            <button
+              onClick={() => editHandler(wing.id)}
+              style={{ marginRight: "20px" }}
+            >
+              Edit
+            </button>
+            <button onClick={() => deleteHandler(wing.id)}>Delete</button>
+          </div>
         </div>
       ))}
     </div>

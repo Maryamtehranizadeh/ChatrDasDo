@@ -17,22 +17,23 @@ function Dashboard() {
   if (isError) {
     return <h2>Error: {error.message}</h2>;
   }
-
-  console.log(data.data.id);
-  console.log(data.data.email);
-
+  // console.log(data.data.id);
+  // console.log(data.data.email);
   return (
-    <div style={{ margin: "20px" }}>
-      <h1>Dashboard | Welcome "{data?.data.email}"</h1>
-      <Link to="/addgear">
-        <button
-          style={{ border: "1px solid var( --primary-color)", margin: "20px" }}
-        >
-          Place an add and sell your item!
-        </button>
-      </Link>
-      <div>
+    <div style={{ margin: "40px" }}>
+      <div style={{ margin: "40px" }}>
+        <h1>Dashboard | Welcome "{data?.data.email}"</h1>
+        <Link to="/addgear">
+          <button style={{ marginRight: "30px" }}>
+            Place an add and sell your item!
+          </button>
+        </Link>
+        <Link to="/requestgear">
+          <button>Tell us what you need!</button>
+        </Link>
         <h1>My Gears</h1>
+      </div>
+      <div>
         <WingList id={data.data.id} />
       </div>
     </div>

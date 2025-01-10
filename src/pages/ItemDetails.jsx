@@ -24,8 +24,11 @@ function ItemDetails() {
   }
   // console.log(data?.data);
 
+  const showCertificate = () => {
+    console.log("certificate");
+  };
   return (
-    <div>
+    <div style={{ margin: "40px" }}>
       <h1>Details about {data.data.name}:</h1>
       <div>
         <div>
@@ -42,6 +45,8 @@ function ItemDetails() {
         <span>
           {data.data.price} {data.data.currency}
         </span>
+        <hr />
+        <button onClick={showCertificate}>Show Certificate</button>
       </div>
     </div>
   );
