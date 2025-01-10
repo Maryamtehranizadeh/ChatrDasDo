@@ -7,6 +7,9 @@ import styles from "./AddGearPage.module.css";
 import toast from "react-hot-toast";
 import PhotoModal from "../components/PhotoModal";
 import { useAuth } from "../context/AuthProvider";
+import CertificateForm from "../components/CertificateForm";
+import { getCertifiers } from "../utils/getAll";
+import { useQuery } from "@tanstack/react-query";
 
 function AddCertificatePage() {
   const [isModal, setIsModal] = useState(false);
@@ -23,7 +26,11 @@ function AddCertificatePage() {
     certifier: "",
   });
 
-  return <div>AddCertificatepage</div>;
+  return (
+    <div>
+      <CertificateForm />
+    </div>
+  );
 }
 
 export default AddCertificatePage;

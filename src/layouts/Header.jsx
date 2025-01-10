@@ -12,11 +12,13 @@ function Header() {
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const { loginToken, logout } = useAuth();
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
     refetchOnMount: true,
     staleTime: 0,
+    enabled: !!loginToken,
   });
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -24,8 +26,8 @@ function Header() {
   if (isError) {
     return <h2>Error: {error.message}</h2>;
   }
-  // console.log(data.data.id);
-  // console.log(data.data.first_name);
+  // console.log(data?.data.id);
+  // console.log(data?.data.first_name);
 
   const logoutHandler = () => {
     logout();
@@ -63,7 +65,7 @@ function Header() {
                 alt="User"
                 style={{ height: "30px", width: "30px", margin: "auto" }}
               />
-              <p>{data.data.first_name}</p>
+              {/* <p>{data?.data.first_name}</p> */}
             </div>
           </>
         ) : (

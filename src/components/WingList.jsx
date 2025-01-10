@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import { deleteGear } from "../utils/deleteAll";
 import { useEffect } from "react";
 import { pureBaseURL } from "../config/api";
+import { useNavigate } from "react-router-dom";
 
 function WingList({ id }) {
   // console.log(id)
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gears", id],
@@ -46,6 +48,7 @@ function WingList({ id }) {
 
   const certificateHandler = (id) => {
     console.log("certificate");
+    navigate("/addcertficate");
   };
 
   return (
