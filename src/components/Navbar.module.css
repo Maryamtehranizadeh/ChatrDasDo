@@ -14,6 +14,9 @@
 }
 
 .navLinks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   list-style: none;
   display: flex;
   gap: 1rem;

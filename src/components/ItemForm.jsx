@@ -18,7 +18,7 @@ function ItemForm({ changeHandler, submitHandler, properties, setProperties }) {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  console.log(data?.data);
+  // console.log(data?.data);
 
   const typeHandler = (event) => {
     const selectedCategory = event.target.value;

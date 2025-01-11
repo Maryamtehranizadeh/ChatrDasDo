@@ -50,6 +50,7 @@ function Navbar() {
             backgroundColor: "var(--primary-color)",
             border: "none",
             padding: "0",
+            margin: "0 30px 0 0 ",
           }}
         >
           <option value="none" className={styles.category}>

@@ -23,7 +23,7 @@ function CertificateForm({
       onChange={changeHandler}
       onSubmit={submitHandler}
     >
-      <h1> Add certificates for your gear and make it more attractive!</h1>
+      <h1> Add certificates for your wing and make it more attractive!</h1>
       <label htmlFor="issue_date">Issued At:</label>
       <input type="date" id="issue_date" name="issue_date" />
 
