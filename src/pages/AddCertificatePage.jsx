@@ -1,34 +1,49 @@
 import { useState, useEffect } from "react";
-import { baseURL } from "../config/api";
-import axios from "axios";
-import { getCookie } from "../utils/cookie";
-import ItemForm from "../components/ItemForm";
-import styles from "./AddGearPage.module.css";
-import toast from "react-hot-toast";
-import PhotoModal from "../components/PhotoModal";
 import { useAuth } from "../context/AuthProvider";
 import CertificateForm from "../components/CertificateForm";
-import { getCertifiers } from "../utils/getAll";
-import { useQuery } from "@tanstack/react-query";
 
 function AddCertificatePage() {
-  const [isModal, setIsModal] = useState(false);
-  const [itemId, setItemId] = useState(null);
-  const [photos, setPhotos] = useState([]);
-  const [properties, setProperties] = useState({});
-  const { loginToken } = useAuth();
   const [certificate, setCertificate] = useState({
     issue_date: "",
     expiration_date: "",
     porosity: 0,
-    lines_need_trim: false,
-    fabric_condition: true,
+    lines_need_trim: null,
+    fabric_condition: null,
     certifier: "",
+    picture: [],
   });
+
+  const changeHandler = (e) => {
+    const { name, type, files, value } = e.target;
+    if (type === "file") {
+      setCertificate((prev) => ({ ...prev, [name]: Array.from(files) }));
+    } else {
+      setCertificate((prev) => ({ ...prev, [name]: value }));
+    }
+    // console.log(Array.from(files));
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(certificate);
+  };
+
+  const deleteHandler = (id) => {
+    const updatedFiles = certificate.picture.filter(
+      (file) => file.lastModified !== id,
+    );
+    setCertificate((prev) => ({ ...prev, picture: updatedFiles }));
+  };
+  console.log(certificate);
 
   return (
     <div>
-      <CertificateForm />
+      <CertificateForm
+        changeHandler={changeHandler}
+        submitHandler={submitHandler}
+        certificate={certificate}
+        deleteHandler={deleteHandler}
+      />
     </div>
   );
 }

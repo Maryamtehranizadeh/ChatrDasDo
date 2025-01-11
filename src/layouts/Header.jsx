@@ -65,7 +65,7 @@ function Header() {
                 alt="User"
                 style={{ height: "30px", width: "30px", margin: "auto" }}
               />
-              {/* <p>{data?.data.first_name}</p> */}
+              <p>{data?.data.first_name}</p>
             </div>
           </>
         ) : (

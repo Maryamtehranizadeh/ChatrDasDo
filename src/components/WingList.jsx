@@ -80,12 +80,14 @@ function WingList({ id }) {
             </p>
           </div>
           <div>
-            <button
-              onClick={() => certificateHandler(wing.id)}
-              style={{ marginRight: "20px" }}
-            >
-              Add Certificates
-            </button>
+            {wing.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c" && (
+              <button
+                onClick={() => certificateHandler(wing.id)}
+                style={{ marginRight: "20px" }}
+              >
+                Add Certificates
+              </button>
+            )}
             <button
               onClick={() => editHandler(wing.id)}
               style={{ marginRight: "20px" }}
