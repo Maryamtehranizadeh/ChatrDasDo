@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthProvider";
 import CertificateForm from "../components/CertificateForm";
+import axios from "axios";
+import { baseURL } from "../config/api";
+import { getCookie } from "../utils/cookie";
 
 function AddCertificatePage() {
   const [certificate, setCertificate] = useState({
@@ -34,7 +37,21 @@ function AddCertificatePage() {
     );
     setCertificate((prev) => ({ ...prev, picture: updatedFiles }));
   };
-  console.log(certificate);
+  // console.log(certificate);
+
+  axios
+    .post(`${baseURL}certificates/`, certificate, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${getCookie()}`,
+      },
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   return (
     <div>

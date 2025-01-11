@@ -47,7 +47,6 @@ function WingList({ id }) {
   };
 
   const certificateHandler = (id) => {
-    console.log("certificate");
     navigate("/addcertficate");
   };
 
