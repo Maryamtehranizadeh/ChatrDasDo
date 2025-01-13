@@ -26,8 +26,8 @@ function Header() {
   if (isError) {
     return <h2>Error: {error.message}</h2>;
   }
-  // console.log(data?.data.id);
-  // console.log(data?.data.first_name);
+  console.log(data?.data.id);
+  console.log(data?.data);
 
   const logoutHandler = () => {
     logout();
@@ -59,14 +59,16 @@ function Header() {
           <>
             <button onClick={dashboardHandler}>Dashboard</button>
             <button onClick={logoutHandler}>Logout</button>
-            <div>
-              <img
-                src="/src/public/user.png"
-                alt="User"
-                style={{ height: "30px", width: "30px", margin: "auto" }}
-              />
-              <p>{data?.data.first_name}</p>
-            </div>
+            <Link to={`/user/${data?.data.id}`}>
+              <div>
+                <img
+                  src="/src/public/user.png"
+                  alt="User"
+                  style={{ height: "30px", width: "30px", margin: "auto" }}
+                />
+                <p>{data?.data.first_name}</p>
+              </div>
+            </Link>
           </>
         ) : (
           <>

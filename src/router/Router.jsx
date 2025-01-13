@@ -23,6 +23,7 @@ import TermsConditions from "../pages/TermsConditions";
 import SecuritySafety from "../pages/SecuritySafety";
 import AddCertificatePage from "../pages/AddCertificatePage";
 import ResetPassword from "../pages/ResetPassword";
+import UserProfile from "../pages/UserProfile";
 
 function Router() {
   const { loginToken } = useAuth();
@@ -58,6 +59,7 @@ function Router() {
       <Route path="/terms-and-conditions" element={<TermsConditions />} />
       <Route path="/security-and-safety" element={<SecuritySafety />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/user/:id" element={<UserProfile />} />
     </Routes>
   );
 }
