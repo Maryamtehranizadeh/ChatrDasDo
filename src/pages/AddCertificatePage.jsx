@@ -29,6 +29,19 @@ function AddCertificatePage() {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(certificate);
+    axios
+      .post(`${baseURL}certificates/`, certificate, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${getCookie()}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const deleteHandler = (id) => {
@@ -38,20 +51,6 @@ function AddCertificatePage() {
     setCertificate((prev) => ({ ...prev, picture: updatedFiles }));
   };
   // console.log(certificate);
-
-  axios
-    .post(`${baseURL}certificates/`, certificate, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${getCookie()}`,
-      },
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
 
   return (
     <div>

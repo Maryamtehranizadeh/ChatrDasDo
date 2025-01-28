@@ -23,9 +23,9 @@ function Header() {
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
-  if (isError) {
-    return <h2>Error: {error.message}</h2>;
-  }
+  // if (isError) {
+  //   return <h2>Error: {error.message}</h2>;
+  // }
   console.log(data?.data.id);
   console.log(data?.data);
 

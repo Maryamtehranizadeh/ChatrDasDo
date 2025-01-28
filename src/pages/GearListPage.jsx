@@ -18,7 +18,7 @@ function GearListPage() {
     return <h3>Error: {error.message}</h3>;
   }
   return (
-    <div style={{ marginLeft: "40px" }}>
+    <div style={{ marginLeft: "40px", marginBottom: "40px" }}>
       <div>
         <Link to="/addgear">
           <button>Add your Item, others may need it!</button>
