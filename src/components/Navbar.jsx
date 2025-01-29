@@ -4,23 +4,12 @@ import styles from "./Navbar.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getGearTypes } from "../utils/getAll";
 import { useNavigate } from "react-router-dom";
+import { useType } from "../context/TypeProvider";
 
 function Navbar() {
   const navigate = useNavigate();
   const [categoryId, setCategoryId] = useState("");
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["gear-types"],
-    queryFn: getGearTypes,
-    refetchOnMount: true,
-    staleTime: 0,
-  });
-  // if (isLoading) {
-  //   return <h2>Loading...</h2>;
-  // }
-  if (isError) {
-    return <h3>Error: {error.message}</h3>;
-  }
-  // console.log(data?.data);
+  const { allTypes } = useType();
 
   const typeHandler = (event) => {
     const selectedCategory = event.target.value;
@@ -56,7 +45,7 @@ function Navbar() {
           <option value="none" className={styles.category}>
             Category
           </option>
-          {data?.data.map((type) => (
+          {allTypes?.map((type) => (
             <option
               className={styles.category}
               key={type.id}

@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { getCookie } from "../utils/cookie";
+import { createContext, useContext } from "react";
 import { getUser } from "../utils/getAll";
 import { useAuth } from "./AuthProvider";
 import { useQuery } from "@tanstack/react-query";
@@ -7,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 const UserContext = createContext();
 
 function UserProvider({ children }) {
-  const { loginToken, logout } = useAuth();
+  const { loginToken } = useAuth();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["user"],
@@ -22,16 +21,35 @@ function UserProvider({ children }) {
   // if (isError) {
   //   return <h2>Error: {error.message}</h2>;
   // }
-  //   console.log(data?.data.id);
   //   console.log(data?.data);
-
-  const loggedUser = data?.data.username;
-  const loggedEmail = data?.data.email;
-  const loggedFirstName = data?.data.first_name;
-  const loggedId = data?.data.id;
+  const {
+    email,
+    country,
+    date_joined,
+    first_name,
+    is_certified_seller,
+    last_name,
+    last_updated,
+    phone_number,
+    username,
+  } = data?.data;
+  const userId = data.data.id;
 
   return (
-    <UserContext.Provider value={{ loggedEmail, loggedUser, loggedId }}>
+    <UserContext.Provider
+      value={{
+        email,
+        country,
+        date_joined,
+        first_name,
+        is_certified_seller,
+        last_name,
+        last_updated,
+        phone_number,
+        username,
+        userId,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

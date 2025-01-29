@@ -1,16 +1,12 @@
 function ItemFormExtraProperties({
-  data,
+  allTypes,
   categoryId,
   properties,
   setProperties,
 }) {
-  const selectedCategory = data?.data.find(
+  const selectedCategory = allTypes?.find(
     (category) => category.id === categoryId,
-  )
-
-  const changeHandler = (event) => {
-    // console.log(event.target.value);
-  }
+  );
 
   return (
     <form
@@ -20,7 +16,6 @@ function ItemFormExtraProperties({
         justifyContent: "start",
         alignItems: "start",
       }}
-      onChange={changeHandler}
     >
       {selectedCategory.extra_properties.map((extra_property) => (
         <div
@@ -42,13 +37,13 @@ function ItemFormExtraProperties({
               setProperties((prevProperties) => ({
                 ...prevProperties,
                 [extra_property.name]: event.target.value,
-              }))
+              }));
             }}
           />
         </div>
       ))}
     </form>
-  )
+  );
 }
 
-export default ItemFormExtraProperties
+export default ItemFormExtraProperties;

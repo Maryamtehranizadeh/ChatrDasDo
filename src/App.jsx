@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import defaultOptions from "./config/reactQuery";
 import AuthProvider from "./context/AuthProvider";
 import UserProvider from "./context/UserProvider";
+import TypeProvider from "./context/TypeProvider";
 
 const queryClient = new QueryClient({
   defaultOptions,
@@ -17,10 +18,12 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <UserProvider>
-            <Layout>
-              <Router />
-              <Toaster />
-            </Layout>
+            <TypeProvider>
+              <Layout>
+                <Router />
+                <Toaster />
+              </Layout>
+            </TypeProvider>
           </UserProvider>
         </AuthProvider>
       </BrowserRouter>

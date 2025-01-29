@@ -1,5 +1,3 @@
-import React from "react";
-
 function FAQ() {
   return (
     <div style={{ width: "1200px", margin: "40px" }}>

@@ -4,21 +4,33 @@ import { getUser } from "../utils/getAll";
 
 function UserProfile() {
   const { loginToken } = useAuth;
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["user"],
-    queryFn: getUser,
-    refetchOnMount: true,
-    staleTime: 0,
-    enabled: !!loginToken,
-  });
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
-  if (isError) {
-    return <h2>Error: {error.message}</h2>;
-  }
-  console.log(data?.data.id);
-  console.log(data?.data);
+  const {
+    email,
+    country,
+    date_joined,
+    first_name,
+    userId,
+    is_certified_seller,
+    last_name,
+    last_updated,
+    phone_number,
+    username,
+  } = useUser;
+  //   const { data, isLoading, isError, error } = useQuery({
+  //     queryKey: ["user"],
+  //     queryFn: getUser,
+  //     refetchOnMount: true,
+  //     staleTime: 0,
+  //     enabled: !!loginToken,
+  //   });
+  //   if (isLoading) {
+  //     return <h1>Loading...</h1>;
+  //   }
+  //   if (isError) {
+  //     return <h2>Error: {error.message}</h2>;
+  //   }
+  //   console.log(data?.data.id);
+  //   console.log(data?.data);
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div
@@ -44,8 +56,8 @@ function UserProfile() {
       </div>
       <div>
         <h2>Personal Details</h2>
-        <p>Username:{data?.data.username}</p>
-        <p>Email: {data?.data.email}</p>
+        <p>Username:{username}</p>
+        <p>Email: {email}</p>
         <p>Location: </p>
       </div>
     </div>

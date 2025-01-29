@@ -3,22 +3,11 @@ import { getGearTypes } from "../utils/getAll";
 import styles from "./ItemForm.module.css";
 import { useState } from "react";
 import ItemFormExtraProperties from "./ItemFormExtraProperties";
+import { useType } from "../context/TypeProvider";
 
 function ItemForm({ changeHandler, submitHandler, properties, setProperties }) {
   const [categoryId, setCategoryId] = useState("");
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["gear-types"],
-    queryFn: getGearTypes,
-    refetchOnMount: true,
-    staleTime: 0,
-  });
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
-  if (isError) {
-    return <h3>Error: {error.message}</h3>;
-  }
-  // console.log(data?.data);
+  const { allTypes } = useType();
 
   const typeHandler = (event) => {
     const selectedCategory = event.target.value;
@@ -35,7 +24,7 @@ function ItemForm({ changeHandler, submitHandler, properties, setProperties }) {
       <label htmlFor="category">Category</label>
       <select name="gear_type_id" id="category" onChange={typeHandler}>
         <option value="none">Category</option>
-        {data?.data.map((type) => (
+        {allTypes?.map((type) => (
           <option key={type.id} value={type.id}>
             {type.name} - {type.description}
           </option>
@@ -61,7 +50,7 @@ function ItemForm({ changeHandler, submitHandler, properties, setProperties }) {
         <ItemFormExtraProperties
           properties={properties}
           setProperties={setProperties}
-          data={data}
+          allTypes={allTypes}
           categoryId={categoryId}
         />
       )}
