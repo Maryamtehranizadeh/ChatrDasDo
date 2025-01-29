@@ -5,6 +5,7 @@ import Layout from "./layouts/Layout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import defaultOptions from "./config/reactQuery";
 import AuthProvider from "./context/AuthProvider";
+import UserProvider from "./context/UserProvider";
 
 const queryClient = new QueryClient({
   defaultOptions,
@@ -15,10 +16,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <AuthProvider>
-          <Layout>
-            <Router />
-            <Toaster />
-          </Layout>
+          <UserProvider>
+            <Layout>
+              <Router />
+              <Toaster />
+            </Layout>
+          </UserProvider>
         </AuthProvider>
       </BrowserRouter>
     </QueryClientProvider>

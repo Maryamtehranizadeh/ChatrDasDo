@@ -2,27 +2,14 @@ import { getUser } from "../utils/getAll";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import WingList from "../components/WingList";
+import { useUser } from "../context/UserProvider";
 
 function Dashboard() {
-  // console.log("dashboard re rendered");
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["user"],
-    queryFn: getUser,
-    refetchOnMount: true,
-    staleTime: 0,
-  });
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
-  if (isError) {
-    return <h2>Error: {error.message}</h2>;
-  }
-  // console.log(data.data.id);
-  // console.log(data.data.email);
+  const { loggedUser, loggedEmail, loggedId } = useUser();
   return (
     <div style={{ margin: "40px" }}>
       <div style={{ margin: "40px" }}>
-        <h1>Dashboard | Welcome "{data?.data.email}"</h1>
+        <h1>Dashboard | Welcome "{loggedEmail}"</h1>
         <Link to="/addgear">
           <button style={{ marginRight: "30px" }}>
             Place an add and sell your item!
@@ -34,7 +21,7 @@ function Dashboard() {
         <h1>My Gears</h1>
       </div>
       <div>
-        <WingList id={data.data.id} />
+        <WingList id={loggedId} />
       </div>
     </div>
   );
