@@ -2,7 +2,7 @@ import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
 import { useUser } from "../context/UserProvider";
 
@@ -10,6 +10,7 @@ function Header() {
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const { loginToken, logout } = useAuth();
+  const user = useUser();
   const {
     email,
     country,
@@ -21,7 +22,7 @@ function Header() {
     last_updated,
     phone_number,
     username,
-  } = useUser();
+  } = user || {};
 
   const logoutHandler = () => {
     logout();
@@ -60,7 +61,7 @@ function Header() {
                   alt="User"
                   style={{ height: "30px", width: "30px", margin: "auto" }}
                 />
-                <p>{first_name}</p>
+                {first_name && <p>{first_name}</p>}
               </div>
             </Link>
           </>

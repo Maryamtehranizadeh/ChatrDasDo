@@ -3,6 +3,7 @@ function ItemFormExtraProperties({
   categoryId,
   properties,
   setProperties,
+  form,
 }) {
   const selectedCategory = allTypes?.find(
     (category) => category.id === categoryId,

@@ -28,7 +28,7 @@ function Login() {
         password,
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         saveCookie(response.data.access);
         navigate("/dashboard");
         setLoginToken(response.data.access);

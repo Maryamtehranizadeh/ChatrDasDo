@@ -24,6 +24,7 @@ import SecuritySafety from "../pages/SecuritySafety";
 import AddCertificatePage from "../pages/AddCertificatePage";
 import ResetPassword from "../pages/ResetPassword";
 import UserProfile from "../pages/UserProfile";
+import EditGear from "../pages/EditGear";
 
 function Router() {
   const { loginToken } = useAuth();
@@ -60,6 +61,7 @@ function Router() {
       <Route path="/security-and-safety" element={<SecuritySafety />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/user/:id" element={<UserProfile />} />
+      <Route path="/editgear/:id" element={<EditGear />} />
     </Routes>
   );
 }

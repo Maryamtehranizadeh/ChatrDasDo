@@ -7,7 +7,6 @@ const UserContext = createContext();
 
 function UserProvider({ children }) {
   const { loginToken } = useAuth();
-
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
@@ -18,9 +17,10 @@ function UserProvider({ children }) {
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
-  // if (isError) {
-  //   return <h2>Error: {error.message}</h2>;
-  // }
+  if (isError || !data?.data) {
+    console.log(error);
+    return <UserContext.Provider value={null}>{children}</UserContext.Provider>;
+  }
   //   console.log(data?.data);
   const {
     email,
@@ -33,7 +33,7 @@ function UserProvider({ children }) {
     phone_number,
     username,
   } = data?.data;
-  const userId = data.data.id;
+  const userId = data?.data.id;
 
   return (
     <UserContext.Provider

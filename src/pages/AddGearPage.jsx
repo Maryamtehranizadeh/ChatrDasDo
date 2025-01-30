@@ -19,34 +19,15 @@ function AddGearPage() {
     gear_type_id: "",
     name: "",
     brand: "",
-    properties: "",
     price: 0,
     currency: "",
     properties: {},
   });
-  // const formKeys = Object.keys(form);
-  // const propertykeys = Object.keys(properties);
-
-  const changeHandler = (event) => {
-    if (!loginToken)
-      return toast.error("In order to place an add please login");
-    setForm((prevForm) => ({
-      ...prevForm,
-      properties,
-      [event.target.name]: event.target.value,
-    }));
-
-    // console.log(event.target.value);
-  };
 
   useEffect(() => {
     // console.log("Form updated:", form);
     // console.log("Properties updated:", properties);
   }, [form, properties]);
-  // console.log(properties);
-  // console.log(form);
-  // console.log(propertykeys);
-  // console.log(formKeys);
 
   for (let key in properties) {
     if (key in form) {
@@ -57,9 +38,7 @@ function AddGearPage() {
   const submitHandler = (event) => {
     event.preventDefault();
     console.log(form);
-
     const { gear_type_id, name, brand, model, price, currency } = form;
-
     Object.keys(form).forEach((key) => {
       if (!form[key]) {
         if (key === "gear_type_id") {
@@ -101,10 +80,11 @@ function AddGearPage() {
   return (
     <div>
       <ItemForm
-        changeHandler={changeHandler}
         submitHandler={submitHandler}
         properties={properties}
         setProperties={setProperties}
+        form={form}
+        setForm={setForm}
       />
 
       {isModal && (

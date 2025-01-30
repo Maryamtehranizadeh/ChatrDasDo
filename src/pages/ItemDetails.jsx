@@ -22,7 +22,7 @@ function ItemDetails() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  // console.log(data?.data);
+  console.log(data?.data);
 
   const showCertificate = () => {
     console.log("certificate");

@@ -1,7 +1,7 @@
 import { getUser } from "../utils/getAll";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import WingList from "../components/WingList";
+import MyGearList from "../components/MyGearList";
 import { useUser } from "../context/UserProvider";
 
 function Dashboard() {
@@ -32,7 +32,7 @@ function Dashboard() {
         <h1>My Gears</h1>
       </div>
       <div>
-        <WingList id={userId} />
+        <MyGearList id={userId} />
       </div>
     </div>
   );

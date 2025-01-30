@@ -3,11 +3,10 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import styles from "./WingList.module.css";
 import { Link } from "react-router-dom";
 import { deleteGear } from "../utils/deleteAll";
-import { useEffect } from "react";
-import { pureBaseURL } from "../config/api";
+import { baseURL, pureBaseURL } from "../config/api";
 import { useNavigate } from "react-router-dom";
 
-function WingList({ id }) {
+function MyGearList({ id }) {
   // console.log(id)
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -43,7 +42,8 @@ function WingList({ id }) {
   // console.log(data?.data);
 
   const editHandler = (id) => {
-    console.log("edit");
+    // console.log("edit", id);
+    navigate(`/editgear/${id}`);
   };
 
   const certificateHandler = (id) => {
@@ -101,4 +101,4 @@ function WingList({ id }) {
   );
 }
 
-export default WingList;
+export default MyGearList;
