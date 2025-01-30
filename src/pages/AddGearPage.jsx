@@ -6,39 +6,22 @@ import ItemForm from "../components/ItemForm";
 import styles from "./AddGearPage.module.css";
 import toast from "react-hot-toast";
 import PhotoModal from "../components/PhotoModal";
-import { useAuth } from "../context/AuthProvider";
 
 function AddGearPage() {
   const [isModal, setIsModal] = useState(false);
   const [itemId, setItemId] = useState(null);
   const [photos, setPhotos] = useState([]);
-  const [properties, setProperties] = useState({});
-  const { loginToken } = useAuth();
+  // const [properties, setProperties] = useState({});
 
-  const [form, setForm] = useState({
-    gear_type_id: "",
-    name: "",
-    brand: "",
-    price: 0,
-    currency: "",
-    properties: {},
-  });
+  // for (let key in properties) {
+  //   if (key in form) {
+  //     delete form[key];
+  //   }
+  // }
 
-  useEffect(() => {
-    // console.log("Form updated:", form);
-    // console.log("Properties updated:", properties);
-  }, [form, properties]);
-
-  for (let key in properties) {
-    if (key in form) {
-      delete form[key];
-    }
-  }
-
-  const submitHandler = (event) => {
+  const submitHandler = (event, form) => {
     event.preventDefault();
-    console.log(form);
-    const { gear_type_id, name, brand, model, price, currency } = form;
+    // console.log(form);
     Object.keys(form).forEach((key) => {
       if (!form[key]) {
         if (key === "gear_type_id") {
@@ -53,13 +36,8 @@ function AddGearPage() {
       .post(
         `${baseURL}gears/`,
         {
-          gear_type_id,
-          name,
-          brand,
-          model,
-          price,
-          currency,
-          properties,
+          ...form,
+          // properties,
         },
         {
           headers: {
@@ -81,10 +59,8 @@ function AddGearPage() {
     <div>
       <ItemForm
         submitHandler={submitHandler}
-        properties={properties}
-        setProperties={setProperties}
-        form={form}
-        setForm={setForm}
+        // properties={properties}
+        // setProperties={setProperties}
       />
 
       {isModal && (

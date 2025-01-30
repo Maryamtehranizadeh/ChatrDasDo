@@ -1,13 +1,39 @@
+import React, { useState, useEffect } from "react";
+
 function ItemFormExtraProperties({
   allTypes,
   categoryId,
-  properties,
   setProperties,
-  form,
+  initialProperties = {},
 }) {
   const selectedCategory = allTypes?.find(
     (category) => category.id === categoryId,
   );
+
+  // Convert initialProperties into a state variable
+  const [properties, setLocalProperties] = useState(initialProperties);
+
+  // Sync state when initialProperties change
+  useEffect(() => {
+    setLocalProperties(initialProperties);
+  }, [initialProperties]);
+
+  const changeHandler = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+
+    // Update local state for immediate UI response
+    setLocalProperties((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Update parent state to reflect changes globally
+    setProperties((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <form
@@ -18,7 +44,7 @@ function ItemFormExtraProperties({
         alignItems: "start",
       }}
     >
-      {selectedCategory.extra_properties.map((extra_property) => (
+      {selectedCategory?.extra_properties?.map((extra_property) => (
         <div
           key={extra_property.name}
           style={{
@@ -34,12 +60,8 @@ function ItemFormExtraProperties({
             type={extra_property.type}
             name={extra_property.name}
             id={extra_property.name}
-            onChange={(event) => {
-              setProperties((prevProperties) => ({
-                ...prevProperties,
-                [extra_property.name]: event.target.value,
-              }));
-            }}
+            value={properties[extra_property.name]}
+            onChange={changeHandler}
           />
         </div>
       ))}

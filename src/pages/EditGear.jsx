@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import ItemForm from "../components/ItemForm";
 import { useQuery } from "@tanstack/react-query";
 import { getItemDetails } from "../utils/getAll";
-import { useState, useEffect } from "react";
 
 function EditGear() {
   const { id } = useParams();
@@ -12,12 +11,14 @@ function EditGear() {
   });
 
   if (isLoading) return <h1>Loading...</h1>;
-  if (isError) return <h2>{error?.message || "Something went wrong"}</h2>;
+  if (isError) return <h2>{error?.message}</h2>;
+  //   console.log(data?.data.properties);
   return (
     <div>
       <ItemForm
         initialData={data?.data}
-        submitHandler={() => console.log("Submit clicked")}
+        submitHandler={(e, form) => console.log("Submit clicked", form)}
+        initialProperties={data?.data.properties}
       />
     </div>
   );

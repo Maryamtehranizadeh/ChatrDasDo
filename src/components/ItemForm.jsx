@@ -6,10 +6,11 @@ import { useAuth } from "../context/AuthProvider";
 
 function ItemForm({
   submitHandler,
-  properties,
-  setProperties,
-  initialData = {},
+  initialData = {}, //why
+  initialProperties = {},
 }) {
+  const [properties, setProperties] = useState({});
+
   const [form, setForm] = useState({
     gear_type_id: "",
     name: "",
@@ -17,23 +18,19 @@ function ItemForm({
     model: "",
     price: 0,
     currency: "",
-    properties: {},
+    properties: { ...initialProperties },
     ...initialData,
   });
   const [categoryId, setCategoryId] = useState("");
   const { allTypes } = useType();
   const { loginToken } = useAuth();
+  const gearTypeName = allTypes?.find((type) => type.id === form?.gear_type_id);
 
   const typeHandler = (event) => {
     const selectedCategory = event.target.value;
     setCategoryId(selectedCategory);
+    setForm((prev) => ({ ...prev, gear_type_id: selectedCategory }));
   };
-
-  useEffect(() => {
-    setForm((prev) => ({ ...prev, ...initialData })); // Update form when initialData changes
-  }, [initialData]);
-
-  const gearTypeName = allTypes?.find((type) => type.id === form?.gear_type);
 
   const changeHandler = (event) => {
     if (!loginToken)
@@ -45,18 +42,20 @@ function ItemForm({
     }));
   };
 
+  // console.log(initialData);
+  // console.log(initialProperties);
   return (
     <form
       onChange={changeHandler}
-      onSubmit={submitHandler}
+      onSubmit={(e) => submitHandler(e, form)}
       className={styles.form}
     >
       <h1> Add your item here!</h1>
       <label htmlFor="category">Category</label>
-      <select name="gear_type_id" id="category" onChange={typeHandler}>
-        <option value="none">{gearTypeName?.name || "Category"}</option>
+      <select name="gear_type" id="category" onChange={typeHandler}>
+        <option value="none">Category</option>
         {allTypes?.map((type) => (
-          <option key={type.id} value={type.id}>
+          <option key={type.id} value={initialData.gear_type_id || type.id}>
             {type.name} - {type.description}
           </option>
         ))}
@@ -79,14 +78,15 @@ function ItemForm({
       </select>
       {categoryId && (
         <ItemFormExtraProperties
-          properties={properties}
           setProperties={setProperties}
           allTypes={allTypes}
           categoryId={categoryId}
-          form={form}
+          initialProperties={initialProperties}
         />
       )}
-      <button type="submit">Add Gear</button>
+      <button type="submit">
+        {Object.keys(initialData).length === 0 ? "Add Gear" : "Update Gear"}
+      </button>
     </form>
   );
 }

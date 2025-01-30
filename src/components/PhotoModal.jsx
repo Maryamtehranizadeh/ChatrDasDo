@@ -52,7 +52,7 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
           allPostedPhotos.push(response.data);
           //   console.log(allPostedPhotos);
           if (allPostedPhotos.length === photos.length) {
-            console.log(allPostedPhotos);
+            // console.log(allPostedPhotos);
             skipHandler();
           }
         })
