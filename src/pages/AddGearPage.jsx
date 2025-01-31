@@ -11,17 +11,10 @@ function AddGearPage() {
   const [isModal, setIsModal] = useState(false);
   const [itemId, setItemId] = useState(null);
   const [photos, setPhotos] = useState([]);
-  // const [properties, setProperties] = useState({});
-
-  // for (let key in properties) {
-  //   if (key in form) {
-  //     delete form[key];
-  //   }
-  // }
 
   const submitHandler = (event, form) => {
     event.preventDefault();
-    // console.log(form);
+    console.log(form);
     Object.keys(form).forEach((key) => {
       if (!form[key]) {
         if (key === "gear_type_id") {
@@ -37,7 +30,6 @@ function AddGearPage() {
         `${baseURL}gears/`,
         {
           ...form,
-          // properties,
         },
         {
           headers: {
@@ -57,11 +49,7 @@ function AddGearPage() {
 
   return (
     <div>
-      <ItemForm
-        submitHandler={submitHandler}
-        // properties={properties}
-        // setProperties={setProperties}
-      />
+      <ItemForm submitHandler={submitHandler} />
 
       {isModal && (
         <PhotoModal

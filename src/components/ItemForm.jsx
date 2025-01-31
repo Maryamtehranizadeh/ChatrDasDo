@@ -4,13 +4,12 @@ import ItemFormExtraProperties from "./ItemFormExtraProperties";
 import { useType } from "../context/TypeProvider";
 import { useAuth } from "../context/AuthProvider";
 
-function ItemForm({
-  submitHandler,
-  initialData = {}, //why
-  initialProperties = {},
-}) {
-  const [properties, setProperties] = useState({});
-
+function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
+  const [properties, setProperties] = useState({
+    color: "",
+    weight: "",
+    certificate: "",
+  });
   const [form, setForm] = useState({
     gear_type_id: "",
     name: "",
@@ -18,19 +17,33 @@ function ItemForm({
     model: "",
     price: 0,
     currency: "",
-    properties: { ...initialProperties },
+    properties: {
+      color: "",
+      weight: "",
+      certificate: "",
+      ...initialProperties,
+    },
     ...initialData,
   });
   const [categoryId, setCategoryId] = useState("");
   const { allTypes } = useType();
   const { loginToken } = useAuth();
   const gearTypeName = allTypes?.find((type) => type.id === form?.gear_type_id);
-
   const typeHandler = (event) => {
     const selectedCategory = event.target.value;
     setCategoryId(selectedCategory);
     setForm((prev) => ({ ...prev, gear_type_id: selectedCategory }));
   };
+  useEffect(() => {
+    setForm((prevForm) => {
+      if (JSON.stringify(prevForm.properties) === JSON.stringify(properties)) {
+        return prevForm; // Prevent unnecessary re-renders
+      }
+      return { ...prevForm, properties };
+    });
+    // console.log(properties);
+    console.log(form);
+  }, [form, properties]);
 
   const changeHandler = (event) => {
     if (!loginToken)
@@ -40,8 +53,8 @@ function ItemForm({
       properties,
       [event.target.name]: event.target.value,
     }));
+    setForm((form) => ({ ...form, properties }));
   };
-
   // console.log(initialData);
   // console.log(initialProperties);
   return (
@@ -82,6 +95,7 @@ function ItemForm({
           allTypes={allTypes}
           categoryId={categoryId}
           initialProperties={initialProperties}
+          properties={properties}
         />
       )}
       <button type="submit">

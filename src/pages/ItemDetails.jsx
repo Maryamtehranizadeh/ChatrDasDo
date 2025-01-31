@@ -13,6 +13,8 @@ function ItemDetails() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear", id],
     queryFn: getItemDetails,
+    refetchOnMount: true,
+    staleTime: 0,
   });
 
   if (isLoading) {

@@ -5,35 +5,48 @@ function ItemFormExtraProperties({
   categoryId,
   setProperties,
   initialProperties = {},
+  properties,
 }) {
   const selectedCategory = allTypes?.find(
     (category) => category.id === categoryId,
   );
 
-  // Convert initialProperties into a state variable
-  const [properties, setLocalProperties] = useState(initialProperties);
-
-  // Sync state when initialProperties change
-  useEffect(() => {
-    setLocalProperties(initialProperties);
-  }, [initialProperties]);
-
-  const changeHandler = (e) => {
-    const { name, value } = e.target;
-    console.log(value);
-
-    // Update local state for immediate UI response
-    setLocalProperties((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    // Update parent state to reflect changes globally
-    setProperties((prev) => ({
-      ...prev,
-      [name]: value,
+  const changeHandler = (event) => {
+    // console.log(event.target.value);
+    setProperties((prevProp) => ({
+      ...prevProp,
+      [event.target.name]: event.target.value,
     }));
   };
+  // console.log(properties);
+  useEffect(() => {
+    // console.log(properties);
+  }, [properties]);
+
+  // Convert initialProperties into a state variable
+  // const [properties, setLocalProperties] = useState(initialProperties);
+
+  // Sync state when initialProperties change
+  // useEffect(() => {
+  //   setLocalProperties(initialProperties);
+  // }, [initialProperties]);
+
+  // const changeHandler = (e) => {
+  //   const { name, value } = e.target;
+  //   // console.log(value);
+
+  //   // Update local state for immediate UI response
+  //   setLocalProperties((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+
+  // Update parent state to reflect changes globally
+  //   setProperties((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
 
   return (
     <form
