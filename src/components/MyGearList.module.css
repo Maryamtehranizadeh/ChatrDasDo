@@ -9,13 +9,16 @@
 }
 
 .wing {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto; /* Adjust column sizes */
+  /* display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-between; */
   align-items: center;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 20px 40px;
+  width: 100%;
 }
 .wing:hover {
   border: 2px solid var(--primary-color);
@@ -24,5 +27,5 @@
 .buttons {
   display: flex;
   flex-direction: row;
-  column-gap: 20px;
+  column-gap: 10px;
 }

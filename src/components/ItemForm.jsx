@@ -42,7 +42,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
       return { ...prevForm, properties };
     });
     // console.log(properties);
-    console.log(form);
+    // console.log(form);
   }, [form, properties]);
 
   const changeHandler = (event) => {
