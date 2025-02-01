@@ -1,15 +1,18 @@
 import { getMyGears } from "../utils/getAll";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import styles from "./WingList.module.css";
+import styles from "./MyGearList.module.css";
 import { Link } from "react-router-dom";
 import { deleteGear } from "../utils/deleteAll";
-import { baseURL, pureBaseURL } from "../config/api";
+import { pureBaseURL } from "../config/api";
 import { useNavigate } from "react-router-dom";
+import { useType } from "../context/TypeProvider";
 
 function MyGearList({ id }) {
   // console.log(id)
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { allTypes } = useType();
+  // console.log(allTypes);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gears", id],
@@ -52,9 +55,9 @@ function MyGearList({ id }) {
 
   return (
     <div className={styles.container}>
-      {data?.data.map((wing) => (
-        <div className={styles.wing} key={wing.id}>
-          <Link to={`/itemdetails/${wing.id}`}>
+      {data?.data.map((gear) => (
+        <div className={styles.wing} key={gear.id}>
+          <Link to={`/itemdetails/${gear.id}`}>
             <div
               style={{
                 display: "flex",
@@ -64,36 +67,36 @@ function MyGearList({ id }) {
               <img
                 style={{ width: "70px", height: "70px", marginRight: "18px" }}
                 src={
-                  wing.pictures.length === 0
+                  gear.pictures.length === 0
                     ? `/src/public/logo.png`
-                    : `${pureBaseURL}${wing.pictures[0].link}`
+                    : `${pureBaseURL}${gear.pictures[0].link}`
                 }
                 alt="Gear"
               />
-              <h3>{wing.name}</h3>
+              <h3>{gear.name}</h3>
             </div>
           </Link>
-          <div style={{ margin: "auto" }}>
-            <p>
-              {wing.brand} - {wing.price} {wing.currency}
-            </p>
+          <div>
+            Category:{" "}
+            {gear.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c"
+              ? "Wing"
+              : gear.gear_type === "49e81219-2646-44e2-b36c-3316ff0d26d3"
+                ? "Instrument"
+                : "Harness"}
           </div>
           <div>
-            {wing.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c" && (
-              <button
-                onClick={() => certificateHandler(wing.id)}
-                style={{ marginRight: "20px" }}
-              >
+            <p>
+              {gear.brand} - {gear.price} {gear.currency}
+            </p>{" "}
+          </div>
+          <div className={styles.buttons}>
+            {gear.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c" && (
+              <button onClick={() => certificateHandler(gear.id)}>
                 Add Certificates
               </button>
             )}
-            <button
-              onClick={() => editHandler(wing.id)}
-              style={{ marginRight: "20px" }}
-            >
-              Edit
-            </button>
-            <button onClick={() => deleteHandler(wing.id)}>Delete</button>
+            <button onClick={() => editHandler(gear.id)}>Edit</button>
+            <button onClick={() => deleteHandler(gear.id)}>Delete</button>
           </div>
         </div>
       ))}
