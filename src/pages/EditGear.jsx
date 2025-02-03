@@ -7,12 +7,14 @@ import { baseURL } from "../config/api";
 import axios from "axios";
 import { useState } from "react";
 import PhotoModal from "../components/PhotoModal";
+import toast from "react-hot-toast";
 
 function EditGear() {
   const { id } = useParams();
   const [isModal, setIsModal] = useState(false);
   const [itemId, setItemId] = useState(null);
   const [photos, setPhotos] = useState([]);
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear", id],
     queryFn: getItemDetails,
@@ -20,13 +22,22 @@ function EditGear() {
 
   if (isLoading) return <h1>Loading...</h1>;
   if (isError) return <h2>{error?.message}</h2>;
-  //   console.log(data?.data.properties);
-  //   console.log(id);
-  //   console.log(`${baseURL}gears/${id}`);
-  //   const urlToEdit = `${baseURL}gears/${id}`;
 
   const editHandler = (form) => {
     // console.log(form);
+    let isFornValid = true;
+    console.log(form);
+    Object.keys(form).forEach((key) => {
+      if (!form[key]) {
+        isFornValid = false;
+        if (key === "gear_type_id") {
+          toast.error("Please choose category!");
+        } else {
+          toast.error(`The field "${key}" is empty!`);
+        }
+      }
+    });
+    if (!isFornValid) return;
     axios
       .put(
         `${baseURL}gears/${id}/`,
@@ -46,6 +57,7 @@ function EditGear() {
         console.log(error);
       });
   };
+  console.log(data?.data.pictures);
   return (
     <div>
       <ItemForm
@@ -60,7 +72,7 @@ function EditGear() {
         <PhotoModal
           setPhotos={setPhotos}
           itemId={itemId}
-          photos={photos}
+          photos={data?.data.pictures}
           isModal={isModal}
           setIsModal={setIsModal}
         />

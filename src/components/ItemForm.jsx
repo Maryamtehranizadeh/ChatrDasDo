@@ -9,6 +9,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
     color: "",
     weight: "",
     certificate: "",
+    ...initialProperties,
   });
   const [form, setForm] = useState({
     gear_type_id: "",
@@ -63,7 +64,12 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
       onSubmit={(e) => submitHandler(e, form)}
       className={styles.form}
     >
-      <h1> Add your item here!</h1>
+      <h1>
+        {" "}
+        {Object.keys(initialData).length === 0
+          ? "Add Your Item"
+          : "Update Your Gear Details"}
+      </h1>
       <label htmlFor="category">Category</label>
       <select name="gear_type" id="category" onChange={typeHandler}>
         <option value="none">Category</option>

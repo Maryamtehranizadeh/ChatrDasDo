@@ -34,7 +34,7 @@ function Router() {
       <Route index path="/" element={<HomePage />} replace />
       <Route
         path="/dashboard"
-        element={loginToken ? <Dashboard /> : <Navigate to="/auth" />}
+        element={!!loginToken ? <Dashboard /> : <Navigate to="/auth" />}
       />
       <Route
         path="/auth"

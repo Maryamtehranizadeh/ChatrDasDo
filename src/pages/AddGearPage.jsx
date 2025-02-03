@@ -14,9 +14,11 @@ function AddGearPage() {
 
   const submitHandler = (event, form) => {
     event.preventDefault();
+    let isFormValid = true;
     console.log(form);
     Object.keys(form).forEach((key) => {
       if (!form[key]) {
+        isFormValid = false;
         if (key === "gear_type_id") {
           toast.error("Please choose category!");
         } else {
@@ -24,6 +26,7 @@ function AddGearPage() {
         }
       }
     });
+    if (!isFormValid) return;
 
     axios
       .post(
@@ -46,11 +49,9 @@ function AddGearPage() {
         console.log(error);
       });
   };
-
   return (
     <div>
       <ItemForm submitHandler={submitHandler} />
-
       {isModal && (
         <PhotoModal
           setPhotos={setPhotos}

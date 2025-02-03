@@ -7,7 +7,7 @@ import { getCookie } from "../utils/cookie";
 function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
   const [loadingButton, setLoadingButton] = useState(false);
   const navigate = useNavigate();
-
+  console.log(photos);
   const skipHandler = () => {
     setIsModal(false);
     navigate(`/itemdetails/${itemId}`);
