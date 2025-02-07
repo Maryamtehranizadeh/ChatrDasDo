@@ -38,7 +38,7 @@ function Header() {
   };
 
   return (
-    <header className={styles.header}>
+    <div className={styles.header}>
       <div>
         <Link to="/">
           <h2>
@@ -76,7 +76,7 @@ function Header() {
           </>
         )}
       </div>
-    </header>
+    </div>
   );
 }
 

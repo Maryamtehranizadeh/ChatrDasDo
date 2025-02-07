@@ -8,7 +8,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
   const [properties, setProperties] = useState({
     color: "",
     weight: "",
-    certificate: "",
+    // certificate: "",
     ...initialProperties,
   });
   const [form, setForm] = useState({
@@ -21,7 +21,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
     properties: {
       color: "",
       weight: "",
-      certificate: "",
+      // certificate: "",
       ...initialProperties,
     },
     ...initialData,

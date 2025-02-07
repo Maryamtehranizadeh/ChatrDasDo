@@ -1,18 +1,32 @@
 import { useEffect, useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { baseURL } from "../config/api";
+import { pureBaseURL, baseURL } from "../config/api";
 import { getCookie } from "../utils/cookie";
+import { deleteGearPhoto } from "../utils/deleteAll";
 
-function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
+function PhotoModal({ itemId, pictures, setIsModal }) {
   const [loadingButton, setLoadingButton] = useState(false);
+  const [photos, setPhotos] = useState(pictures || []);
+  const queryClient = useQueryClient();
+
   const navigate = useNavigate();
-  console.log(photos);
   const skipHandler = () => {
     setIsModal(false);
     navigate(`/itemdetails/${itemId}`);
   };
-
+  const deleteMutation = useMutation({
+    mutationFn: deleteGearPhoto,
+    onSuccess: (response) => {
+      console.log(response);
+      queryClient.invalidateQueries(["photos"]);
+    },
+    onError: (error) => {
+      console.error("Error deleting photo:", error);
+    },
+  });
   const photoHandler = (event) => {
     // console.log(event.target.files);
     const selectedPhotos = event.target.files;
@@ -22,46 +36,96 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
     ]);
   };
 
-  const deleteHandler = (fileName) => {
-    setPhotos(photos.filter((photo) => photo.name !== fileName));
+  const removeHandler = (fileName) => {
+    setPhotos((prev) => {
+      const updatedPhotos = prev.filter(
+        (photo) => photo.picture_id !== fileName && photo.name !== fileName,
+      );
+      // console.log("Updated Photos After Deletion:", updatedPhotos);
+      return [...updatedPhotos];
+    });
   };
 
   useEffect(() => {
     if (photos.length > 0) {
-      console.log("Updated photos:", photos);
+      console.log("previous uploaded pictures ", pictures);
+      console.log("desired final photos to appear:", photos);
+      console.log("Photos to delete from pictures:", deletedPhotos);
+      console.log("Photos to add to pictures:", addedPhotos);
     }
   }, [photos]);
+
+  const deletedPhotos = pictures?.filter((pic) => !photos?.includes(pic));
+  const addedPhotos = photos?.filter((photo) => !pictures?.includes(photo));
+  // const deletedPhotos = pictures.filter(
+  //   (pic) =>
+  //     !photos.some(
+  //       (photo) =>
+  //         photo.picture_id === pic.picture_id || photo.name === pic.name,
+  //     ),
+  // );
+
+  // const addedPhotos = photos.filter(
+  //   (photo) =>
+  //     !pictures.some(
+  //       (pic) => pic.picture_id === photo.picture_id || pic.name === photo.name,
+  //     ),
+  // );
 
   const addPhotoHandler = () => {
     let allPostedPhotos = [];
     setLoadingButton(true);
-    photos.forEach((photo) => {
-      const formData = new FormData();
-      formData.append("image", photo);
-      //   for (let [key, value] of formData.entries()) {
-      //     console.log(`${key}:`, value);
-      //   }
-      axios
-        .post(`${baseURL}gears/${itemId}/pictures/`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Token ${getCookie()}`,
-          },
-        })
-        .then((response) => {
-          allPostedPhotos.push(response.data);
-          //   console.log(allPostedPhotos);
-          if (allPostedPhotos.length === photos.length) {
-            // console.log(allPostedPhotos);
-            skipHandler();
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-  };
+    console.log("previous uploaded pictures ", pictures);
+    console.log("desired final photos to appear:", photos);
+    console.log("Photos to delete from pictures:", deletedPhotos);
+    console.log("Photos to add to pictures:", addedPhotos);
 
+    //remove the deletedphotos
+    if (deletedPhotos?.length > 0) {
+      deletedPhotos.forEach((photo) => {
+        axios
+          .delete(`${baseURL}gears/${itemId}/pictures/${photo.picture_id}/`, {
+            headers: {
+              Authorization: `Token ${getCookie()}`,
+            },
+          })
+          .then((response) => {
+            console.log(`Deleted photo: ${photo.picture_id}`, response);
+            // You can manage deleted photos here, e.g., update UI
+          })
+          .catch((error) => {
+            console.error("Error deleting photo:", error);
+          });
+      });
+    }
+
+    // upload addedphotos
+
+    if (addedPhotos?.length > 0) {
+      addedPhotos.forEach((photo) => {
+        const formData = new FormData();
+        formData.append("image", photo);
+        axios
+          .post(`${baseURL}gears/${itemId}/pictures/`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Token ${getCookie()}`,
+            },
+          })
+          .then((response) => {
+            allPostedPhotos.push(response.data);
+            //   console.log(allPostedPhotos);
+            if (allPostedPhotos.length === photos.length) {
+              // console.log(allPostedPhotos);
+              skipHandler();
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    }
+  };
   const closeHandler = () => {
     setIsModal(false);
   };
@@ -78,7 +142,9 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
           className="text-lg font-semibold text-gray-800 "
           style={{ marginBottom: "35px", color: "var(--p-color)" }}
         >
-          Now add some photos of your Item
+          {pictures?.length > 0
+            ? "Now edit your Item photos"
+            : "Now add some photos of your Item"}
         </h2>
         <div style={{ marginBottom: "25px" }}>
           <label
@@ -91,7 +157,7 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
               cursor: "pointer",
             }}
           >
-            Upload Photos
+            Browse
           </label>
           <input
             id="photo"
@@ -104,9 +170,9 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
         </div>
         {photos.length > 0 && (
           <div style={{ marginTop: "10px" }}>
-            {photos.map((photo) => (
+            {photos.map((photo, index) => (
               <div
-                key={photo.lastModified}
+                key={photo.picture_id || photo.lastModified}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -114,20 +180,23 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
                 }}
               >
                 <img
-                  src={URL.createObjectURL(photo)}
-                  alt={photo.name}
+                  src={
+                    photo instanceof File || photo instanceof Blob
+                      ? URL.createObjectURL(photo)
+                      : `${pureBaseURL}${photo.link}`
+                  }
+                  alt={photo.name || "Uploaded Photo"}
                   style={{
                     width: "50px",
                     height: "50px",
                     objectFit: "cover",
                   }}
                 />
-                <p>{photo.name}</p>
+                <p>{photo.name || `Photo ${index + 1}`}</p>
                 <button
-                  onClick={() => deleteHandler(photo.name)}
-                  style={{ border: "1px solid var(--primary-color)" }}
+                  onClick={() => removeHandler(photo.picture_id || photo.name)}
                 >
-                  Delete
+                  Remove
                 </button>
               </div>
             ))}
@@ -149,7 +218,7 @@ function PhotoModal({ setPhotos, itemId, photos, setIsModal }) {
                 backgroundColor: "var(--primary-color)",
               }}
             >
-              {loadingButton ? "Adding Photos..." : "Add Photos"}
+              {loadingButton ? "Uploading..." : "Upload Photos"}
             </button>
           )}
           {photos.length == 0 && (

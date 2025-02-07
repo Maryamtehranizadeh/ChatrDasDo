@@ -8,11 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { useType } from "../context/TypeProvider";
 
 function MyGearList({ id }) {
-  // console.log(id)
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { allTypes } = useType();
-  // console.log(allTypes);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gears", id],
@@ -25,7 +23,8 @@ function MyGearList({ id }) {
     onSuccess: (response) => {
       console.log(response);
       // Invalidate and refetch the wings query to reflect the changes after deletion
-      queryClient.invalidateQueries(["wings"]);
+      // in the following line instead of gears it was "wings, i changed it but it is still working i dont know why!!!??"
+      queryClient.invalidateQueries(["gears"]);
     },
     onError: (error) => {
       console.error("Error deleting gear:", error);

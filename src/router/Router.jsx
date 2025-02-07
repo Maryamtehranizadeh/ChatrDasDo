@@ -25,6 +25,7 @@ import AddCertificatePage from "../pages/AddCertificatePage";
 import ResetPassword from "../pages/ResetPassword";
 import UserProfile from "../pages/UserProfile";
 import EditGear from "../pages/EditGear";
+import RequestGear from "../pages/RequestGear";
 
 function Router() {
   const { loginToken } = useAuth();
@@ -62,6 +63,7 @@ function Router() {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/user/:id" element={<UserProfile />} />
       <Route path="/editgear/:id" element={<EditGear />} />
+      <Route path="/requestgear" element={<RequestGear />} />
     </Routes>
   );
 }

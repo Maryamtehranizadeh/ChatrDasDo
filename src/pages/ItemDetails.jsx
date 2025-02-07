@@ -1,15 +1,16 @@
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { baseURL } from "../config/api";
-import { getCookie } from "../utils/cookie";
 import GearPhotos from "../components/GearPhotos";
 import { getItemDetails } from "../utils/getAll";
+import { useAuth } from "../context/AuthProvider";
+import { useUser } from "../context/UserProvider";
+import { useNavigate } from "react-router-dom";
 
 function ItemDetails() {
   const { id } = useParams();
-  // console.log(id);
+  const { loginToken } = useAuth();
+  const { userId } = useUser();
+  const navigate = useNavigate();
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear", id],
     queryFn: getItemDetails,
@@ -24,7 +25,8 @@ function ItemDetails() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  // console.log(data?.data);
+  // console.log(data?.data.user);
+  // console.log(userId);
 
   const showCertificate = () => {
     console.log("certificate");
@@ -47,8 +49,16 @@ function ItemDetails() {
         <span>
           {data.data.price} {data.data.currency}
         </span>
-        <hr />
-        <button onClick={showCertificate}>Show Certificate</button>
+        <div>
+          <button onClick={showCertificate} style={{ margin: "40px" }}>
+            Show Certificate
+          </button>
+          {loginToken && userId === data?.data.user && (
+            <button onClick={() => navigate(`/editgear/${id}`)}>
+              Edit Details
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
