@@ -14,46 +14,63 @@ function UserProvider({ children }) {
     staleTime: 0,
     enabled: !!loginToken,
   });
+
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
-  if (isError || !data?.data) {
-    // console.log(error);
-    return <UserContext.Provider value={null}>{children}</UserContext.Provider>;
+  let isLoggedIn = false;
+  let userData = null;
+
+  if (loginToken && !isError && data) {
+    isLoggedIn = true;
+    userData = data?.data;
   }
-  //   console.log(data?.data);
-  const {
-    email,
-    country,
-    date_joined,
-    first_name,
-    is_certified_seller,
-    last_name,
-    last_updated,
-    phone_number,
-    username,
-  } = data?.data;
-  const userId = data?.data.id;
 
   return (
     <UserContext.Provider
-      value={{
-        email,
-        country,
-        date_joined,
-        first_name,
-        is_certified_seller,
-        last_name,
-        last_updated,
-        phone_number,
-        username,
-        userId,
-      }}
+      value={{ isLoggedIn: isLoggedIn, userData: userData }}
     >
       {children}
     </UserContext.Provider>
   );
 }
+
+//   if (isError || !data?.data) {
+//     // console.log(error);
+//     return <UserContext.Provider value={null}>{children}</UserContext.Provider>;
+//   }
+
+//   const {
+//     email,
+//     country,
+//     date_joined,
+//     first_name,
+//     is_certified_seller,
+//     last_name,
+//     last_updated,
+//     phone_number,
+//     username,
+//   } = data?.data;
+//   const userId = data?.data?.id || false;
+
+//   return (
+//     <UserContext.Provider
+//       value={{
+//         email,
+//         country,
+//         date_joined,
+//         first_name,
+//         is_certified_seller,
+//         last_name,
+//         last_updated,
+//         phone_number,
+//         username,
+//         userId,
+//       }}
+//     >
+//       {children}
+//     </UserContext.Provider>
+//   );
 
 const useUser = () => useContext(UserContext);
 

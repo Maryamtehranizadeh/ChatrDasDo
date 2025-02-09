@@ -1,12 +1,13 @@
 import { createContext, useContext, useState } from "react";
-import { getCookie } from "../utils/cookie";
+import { setCookie, getCookie } from "../utils/cookie";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [loginToken, setLoginToken] = useState(getCookie());
+
   const login = (token) => {
-    document.cookie = `airToken=${token}; max-age=86400`;
+    setCookie(token);
     setLoginToken(token);
   };
   const logout = () => {

@@ -10,7 +10,11 @@ import { useEffect } from "react";
 function ItemDetails() {
   const { id } = useParams();
   const { loginToken } = useAuth();
-  const { userId } = useUser();
+  // const { userId } = useUser();
+  const { isLoggedIn, userData } = useUser();
+  // console.log(user);
+  // const userId = user?.userId || false;
+  console.log(userData?.id);
   const navigate = useNavigate();
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["gear", id],
@@ -62,7 +66,7 @@ function ItemDetails() {
           <button onClick={showCertificate} style={{ margin: "40px" }}>
             Show Certificate
           </button>
-          {loginToken && userId === data?.data.user && (
+          {isLoggedIn && userData.id === data?.data.user && (
             <button onClick={editHandler}>Edit Details</button>
           )}
         </div>
