@@ -25,6 +25,9 @@ function UserProvider({ children }) {
     isLoggedIn = true;
     userData = data?.data;
   }
+  //   if (isError) {
+  //     console.log(error?.message);
+  //   }
 
   return (
     <UserContext.Provider

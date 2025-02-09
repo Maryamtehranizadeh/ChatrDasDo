@@ -59,17 +59,16 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
   console.log(initialData);
   // console.log(initialProperties);
 
-  let typeToEdit;
-  console.log(previousGearTypeName);
-  if (initialData?.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c") {
-    typeToEdit = "Wing";
-  } else if (
-    initialData?.gear_type === "49e81219-2646-44e2-b36c-3316ff0d26d3"
-  ) {
-    typeToEdit = "Instrument";
-  } else {
-    typeToEdit = "Harness";
-  }
+  // let typeToEdit;
+  // if (initialData?.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c") {
+  //   typeToEdit = "Wing";
+  // } else if (
+  //   initialData?.gear_type === "49e81219-2646-44e2-b36c-3316ff0d26d3"
+  // ) {
+  //   typeToEdit = "Instrument";
+  // } else {
+  //   typeToEdit = "Harness";
+  // }
 
   return (
     <form
@@ -83,7 +82,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
           ? "Add Your Item"
           : "Update Your Gear Details"}
       </h1>
-      <label htmlFor="category">{typeToEdit || "Category"}</label>
+      <label htmlFor="category">Category</label>
       <select name="gear_type" id="category" onChange={typeHandler}>
         <option value="none">Category</option>
         {allTypes?.map((type) => (
