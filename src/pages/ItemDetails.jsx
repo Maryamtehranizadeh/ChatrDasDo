@@ -19,9 +19,8 @@ function ItemDetails() {
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["gear", id],
     queryFn: getItemDetails,
+    refetchOnMount: true,
     staleTime: 0,
-    // refetchOnMount: true,
-    // enabled: false,
   });
 
   useEffect(() => {
