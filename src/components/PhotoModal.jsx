@@ -1,34 +1,20 @@
 import { useEffect, useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { pureBaseURL, baseURL } from "../config/api";
 import { getCookie } from "../utils/cookie";
-import { deleteGearPhoto } from "../utils/deleteAll";
 
 function PhotoModal({ itemId, pictures, setIsModal }) {
   const [loadingButton, setLoadingButton] = useState(false);
   const [photos, setPhotos] = useState(pictures || []);
-  const queryClient = useQueryClient();
 
   const navigate = useNavigate();
+
   const skipHandler = () => {
     setIsModal(false);
     navigate(`/itemdetails/${itemId}`);
   };
-  const deleteMutation = useMutation({
-    mutationFn: deleteGearPhoto,
-    onSuccess: (response) => {
-      console.log(response);
-      queryClient.invalidateQueries(["photos"]);
-    },
-    onError: (error) => {
-      console.error("Error deleting photo:", error);
-    },
-  });
   const photoHandler = (event) => {
-    // console.log(event.target.files);
     const selectedPhotos = event.target.files;
     setPhotos((previousPhotos) => [
       ...previousPhotos,
@@ -41,48 +27,45 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
       const updatedPhotos = prev.filter(
         (photo) => photo.picture_id !== fileName && photo.name !== fileName,
       );
-      // console.log("Updated Photos After Deletion:", updatedPhotos);
       return [...updatedPhotos];
     });
   };
 
   useEffect(() => {
     if (photos.length > 0) {
-      console.log("previous uploaded pictures ", pictures);
-      console.log("desired final photos to appear:", photos);
-      console.log("Photos to delete from pictures:", deletedPhotos);
-      console.log("Photos to add to pictures:", addedPhotos);
+      // console.log("previous uploaded pictures ", pictures);
+      // console.log("desired final photos to appear:", photos);
+      // console.log("Photos to delete from pictures:", deletedPhotos);
+      // console.log("Photos to add to pictures:", addedPhotos);
+      // console.log("Photos to stay uploaded :", stayingPhotos);
     }
   }, [photos]);
 
   const deletedPhotos = pictures?.filter((pic) => !photos?.includes(pic));
   const addedPhotos = photos?.filter((photo) => !pictures?.includes(photo));
-  // const deletedPhotos = pictures.filter(
-  //   (pic) =>
-  //     !photos.some(
-  //       (photo) =>
-  //         photo.picture_id === pic.picture_id || photo.name === pic.name,
-  //     ),
-  // );
-
-  // const addedPhotos = photos.filter(
-  //   (photo) =>
-  //     !pictures.some(
-  //       (pic) => pic.picture_id === photo.picture_id || pic.name === photo.name,
-  //     ),
-  // );
+  const stayingPhotos = pictures?.filter((pic) => photos.includes(pic));
 
   const addPhotoHandler = () => {
-    let allPostedPhotos = [];
+    let completedDeletes = 0;
+    let completedUploads = 0;
+    let totalDeletes = deletedPhotos?.length || 0;
+    let totalUploads = addedPhotos?.length || 0;
+
     setLoadingButton(true);
-    console.log("previous uploaded pictures ", pictures);
-    console.log("desired final photos to appear:", photos);
-    console.log("Photos to delete from pictures:", deletedPhotos);
-    console.log("Photos to add to pictures:", addedPhotos);
+
+    const checkCompletion = () => {
+      if (
+        completedDeletes === totalDeletes &&
+        completedUploads === totalUploads
+      ) {
+        console.log("All deletions and uploads are done. Navigating...");
+        skipHandler();
+      }
+    };
 
     //remove the deletedphotos
     if (deletedPhotos?.length > 0) {
-      deletedPhotos.forEach((photo) => {
+      deletedPhotos?.forEach((photo) => {
         axios
           .delete(`${baseURL}gears/${itemId}/pictures/${photo.picture_id}/`, {
             headers: {
@@ -91,18 +74,23 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
           })
           .then((response) => {
             console.log(`Deleted photo: ${photo.picture_id}`, response);
-            // You can manage deleted photos here, e.g., update UI
+            if (response.status === 204) {
+              completedDeletes++;
+              checkCompletion();
+            }
           })
           .catch((error) => {
             console.error("Error deleting photo:", error);
           });
       });
+    } else {
+      completedDeletes = totalDeletes;
+      checkCompletion();
     }
 
     // upload addedphotos
-
     if (addedPhotos?.length > 0) {
-      addedPhotos.forEach((photo) => {
+      addedPhotos?.forEach((photo) => {
         const formData = new FormData();
         formData.append("image", photo);
         axios
@@ -113,19 +101,21 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
             },
           })
           .then((response) => {
-            allPostedPhotos.push(response.data);
-            //   console.log(allPostedPhotos);
-            if (allPostedPhotos.length === photos.length) {
-              // console.log(allPostedPhotos);
-              skipHandler();
+            if (response.status === 201) {
+              completedUploads++;
+              checkCompletion();
             }
           })
           .catch((error) => {
             console.log(error);
           });
       });
+    } else {
+      completedUploads = totalUploads;
+      checkCompletion();
     }
   };
+
   const closeHandler = () => {
     setIsModal(false);
   };
@@ -223,9 +213,19 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
           )}
           {photos.length == 0 && (
             <div>
-              <button style={{ marginRight: "40px" }} onClick={skipHandler}>
-                Maybe Later... Skip!
-              </button>
+              {pictures?.length > 0 ? (
+                <button
+                  style={{ marginRight: "40px" }}
+                  onClick={addPhotoHandler}
+                >
+                  Update without Photos
+                </button>
+              ) : (
+                <button style={{ marginRight: "40px" }} onClick={skipHandler}>
+                  Maybe Later... Skip!
+                </button>
+              )}
+
               <button onClick={closeHandler}>Close... Back to the form</button>
             </div>
           )}

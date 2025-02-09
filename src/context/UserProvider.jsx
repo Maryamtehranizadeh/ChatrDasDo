@@ -18,7 +18,7 @@ function UserProvider({ children }) {
     return <h1>Loading...</h1>;
   }
   if (isError || !data?.data) {
-    console.log(error);
+    // console.log(error);
     return <UserContext.Provider value={null}>{children}</UserContext.Provider>;
   }
   //   console.log(data?.data);
