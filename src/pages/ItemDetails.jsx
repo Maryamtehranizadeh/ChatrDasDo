@@ -1,21 +1,31 @@
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { baseURL } from "../config/api";
-import { getCookie } from "../utils/cookie";
 import GearPhotos from "../components/GearPhotos";
 import { getItemDetails } from "../utils/getAll";
+import { useAuth } from "../context/AuthProvider";
+import { useUser } from "../context/UserProvider";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function ItemDetails() {
   const { id } = useParams();
-  // console.log(id);
-  const { data, isLoading, isError, error } = useQuery({
+  const { loginToken } = useAuth();
+  // const { userId } = useUser();
+  const { isLoggedIn, userData } = useUser();
+  // console.log(user);
+  // const userId = user?.userId || false;
+  console.log(userData?.id);
+  const navigate = useNavigate();
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["gear", id],
     queryFn: getItemDetails,
     refetchOnMount: true,
     staleTime: 0,
   });
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -24,31 +34,41 @@ function ItemDetails() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  // console.log(data?.data);
+  // console.log(data?.data.user);
+  // console.log(userId);
 
   const showCertificate = () => {
     console.log("certificate");
   };
+  const editHandler = () => {
+    navigate(`/editgear/${id}`);
+  };
   return (
     <div style={{ margin: "40px" }}>
-      <h1>Details about {data.data.name}:</h1>
+      <h1>Details about {data?.data.name}:</h1>
       <div>
         <div>
           <GearPhotos id={id} />
         </div>
-        <h4>Name: {data.data.name}</h4>
-        <h4>Model: {data.data.model}</h4>
+        <h4>Name: {data?.data.name}</h4>
+        <h4>Model: {data?.data.model}</h4>
         <hr />
-        <p>Brand: {data.data.brand}</p>
+        <p>Brand: {data?.data.brand}</p>
         <hr />
-        <h4>Certificate: {data.data.properties.certificate}</h4>
-        <p>Color: {data.data.properties.color}</p>
-        <p>Weight:{data.data.properties.weight}</p>
+        <h4>Certificate: {data?.data.properties.certificate}</h4>
+        <p>Color: {data?.data.properties.color}</p>
+        <p>Weight:{data?.data.properties.weight}</p>
         <span>
-          {data.data.price} {data.data.currency}
+          {data?.data.price} {data?.data.currency}
         </span>
-        <hr />
-        <button onClick={showCertificate}>Show Certificate</button>
+        <div>
+          <button onClick={showCertificate} style={{ margin: "40px" }}>
+            Show Certificate
+          </button>
+          {isLoggedIn && userData.id === data?.data.user && (
+            <button onClick={editHandler}>Edit Details</button>
+          )}
+        </div>
       </div>
     </div>
   );

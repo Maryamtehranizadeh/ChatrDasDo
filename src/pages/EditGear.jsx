@@ -5,7 +5,7 @@ import { getItemDetails } from "../utils/getAll";
 import { getCookie } from "../utils/cookie";
 import { baseURL } from "../config/api";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PhotoModal from "../components/PhotoModal";
 import toast from "react-hot-toast";
 
@@ -13,7 +13,6 @@ function EditGear() {
   const { id } = useParams();
   const [isModal, setIsModal] = useState(false);
   const [itemId, setItemId] = useState(null);
-  const [photos, setPhotos] = useState([]);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear", id],
@@ -57,7 +56,8 @@ function EditGear() {
         console.log(error);
       });
   };
-  console.log(data?.data.pictures);
+  //   console.log(data?.data.pictures);
+
   return (
     <div>
       <ItemForm
@@ -70,9 +70,8 @@ function EditGear() {
       />
       {isModal && (
         <PhotoModal
-          setPhotos={setPhotos}
           itemId={itemId}
-          photos={data?.data.pictures}
+          pictures={data?.data.pictures}
           isModal={isModal}
           setIsModal={setIsModal}
         />

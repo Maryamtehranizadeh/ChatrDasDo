@@ -10,19 +10,7 @@ function Header() {
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const { loginToken, logout } = useAuth();
-  const user = useUser();
-  const {
-    email,
-    country,
-    date_joined,
-    first_name,
-    userId,
-    is_certified_seller,
-    last_name,
-    last_updated,
-    phone_number,
-    username,
-  } = user || {};
+  const { isLoggedIn, userData } = useUser();
 
   const logoutHandler = () => {
     logout();
@@ -38,7 +26,7 @@ function Header() {
   };
 
   return (
-    <header className={styles.header}>
+    <div className={styles.header}>
       <div>
         <Link to="/">
           <h2>
@@ -54,14 +42,14 @@ function Header() {
           <>
             <button onClick={dashboardHandler}>Dashboard</button>
             <button onClick={logoutHandler}>Logout</button>
-            <Link to={`/user/${userId}`}>
+            <Link to={`/user/${userData?.id}`}>
               <div>
                 <img
                   src="/src/public/user.png"
                   alt="User"
                   style={{ height: "30px", width: "30px", margin: "auto" }}
                 />
-                {first_name && <p>{first_name}</p>}
+                {userData && <p>{userData?.first_name}</p>}
               </div>
             </Link>
           </>
@@ -76,7 +64,7 @@ function Header() {
           </>
         )}
       </div>
-    </header>
+    </div>
   );
 }
 

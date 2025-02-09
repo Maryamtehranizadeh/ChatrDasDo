@@ -8,7 +8,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
   const [properties, setProperties] = useState({
     color: "",
     weight: "",
-    certificate: "",
+    // certificate: "",
     ...initialProperties,
   });
   const [form, setForm] = useState({
@@ -21,7 +21,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
     properties: {
       color: "",
       weight: "",
-      certificate: "",
+      // certificate: "",
       ...initialProperties,
     },
     ...initialData,
@@ -56,8 +56,21 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
     }));
     setForm((form) => ({ ...form, properties }));
   };
-  // console.log(initialData);
+  console.log(initialData);
   // console.log(initialProperties);
+
+  let typeToEdit;
+  console.log(previousGearTypeName);
+  if (initialData?.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c") {
+    typeToEdit = "Wing";
+  } else if (
+    initialData?.gear_type === "49e81219-2646-44e2-b36c-3316ff0d26d3"
+  ) {
+    typeToEdit = "Instrument";
+  } else {
+    typeToEdit = "Harness";
+  }
+
   return (
     <form
       onChange={changeHandler}
@@ -70,7 +83,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
           ? "Add Your Item"
           : "Update Your Gear Details"}
       </h1>
-      <label htmlFor="category">Category</label>
+      <label htmlFor="category">{typeToEdit || "Category"}</label>
       <select name="gear_type" id="category" onChange={typeHandler}>
         <option value="none">Category</option>
         {allTypes?.map((type) => (
