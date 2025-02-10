@@ -44,7 +44,9 @@ function ItemFormExtraProperties({
             {extra_property.name} {!extra_property.required && "(Optional)"}
           </label>
           <input
-            type={extra_property.type}
+            type={
+              extra_property.type === "string" ? "text" : extra_property.type
+            }
             name={extra_property.name}
             id={extra_property.name}
             value={properties[extra_property.name]}

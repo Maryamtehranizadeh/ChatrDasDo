@@ -10,11 +10,8 @@ import { useEffect } from "react";
 function ItemDetails() {
   const { id } = useParams();
   const { loginToken } = useAuth();
-  // const { userId } = useUser();
   const { isLoggedIn, userData } = useUser();
-  // console.log(user);
-  // const userId = user?.userId || false;
-  console.log(userData?.id);
+  // console.log(userData?.id);
   const navigate = useNavigate();
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["gear", id],
@@ -24,7 +21,7 @@ function ItemDetails() {
   });
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
   }, [data]);
 
   if (isLoading) {
@@ -34,8 +31,6 @@ function ItemDetails() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  // console.log(data?.data.user);
-  // console.log(userId);
 
   const showCertificate = () => {
     console.log("certificate");
@@ -48,7 +43,7 @@ function ItemDetails() {
       <h1>Details about {data?.data.name}:</h1>
       <div>
         <div>
-          <GearPhotos id={id} />
+          <GearPhotos id={id} info={data} />
         </div>
         <h4>Name: {data?.data.name}</h4>
         <h4>Model: {data?.data.model}</h4>

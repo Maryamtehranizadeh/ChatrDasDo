@@ -5,7 +5,8 @@ import FAQ from "../components/FAQ";
 import { useUser } from "../context/UserProvider";
 
 function AboutUs() {
-  const { loggedUser, loggedEmail } = useUser();
+  const { userData } = useUser();
+  // console.log(userData);
   return (
     <>
       <div
@@ -20,7 +21,7 @@ function AboutUs() {
         <WhoWeAre />
         <ContactUsForm />
       </div>
-      <h1>Hello {loggedUser}</h1>
+      <h1 style={{ marginLeft: "40px" }}>Hello {userData.username}</h1>
       <FAQ />
     </>
   );

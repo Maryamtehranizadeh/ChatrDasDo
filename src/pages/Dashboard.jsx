@@ -6,7 +6,7 @@ import { useUser } from "../context/UserProvider";
 
 function Dashboard() {
   const { isLoggedIn, userData } = useUser();
-  console.log(userData);
+  // console.log(userData);
   return (
     <div style={{ margin: "40px" }}>
       <div style={{ margin: "40px" }}>
