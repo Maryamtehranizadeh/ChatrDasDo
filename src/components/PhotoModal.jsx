@@ -58,7 +58,7 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
         completedDeletes === totalDeletes &&
         completedUploads === totalUploads
       ) {
-        console.log("All deletions and uploads are done. Navigating...");
+        // console.log("All deletions and uploads are done. Navigating...");
         skipHandler();
       }
     };

@@ -1,10 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { getGearPhotos } from "../utils/getAll";
-import { baseURL, pureBaseURL } from "../config/api";
-import { useEffect } from "react";
+import { pureBaseURL } from "../config/api";
 
 function GearPhotos({ id, info }) {
-  console.log(info?.data);
+  // console.log(info?.data);
   if (info?.data?.pictures?.length === 0)
     return (
       <div>
