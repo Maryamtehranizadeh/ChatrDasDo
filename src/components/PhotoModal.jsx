@@ -73,7 +73,7 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
             },
           })
           .then((response) => {
-            console.log(`Deleted photo: ${photo.picture_id}`, response);
+            // console.log(`Deleted photo: ${photo.picture_id}`, response);
             if (response.status === 204) {
               completedDeletes++;
               checkCompletion();

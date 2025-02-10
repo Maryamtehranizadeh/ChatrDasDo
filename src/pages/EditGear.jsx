@@ -53,7 +53,7 @@ function EditGear() {
         setItemId(response.data.id);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
   //   console.log(data?.data.pictures);
