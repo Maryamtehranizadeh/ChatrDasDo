@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { useType } from "../context/TypeProvider";
 function Search() {
+  const [search, setSearch] = useState("");
+  console.log(search);
   const { allTypes } = useType();
+
   return (
     <div
       style={{
@@ -14,7 +18,12 @@ function Search() {
       <div
         style={{ display: "flex", alignItems: "baseline", marginLeft: "30px" }}
       >
-        <input type="text" placeholder="Search" />
+        <input
+          type="text"
+          placeholder="Search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <p
           style={{
             color: "var(--secondary-color)",
