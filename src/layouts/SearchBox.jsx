@@ -1,22 +1,23 @@
 import { useType } from "../context/TypeProvider";
 import { useSearch } from "../context/SearchProvider";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function SearchBox() {
   const navigate = useNavigate();
   const { queryObject, setQueryObject } = useSearch();
+  const [formData, setFormData] = useState({ name: "", gear_type: "" });
 
   const { allTypes } = useType();
 
   const changeHandler = (e) => {
-    // console.log(e.target.value);
-    setQueryObject((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    // setQueryObject((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setQueryObject((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    // console.log(queryObject);
+    setQueryObject(formData);
     navigate("/search");
   };
 
@@ -31,11 +32,17 @@ function SearchBox() {
       }}
     >
       <form
-        onChange={changeHandler}
+        // onChange={changeHandler}
         onSubmit={submitHandler}
         style={{ display: "flex", alignItems: "baseline", marginLeft: "30px" }}
       >
-        <input id="name" type="text" placeholder="Search" name="name" />
+        <input
+          id="name"
+          type="text"
+          placeholder="Search"
+          name="name"
+          onChange={changeHandler}
+        />
         <p
           style={{
             color: "var(--secondary-color)",
@@ -46,6 +53,7 @@ function SearchBox() {
           in
         </p>
         <select
+          onChange={changeHandler}
           name="gear_type"
           id="category"
           style={{ color: "var(--p-color)" }}

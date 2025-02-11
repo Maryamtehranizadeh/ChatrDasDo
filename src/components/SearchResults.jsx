@@ -21,20 +21,24 @@ function SearchResults() {
           flexWrap: "wrap",
         }}
       >
-        {data?.data?.map((wing) => (
-          <div
-            key={wing.id}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              border: "1px, solid, var(--border-color)",
-              borderRadius: "10px",
-              margin: "20px",
-            }}
-          >
-            <WingCard wing={wing} />
-          </div>
-        ))}
+        {queryObject.name && data?.data?.length === 0 ? (
+          <h2>Sorry! no item was found...</h2>
+        ) : (
+          data?.data?.map((wing) => (
+            <div
+              key={wing.id}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                border: "1px, solid, var(--border-color)",
+                borderRadius: "10px",
+                margin: "20px",
+              }}
+            >
+              <WingCard wing={wing} />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
