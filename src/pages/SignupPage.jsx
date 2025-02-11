@@ -105,7 +105,7 @@ function SignupPage() {
                   value={country.cca2}
                   placeholder="Country"
                 >
-                  {country.name.common}
+                  {country.flag} {country.name.common}
                 </option>
               ))}
           </select>

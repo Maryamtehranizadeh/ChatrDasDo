@@ -1,18 +1,14 @@
 import { useType } from "../context/TypeProvider";
 import { useSearch } from "../context/SearchProvider";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 function SearchBox() {
   const navigate = useNavigate();
-  const { queryObject, setQueryObject } = useSearch();
-  const [formData, setFormData] = useState({ name: "", gear_type: "" });
-
+  const { setQueryObject, formData, setFormData } = useSearch();
   const { allTypes } = useType();
 
   const changeHandler = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    // setQueryObject((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const submitHandler = (e) => {
@@ -32,7 +28,6 @@ function SearchBox() {
       }}
     >
       <form
-        // onChange={changeHandler}
         onSubmit={submitHandler}
         style={{ display: "flex", alignItems: "baseline", marginLeft: "30px" }}
       >
