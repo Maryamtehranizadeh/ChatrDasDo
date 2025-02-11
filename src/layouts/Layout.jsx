@@ -1,6 +1,6 @@
 import Footer from "./Footer";
 import Header from "./Header";
-import { useState } from "react";
+import SearchBox from "./SearchBox";
 
 function Layout({ children }) {
   return (
@@ -8,6 +8,7 @@ function Layout({ children }) {
       style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
     >
       <Header />
+      <SearchBox />
       <main style={{ flex: "1" }}>{children}</main>
       <Footer />
     </div>

@@ -32,7 +32,7 @@ function SignupPage() {
   const changeHandler = (event) => {
     if (event.target.name === "country") {
       const selectedCountry = countries.find(
-        (country) => country.cca2 === event.target.value
+        (country) => country.cca2 === event.target.value,
       );
       if (selectedCountry) {
         const code =
@@ -86,8 +86,8 @@ function SignupPage() {
 
       <div className={styles.twins}>
         <div className={styles.side}>
-          <label htmlFor="name">First Name</label>
-          <input type="text" id="name" name="first_name" />
+          <label htmlFor="first_name">First Name</label>
+          <input type="text" id="first_name" name="first_name" />
           <label htmlFor="last_name">Last Name </label>
           <input type="text" id="last_name" name="last_name" />
           <label htmlFor="email">Email</label>
@@ -105,7 +105,7 @@ function SignupPage() {
                   value={country.cca2}
                   placeholder="Country"
                 >
-                  {country.name.common}
+                  {country.flag} {country.name.common}
                 </option>
               ))}
           </select>

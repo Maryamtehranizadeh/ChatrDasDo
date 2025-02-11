@@ -25,7 +25,7 @@ function EditGear() {
   const editHandler = (form) => {
     // console.log(form);
     let isFornValid = true;
-    console.log(form);
+    // console.log(form);
     Object.keys(form).forEach((key) => {
       if (!form[key]) {
         isFornValid = false;

@@ -26,7 +26,7 @@ import ResetPassword from "../pages/ResetPassword";
 import UserProfile from "../pages/UserProfile";
 import EditGear from "../pages/EditGear";
 import RequestGear from "../pages/RequestGear";
-import { useUser } from "../context/UserProvider";
+import SearchPage from "../pages/SearchPage";
 
 function Router() {
   const { loginToken } = useAuth();
@@ -65,6 +65,7 @@ function Router() {
       <Route path="/user/:id" element={<UserProfile />} />
       <Route path="/editgear/:id" element={<EditGear />} />
       <Route path="/requestgear" element={<RequestGear />} />
+      <Route path="/search" element={<SearchPage />} />
     </Routes>
   );
 }

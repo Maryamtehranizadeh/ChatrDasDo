@@ -21,7 +21,7 @@ function MyGearList({ id }) {
   const deleteMutation = useMutation({
     mutationFn: deleteGear,
     onSuccess: (response) => {
-      console.log(response);
+      // console.log(response);
       // Invalidate and refetch the wings query to reflect the changes after deletion
       // in the following line instead of gears it was "wings, i changed it but it is still working i dont know why!!!??"
       queryClient.invalidateQueries(["gears"]);

@@ -7,6 +7,7 @@ import defaultOptions from "./config/reactQuery";
 import AuthProvider from "./context/AuthProvider";
 import UserProvider from "./context/UserProvider";
 import TypeProvider from "./context/TypeProvider";
+import SearchProvider from "./context/SearchProvider";
 
 const queryClient = new QueryClient({
   defaultOptions,
@@ -19,10 +20,12 @@ function App() {
         <AuthProvider>
           <UserProvider>
             <TypeProvider>
-              <Layout>
-                <Router />
-                <Toaster />
-              </Layout>
+              <SearchProvider>
+                <Layout>
+                  <Router />
+                  <Toaster />
+                </Layout>
+              </SearchProvider>
             </TypeProvider>
           </UserProvider>
         </AuthProvider>

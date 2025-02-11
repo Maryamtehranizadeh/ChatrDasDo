@@ -13,7 +13,7 @@ function ItemDetails() {
   const { isLoggedIn, userData } = useUser();
   // console.log(userData?.id);
   const navigate = useNavigate();
-  const { data, isLoading, isError, error, refetch } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear", id],
     queryFn: getItemDetails,
     refetchOnMount: true,

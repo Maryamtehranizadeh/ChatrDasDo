@@ -29,6 +29,22 @@ const getAllGears = () => {
   });
 };
 
+const searchedGears = (params) => {
+  const objectToQueryParams = (queryObject) => {
+    return Object.entries(queryObject)
+      .filter(
+        ([_, value]) => value !== undefined && value !== null && value !== "",
+      )
+      .map(
+        ([key, value]) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
+      )
+      .join("&");
+  };
+  const queryString = objectToQueryParams(params.queryKey[0]);
+  return axios.get(`${baseURL}gears/?${queryString}`);
+};
+
 const getSpecificGear = ({ queryKey }) => {
   const [, id] = queryKey;
   return axios.get(`${baseURL}gears/?gear_type=${id}`, {
@@ -93,4 +109,5 @@ export {
   getUser,
   getAllGears,
   getSpecificGear,
+  searchedGears,
 };

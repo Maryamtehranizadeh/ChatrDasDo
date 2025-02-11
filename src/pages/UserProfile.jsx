@@ -1,36 +1,8 @@
-import { useAuth } from "../context/AuthProvider";
-import { useQuery } from "@tanstack/react-query";
-import { getUser } from "../utils/getAll";
+import { useUser } from "../context/UserProvider";
 
 function UserProfile() {
-  const { loginToken } = useAuth;
-  const {
-    email,
-    country,
-    date_joined,
-    first_name,
-    userId,
-    is_certified_seller,
-    last_name,
-    last_updated,
-    phone_number,
-    username,
-  } = useUser;
-  //   const { data, isLoading, isError, error } = useQuery({
-  //     queryKey: ["user"],
-  //     queryFn: getUser,
-  //     refetchOnMount: true,
-  //     staleTime: 0,
-  //     enabled: !!loginToken,
-  //   });
-  //   if (isLoading) {
-  //     return <h1>Loading...</h1>;
-  //   }
-  //   if (isError) {
-  //     return <h2>Error: {error.message}</h2>;
-  //   }
-  //   console.log(data?.data.id);
-  //   console.log(data?.data);
+  const { userData } = useUser();
+  // console.log(userData);
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div
@@ -38,26 +10,27 @@ function UserProfile() {
           height: "200px",
           width: "300px",
           margin: "auto",
+          marginBottom: "100px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
         <img src="/src/public/user.png" alt="User" />
-        {data?.data.is_certified_seller ? (
+        {userData?.is_certified_seller ? (
           <p>
-            {data?.data.first_name} {data?.data.last_name} is a certified seller
+            {userData?.first_name} {userData?.last_name} is a certified seller
           </p>
         ) : (
           <p>
-            {data?.data.first_name} {data?.data.last_name}
+            {userData?.first_name} {userData?.last_name}
           </p>
         )}
       </div>
-      <div>
+      <div style={{ margin: "40px" }}>
         <h2>Personal Details</h2>
-        <p>Username:{username}</p>
-        <p>Email: {email}</p>
+        <p>Username:{userData?.username}</p>
+        <p>Email: {userData?.email}</p>
         <p>Location: </p>
       </div>
     </div>
