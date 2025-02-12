@@ -22,7 +22,6 @@ function SearchBox() {
       <form
         className="flex flex-col md:flex-row items-center  md:space-x-3 w-full md:w-auto"
         onSubmit={submitHandler}
-        // style={{ display: "flex", alignItems: "baseline", marginLeft: "30px" }}
       >
         <input
           id="name"

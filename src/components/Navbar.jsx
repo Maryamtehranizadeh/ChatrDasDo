@@ -22,9 +22,19 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.navbarBrand}>
-        <button className={styles.hamburger} onClick={toggleMenu}>
+    <nav
+      className="bg-[var(--primary-color)] text-[var(--secondary-color)] p-4 relative"
+      //  className={styles.navbar}
+    >
+      <div
+        className="flex justify-between items-center"
+        // className={styles.navbarBrand}
+      >
+        <button
+          className="lg-md:hidden text-2xl focus:outline-none"
+          onClick={toggleMenu}
+          // className={styles.hamburger}
+        >
           ☰
         </button>
       </div>
@@ -54,16 +64,40 @@ function Navbar() {
             </option>
           ))}
         </select>
-        <NavLink to="/addgear" onClick={() => setIsOpen(false)}>
+        <NavLink
+          style={{
+            whiteSpace: "nowrap",
+          }}
+          to="/addgear"
+          onClick={() => setIsOpen(false)}
+        >
           Sell your items
         </NavLink>
-        <NavLink to="/requestgear" onClick={() => setIsOpen(false)}>
-          Tell us what you need
+        <NavLink
+          style={{
+            whiteSpace: "nowrap",
+          }}
+          to="/requestgear"
+          onClick={() => setIsOpen(false)}
+        >
+          Say what you need
         </NavLink>
-        <NavLink to="/About-us" onClick={() => setIsOpen(false)}>
+        <NavLink
+          style={{
+            whiteSpace: "nowrap",
+          }}
+          to="/About-us"
+          onClick={() => setIsOpen(false)}
+        >
           Contact Us
         </NavLink>
-        <NavLink to="/security-and-safety" onClick={() => setIsOpen(false)}>
+        <NavLink
+          style={{
+            whiteSpace: "nowrap",
+          }}
+          to="/security-and-safety"
+          onClick={() => setIsOpen(false)}
+        >
           Security and Safety
         </NavLink>
       </div>

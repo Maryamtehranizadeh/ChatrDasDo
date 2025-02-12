@@ -1,4 +1,3 @@
-import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -26,21 +25,15 @@ function Header() {
   };
 
   return (
-    <header
-      className="bg-[var(--primary-color)] text-[var(--secondary-color)] flex justify-between items-center p-6 md:p-8"
-      // className={styles.header}
-    >
+    <header className="bg-[var(--primary-color)] text-[var(--secondary-color)] flex justify-between items-center p-6 md:p-8">
       <div>
         <Link to="/" className="text-xl md:text-2xl font-bold">
           <h2>
-            Air Gear <span className="hidden md:inline">| All in One</span>
+            Air Gear <span className="hidden lg-md:inline">| All in One</span>
           </h2>
         </Link>
       </div>
-      <nav
-        className="flex items-center"
-        // className={styles.navbar}
-      >
+      <nav className="flex items-center">
         <Navbar />
       </nav>
       <div className="flex items-center space-x-3">
@@ -66,7 +59,6 @@ function Header() {
                 className="h-8 w-8 rounded-full"
                 src="/src/public/user.png"
                 alt="User"
-                // style={{ height: "30px", width: "30px", margin: "auto" }}
               />
               {userData && <p>{userData?.first_name}</p>}
             </Link>
@@ -79,7 +71,7 @@ function Header() {
               </button>
             </Link>
             <Link to="/signup">
-              <button className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80">
+              <button className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80 min-w-[100px] whitespace-nowrap">
                 Sign Up
               </button>
             </Link>

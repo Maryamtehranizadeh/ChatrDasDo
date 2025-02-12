@@ -4,7 +4,6 @@ import { useSearch } from "../context/SearchProvider";
 
 function Filters() {
   const { queryObject, setQueryObject, formData, setFormData } = useSearch();
-  // console.log(queryObject);
   const fetchCountries = async () => {
     const response = await axios.get("https://restcountries.com/v3.1/all");
     return response?.data;
