@@ -34,6 +34,7 @@ function Filters() {
   return (
     <div>
       <form className="p-4 m-4" onSubmit={submitHandler}>
+        <label htmlFor="sell_or_buy">Sell or Buy</label>
         <select
           onChange={changeHandler}
           name="sell_or_buy"
@@ -44,6 +45,7 @@ function Filters() {
           <option value="sell">I want to sell </option>
         </select>
 
+        <label htmlFor="country">Country</label>
         <select
           onChange={changeHandler}
           id="country"
@@ -55,7 +57,7 @@ function Filters() {
             textOverflow: "ellipsis",
           }}
         >
-          <option value="">Country</option>
+          <option value="">Location</option>
           {countries
             ?.sort((a, b) => a.name.common.localeCompare(b.name.common))
             .map((country) => (
@@ -68,28 +70,42 @@ function Filters() {
               </option>
             ))}
         </select>
+
+        <label htmlFor="model">Model</label>
         <input
           onChange={changeHandler}
+          id="model"
           type="text"
           name="model"
-          placeholder="Model"
+          // placeholder="Model"
           style={{ width: "100%" }}
         />
+        <label htmlFor="brand">Brand</label>
         <input
           onChange={changeHandler}
+          id="brand"
           type="text"
           name="brand"
-          placeholder="Brand"
+          // placeholder="Brand"
           style={{ width: "100%" }}
         />
+        <label htmlFor="max_price">Maximum Price</label>
         <input
           onChange={changeHandler}
           type="text"
-          name="price"
-          placeholder="Price"
+          name="max_price"
+          // placeholder="Maximum Price"
           style={{ width: "100%" }}
         />
-        <button type="submit" style={{ width: "100%" }}>
+
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            color: "var(--secondary-color)",
+            backgroundColor: "var(--primary-color)",
+          }}
+        >
           Search With Filters
         </button>
       </form>
