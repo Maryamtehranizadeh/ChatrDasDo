@@ -72,10 +72,10 @@ function SearchBox() {
         }}
       >
         <select name="lang" id="lang">
-          <option value="en">EN</option>
-          <option value="pt">PT</option>
-          <option value="es">ES</option>
-          <option value="fr">FR</option>
+          <option value="en">🇬🇧 EN</option>
+          <option value="pt">🇵🇹 PT</option>
+          <option value="es">🇫🇷 ES</option>
+          <option value="fr">🇪🇸 FR</option>
         </select>
       </div>
     </div>
