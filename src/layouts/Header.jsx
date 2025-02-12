@@ -26,40 +26,62 @@ function Header() {
   };
 
   return (
-    <header className={styles.header}>
+    <header
+      className="bg-[var(--primary-color)] text-[var(--secondary-color)] flex justify-between items-center p-6 md:p-8"
+      // className={styles.header}
+    >
       <div>
-        <Link to="/">
+        <Link to="/" className="text-xl md:text-2xl font-bold">
           <h2>
-            Air Gear <span className={styles.logo}>| All in One</span>
+            Air Gear <span className="hidden md:inline">| All in One</span>
           </h2>
         </Link>
       </div>
-      <div className={styles.navbar}>
+      <nav
+        className="flex items-center"
+        // className={styles.navbar}
+      >
         <Navbar />
-      </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      </nav>
+      <div className="flex items-center space-x-3">
         {loginToken ? (
           <>
-            <button onClick={dashboardHandler}>Dashboard</button>
-            <button onClick={logoutHandler}>Logout</button>
-            <Link to={`/user/${userData?.id}`}>
-              <div>
-                <img
-                  src="/src/public/user.png"
-                  alt="User"
-                  style={{ height: "30px", width: "30px", margin: "auto" }}
-                />
-                {userData && <p>{userData?.first_name}</p>}
-              </div>
+            <button
+              onClick={dashboardHandler}
+              className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80"
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={logoutHandler}
+              className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80"
+            >
+              Logout
+            </button>
+            <Link
+              to={`/user/${userData?.id}`}
+              className="flex flex-col items-center"
+            >
+              <img
+                className="h-8 w-8 rounded-full"
+                src="/src/public/user.png"
+                alt="User"
+                // style={{ height: "30px", width: "30px", margin: "auto" }}
+              />
+              {userData && <p>{userData?.first_name}</p>}
             </Link>
           </>
         ) : (
           <>
             <Link to="/auth">
-              <button>Login</button>
+              <button className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80">
+                Login
+              </button>
             </Link>
             <Link to="/signup">
-              <button>Sign Up</button>
+              <button className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80">
+                Sign Up
+              </button>
             </Link>
           </>
         )}

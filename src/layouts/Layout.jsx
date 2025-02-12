@@ -5,11 +5,12 @@ import SearchBox from "./SearchBox";
 function Layout({ children }) {
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      className="flex flex-col min-h-screen"
+      // style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
     >
       <Header />
       <SearchBox />
-      <main style={{ flex: "1" }}>{children}</main>
+      <main className="flex-1">{children}</main>
       <Footer />
     </div>
   );
