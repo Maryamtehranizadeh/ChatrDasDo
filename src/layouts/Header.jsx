@@ -10,6 +10,7 @@ function Header() {
   const navigate = useNavigate();
   const { loginToken, logout } = useAuth();
   const { isLoggedIn, userData } = useUser();
+  const [isOpen, setIsOpen] = useState(false);
 
   const logoutHandler = () => {
     logout();
@@ -24,17 +25,33 @@ function Header() {
     }
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <header className="bg-[var(--primary-color)] text-[var(--secondary-color)] flex justify-between items-center p-6 md:p-8">
+      <div
+        className="flex justify-between items-center cursor-pointer"
+        // className={styles.navbarBrand}
+      >
+        <button
+          className="lg-md:hidden text-2xl focus:outline-none"
+          onClick={toggleMenu}
+          // className={styles.hamburger}
+        >
+          ☰
+        </button>
+      </div>
       <div>
         <Link to="/" className="text-xl md:text-2xl font-bold">
-          <h2>
+          <h2 className="whitespace-nowrap">
             Air Gear <span className="hidden lg-md:inline">| All in One</span>
           </h2>
         </Link>
       </div>
       <nav className="flex items-center">
-        <Navbar />
+        <Navbar isOpen={isOpen} setIsOpen={setIsOpen} toggleMenu={toggleMenu} />
       </nav>
       <div className="flex items-center space-x-3">
         {loginToken ? (

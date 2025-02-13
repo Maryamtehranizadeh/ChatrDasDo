@@ -4,7 +4,7 @@ import styles from "./Navbar.module.css";
 import { useNavigate } from "react-router-dom";
 import { useType } from "../context/TypeProvider";
 
-function Navbar() {
+function Navbar({ isOpen, setIsOpen, toggleMenu }) {
   const navigate = useNavigate();
   const [categoryId, setCategoryId] = useState("");
   const { allTypes } = useType();
@@ -16,46 +16,29 @@ function Navbar() {
       navigate(`/${selectedCategory}`);
     }
   };
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
   return (
     <nav
-      className="bg-[var(--primary-color)] text-[var(--secondary-color)] p-4 relative"
+      className="bg-[var(--primary-color)] text-[var(--secondary-color)]  p-4 "
       //  className={styles.navbar}
     >
-      <div
-        className="flex justify-between items-center"
-        // className={styles.navbarBrand}
-      >
-        <button
-          className="lg-md:hidden text-2xl focus:outline-none"
-          onClick={toggleMenu}
-          // className={styles.hamburger}
-        >
-          ☰
-        </button>
-      </div>
       <div className={`${styles.navLinks} ${isOpen ? styles.show : ""}`}>
         <select
+          className={styles.category}
           name="gear_type_id"
           id="category"
           onChange={typeHandler}
           style={{
             backgroundColor: "var(--primary-color)",
             border: "none",
-            padding: "0",
-            margin: "0 30px 0 0 ",
+            marginBottom: "0px",
+            // textAlign: "center",
+            // paddingLeft: "0px",
           }}
         >
-          <option value="none" className={styles.category}>
-            Category
-          </option>
+          <option value="none">Category</option>
           {allTypes?.map((type) => (
             <option
-              className={styles.category}
               key={type.id}
               value={type.name}
               onClick={() => setIsOpen(false)}
@@ -64,9 +47,11 @@ function Navbar() {
             </option>
           ))}
         </select>
+
         <NavLink
           style={{
             whiteSpace: "nowrap",
+            textAlign: "left",
           }}
           to="/addgear"
           onClick={() => setIsOpen(false)}
@@ -76,6 +61,7 @@ function Navbar() {
         <NavLink
           style={{
             whiteSpace: "nowrap",
+            textAlign: "left",
           }}
           to="/requestgear"
           onClick={() => setIsOpen(false)}
@@ -85,6 +71,7 @@ function Navbar() {
         <NavLink
           style={{
             whiteSpace: "nowrap",
+            textAlign: "left",
           }}
           to="/About-us"
           onClick={() => setIsOpen(false)}
@@ -94,6 +81,7 @@ function Navbar() {
         <NavLink
           style={{
             whiteSpace: "nowrap",
+            textAlign: "left",
           }}
           to="/security-and-safety"
           onClick={() => setIsOpen(false)}
