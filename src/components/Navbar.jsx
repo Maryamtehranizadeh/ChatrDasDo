@@ -18,23 +18,16 @@ function Navbar({ isOpen, setIsOpen, toggleMenu }) {
   };
 
   return (
-    <nav
-      className="bg-[var(--primary-color)] text-[var(--secondary-color)]  p-4 "
-      //  className={styles.navbar}
-    >
-      <div className={`${styles.navLinks} ${isOpen ? styles.show : ""}`}>
+    <nav className="bg-[var(--primary-color)] text-[var(--secondary-color)] text-lg  p-4 ">
+      <div
+        className={`${isOpen ? "flex flex-col gap-4 absolute top-[80px] left-0 right-0 w-screen bg-[var(--primary-color)] p-4 shadow-md transition-all" : " hidden lg-md:flex flex-row gap-3.5 justify-between align-baseline"}`}
+        // className={`${styles.navLinks} ${isOpen ? styles.show : ""}`}
+      >
         <select
-          className={styles.category}
+          className="pl-0 pb-0 mb-0 border-none w-full lg-md:w-auto bg-[var(--primary-color)] p-0"
           name="gear_type_id"
           id="category"
           onChange={typeHandler}
-          style={{
-            backgroundColor: "var(--primary-color)",
-            border: "none",
-            marginBottom: "0px",
-            // textAlign: "center",
-            // paddingLeft: "0px",
-          }}
         >
           <option value="none">Category</option>
           {allTypes?.map((type) => (

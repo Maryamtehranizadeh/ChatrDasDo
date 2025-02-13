@@ -30,7 +30,7 @@ function Header() {
   };
 
   return (
-    <header className="bg-[var(--primary-color)] text-[var(--secondary-color)] flex justify-between items-center p-6 md:p-8">
+    <header className="bg-[var(--primary-color)] text-[var(--secondary-color)] flex justify-between items-baseline p-6 md:p-8">
       <div
         className="flex justify-between items-center cursor-pointer"
         // className={styles.navbarBrand}
@@ -44,7 +44,7 @@ function Header() {
         </button>
       </div>
       <div>
-        <Link to="/" className="text-xl md:text-2xl font-bold">
+        <Link to="/" className="text-lg md:text-2xl font-bold">
           <h2 className="whitespace-nowrap">
             Air Gear <span className="hidden lg-md:inline">| All in One</span>
           </h2>

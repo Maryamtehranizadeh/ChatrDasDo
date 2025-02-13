@@ -8,11 +8,6 @@
   color: var(--secondary-color);
 }
 
-.navbarBrand {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
 .navLinks {
   display: flex;
   flex-direction: row;
