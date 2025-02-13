@@ -36,9 +36,8 @@ function Header() {
         // className={styles.navbarBrand}
       >
         <button
-          className="lg-md:hidden text-2xl focus:outline-none"
+          className="block lg-md:hidden text-2xl focus:outline-none"
           onClick={toggleMenu}
-          // className={styles.hamburger}
         >
           ☰
         </button>
