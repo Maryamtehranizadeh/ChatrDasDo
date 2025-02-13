@@ -18,9 +18,9 @@ function SearchBox() {
   };
 
   return (
-    <div className="w-full bg-[var(--primary-color)] flex flex-col sm:flex-row items-baseline justify-between p-4 md:p-6">
+    <div className="w-full bg-[var(--primary-color)] flex flex-col md:flex-row items-baseline justify-between p-4 md:p-6">
       <form
-        className="flex flex-col md:flex-row items-center  md:space-x-3 w-full md:w-auto"
+        className="flex flex-col  md:flex-row items-center  md:space-x-3 w-full md:w-auto"
         onSubmit={submitHandler}
       >
         <input
@@ -52,8 +52,12 @@ function SearchBox() {
           Search
         </button>
       </form>
-      <div className="mt-3 mr-4 md:mt-0 text-[var(--primary-color)]">
-        <select name="lang" id="lang">
+      <div className="mt-3 mr-4 md:mt-0 text-[var(--secondary-color)]">
+        <select
+          name="lang"
+          id="lang"
+          className="border-none bg-[var(--primary-color)]"
+        >
           <option value="en">🇬🇧 EN</option>
           <option value="pt">🇵🇹 PT</option>
           <option value="es">🇪🇸 ES</option>
