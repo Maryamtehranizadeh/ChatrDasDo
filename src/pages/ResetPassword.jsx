@@ -2,7 +2,7 @@ import styles from "./ResetPassword.module.css";
 import { useState } from "react";
 
 function ResetPassword() {
-  const [verified, setVerified] = useState(true);
+  const [verified, setVerified] = useState(false);
   return (
     <div>
       {verified ? (

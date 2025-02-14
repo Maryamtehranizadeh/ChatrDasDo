@@ -16,9 +16,7 @@ function Allgears() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  //   console.log(data?.data);
-  const limitedData = data?.data.slice(0, 8);
-  //   console.log(limitedData);
+  const limitedData = data?.data.slice(0, 4);
 
   return (
     <div style={{ margin: "40px" }}>
