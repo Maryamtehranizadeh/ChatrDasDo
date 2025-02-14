@@ -36,7 +36,7 @@ function Header() {
         // className={styles.navbarBrand}
       >
         <button
-          className="block lg-md:hidden text-2xl focus:outline-none"
+          className="block lg-md:hidden text-3xl py-1 focus:outline-none text-[var(--seondary-color)] hover:border-[var(--seondary-color)]"
           onClick={toggleMenu}
         >
           ☰

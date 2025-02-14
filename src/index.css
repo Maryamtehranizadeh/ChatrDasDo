@@ -56,6 +56,12 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+a:hover {
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow on hover */
+  border-radius: 5px;
+}
 h1 {
   color: var(--primary-color);
   font-size: 2.25rem;

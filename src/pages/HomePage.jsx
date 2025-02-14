@@ -9,7 +9,7 @@ function HomePage() {
       <div className="text-center">
         <Link to="/gears">
           <button className=" text-3xl transform mb-8 p-5 ">
-            Click to see all our gears ...
+            Click here to see all our gears ...
           </button>
         </Link>
 
@@ -20,10 +20,7 @@ function HomePage() {
               key={type.id}
               to={`/${type.name}`}
             >
-              <li
-                className="list-none p-2 text-lg transition-all duration-700 hover:text-xl hover:shadow-lg hover:shadow-[var(--primary-color)] rounded-lg"
-                // className="list-none hover:underline"
-              >
+              <li className="list-none p-2 text-lg transition-all duration-700 hover:text-xl hover:shadow-lg hover:shadow-[var(--primary-color)] rounded-lg">
                 {type.name}: {type.description}
               </li>
             </Link>

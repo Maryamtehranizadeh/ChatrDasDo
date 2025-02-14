@@ -16,7 +16,7 @@ function Navbar({ isOpen, setIsOpen, toggleMenu }) {
     }
   };
   const navLinkClass =
-    "text-left lg-md:flex flex-wrap justify-center lg-md:text-center hover:underline transition-colors duration-300 ease-in-out";
+    "text-left lg-md:flex flex-wrap justify-center lg-md:text-center transition-colors duration-800 ease-in-out";
 
   return (
     <nav className="bg-[var(--primary-color)] text-[var(--secondary-color)] text-lg  p-4 ">
