@@ -63,9 +63,9 @@ function SearchBox() {
         </button>
       </form>
 
-      <div className="mt-3 mr-4 md:mt-0 text-[var(--secondary-color)]">
+      <div className=" justify-between mt-3 mr-4 md:mt-0 text-[var(--secondary-color)]">
         <select
-          className="mr-2 border border-[var(--primary-color)] bg-[var(--primary-color)] cursor-pointer hover:border-[var(--secondary-color)]"
+          className=" border border-[var(--primary-color)] bg-[var(--primary-color)] cursor-pointer hover:border-[var(--secondary-color)]"
           name="gear_type_id"
           id="category"
           onChange={typeHandler}

@@ -1,12 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useType } from "../context/TypeProvider";
 
 function Navbar({ isOpen, setIsOpen, toggleMenu }) {
-  const navigate = useNavigate();
-  const { allTypes } = useType();
-
   const navLinkClass =
     "px-3 py-3 rounded-lg text-left lg-md:flex flex-wrap justify-center lg-md:text-center  transition-colors duration-500 ease-in-out hover:scale-107 hover:text-[var(--primary-color)] hover:bg-[var(--secondary-color)]";
 
