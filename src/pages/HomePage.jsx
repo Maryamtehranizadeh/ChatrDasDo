@@ -13,14 +13,14 @@ function HomePage() {
           </button>
         </Link>
 
-        <div className="text-[var(--primary-color)] text-lg w-1/2  mx-auto">
+        <div className="text-[var(--primary-color)] text-lg w-2/5  mx-auto">
           {allTypes.map((type) => (
             <Link
               style={{ marginRight: "20px" }}
               key={type.id}
               to={`/${type.name}`}
             >
-              <li className="whitespace-nowrap overflow-hidden text-ellipsis list-none p-3  transition-all duration-700  hover:shadow-lg hover:shadow-[var(--primary-color)] rounded-lg hover:text-[var(--p-color)] md:text-2xl">
+              <li className="whitespace-nowrap overflow-hidden text-ellipsis list-none p-3  transition-all duration-700  shadow-sm hover:shadow-lg shadow-[var(--border-color)] hover:shadow-[var(--primary-color)] rounded-lg hover:text-[var(--p-color)]">
                 {type.name}: {type.description}
               </li>
             </Link>

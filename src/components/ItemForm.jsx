@@ -42,8 +42,6 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
       }
       return { ...prevForm, properties };
     });
-    // console.log(properties);
-    // console.log(form);
   }, [form, properties]);
 
   const changeHandler = (event) => {
@@ -56,7 +54,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
     }));
     setForm((form) => ({ ...form, properties }));
   };
-  // console.log(initialData);
+  const inputFocus = "focus:ring-2 focus:ring-[var(--secondary-color)]";
 
   return (
     <form
