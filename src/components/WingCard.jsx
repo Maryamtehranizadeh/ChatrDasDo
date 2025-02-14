@@ -16,6 +16,7 @@ function WingCard({ wing }) {
         flexDirection: "column",
         padding: "15px",
         rowGap: "10px",
+        borderRadius: "10px",
       }}
     >
       <h2>{wing.brand}</h2>
