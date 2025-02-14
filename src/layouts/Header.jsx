@@ -31,10 +31,7 @@ function Header() {
 
   return (
     <header className="bg-[var(--primary-color)] text-[var(--secondary-color)] flex justify-between items-baseline p-6 md:p-8">
-      <div
-        className="flex justify-between items-center cursor-pointer"
-        // className={styles.navbarBrand}
-      >
+      <div className="flex justify-between items-center cursor-pointer">
         <button
           className="block lg-md:hidden text-3xl py-1 focus:outline-none text-[var(--seondary-color)] hover:border-[var(--seondary-color)]"
           onClick={toggleMenu}
@@ -44,7 +41,7 @@ function Header() {
       </div>
       <div>
         <Link to="/" className="text-lg md:text-2xl font-bold">
-          <h2 className="whitespace-nowrap">
+          <h2 className="whitespace-nowrap hover:opacity-80 hover:text-xl duration-800 ease-in-out">
             Air Gear <span className="hidden lg-md:inline">| All in One</span>
           </h2>
         </Link>

@@ -8,7 +8,7 @@ function HomePage() {
       <Allgears number={4} />
       <div className="text-center">
         <Link to="/gears">
-          <button className=" text-3xl transform mb-8 p-5 ">
+          <button className=" text-xl transform mb-8 p-5 sm:text-3xl">
             Click here to see all our gears ...
           </button>
         </Link>
@@ -20,7 +20,7 @@ function HomePage() {
               key={type.id}
               to={`/${type.name}`}
             >
-              <li className="list-none p-3 text-2xl transition-all duration-700  hover:shadow-lg hover:shadow-[var(--primary-color)] rounded-lg hover:text-[var(--border-color)]">
+              <li className="whitespace-nowrap overflow-hidden text-ellipsis list-none p-3  transition-all duration-700  hover:shadow-lg hover:shadow-[var(--primary-color)] rounded-lg hover:text-[var(--p-color)] md:text-2xl">
                 {type.name}: {type.description}
               </li>
             </Link>
