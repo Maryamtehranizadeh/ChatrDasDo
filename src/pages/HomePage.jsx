@@ -13,7 +13,7 @@ function HomePage() {
           </button>
         </Link>
 
-        <div className="text-[var(--primary-color)] text-lg w-2/5  mx-auto">
+        <div className="text-[var(--primary-color)] text-lg md:w-2/5  mx-auto ">
           {allTypes.map((type) => (
             <Link
               style={{ marginRight: "20px" }}
