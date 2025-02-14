@@ -8,19 +8,10 @@ function WingCard({ wing }) {
   const navigate = useNavigate();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        padding: "15px",
-        rowGap: "10px",
-        borderRadius: "10px",
-        backgroundColor: "white",
-      }}
-    >
+    <div className="flex flex-col p-[15px] gap-[10px] rounded-[10px] bg-white">
       <h2>{wing.brand}</h2>
       <img
-        style={{ width: "250px", height: "250px" }}
+        className="w-[250px] h-[250px]"
         alt={wing.name}
         src={
           wing.pictures.length === 0
@@ -28,7 +19,7 @@ function WingCard({ wing }) {
             : `${pureBaseURL}${wing.pictures[0].link}`
         }
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div className="flex justify-between mb-5 text-[var(--p-color)]">
         <p>{wing.name}</p>
         <span>{wing.model}</span>
       </div>

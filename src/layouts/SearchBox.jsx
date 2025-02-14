@@ -1,9 +1,11 @@
 import { useType } from "../context/TypeProvider";
 import { useSearch } from "../context/SearchProvider";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function SearchBox() {
   const navigate = useNavigate();
+  const [categoryId, setCategoryId] = useState("");
   const { setQueryObject, formData, setFormData } = useSearch();
   const { allTypes } = useType();
 
@@ -15,6 +17,14 @@ function SearchBox() {
     e.preventDefault();
     setQueryObject(formData);
     navigate("/search");
+  };
+
+  const typeHandler = (event) => {
+    const selectedCategory = event.target.value;
+    if (selectedCategory !== "none") {
+      setCategoryId(selectedCategory);
+      navigate(`/${selectedCategory}`);
+    }
   };
 
   return (
@@ -52,7 +62,25 @@ function SearchBox() {
           Search
         </button>
       </form>
+
       <div className="mt-3 mr-4 md:mt-0 text-[var(--secondary-color)]">
+        <select
+          className="mr-2 border border-[var(--primary-color)] bg-[var(--primary-color)] cursor-pointer hover:border-[var(--secondary-color)]"
+          name="gear_type_id"
+          id="category"
+          onChange={typeHandler}
+        >
+          <option value="none">Category</option>
+          {allTypes?.map((type) => (
+            <option
+              key={type.id}
+              value={type.name}
+              // onClick={() => setIsOpen(false)}
+            >
+              {type.name}
+            </option>
+          ))}
+        </select>
         <select
           name="lang"
           id="lang"

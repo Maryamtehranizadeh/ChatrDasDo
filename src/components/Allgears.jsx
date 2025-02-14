@@ -18,6 +18,9 @@ function Allgears({ number }) {
   }
   const limitedData = data?.data.slice(0, number);
 
+  const cardClass =
+    "flex flex-col rounded-[20px] m-7 shadow-md shadow-[var(--border-color)]";
+
   return (
     <div style={{ margin: "40px" }}>
       <div
@@ -29,31 +32,12 @@ function Allgears({ number }) {
       >
         {!!number
           ? limitedData?.map((wing) => (
-              <div
-                key={wing.id}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  // border: "1px, solid, var(--border-color)",
-                  borderRadius: "10px",
-                  margin: "20px",
-                }}
-              >
+              <div className={cardClass} key={wing.id}>
                 <WingCard wing={wing} />
               </div>
             ))
           : data?.data.map((wing) => (
-              <div
-                key={wing.id}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  boxShadow: "0 4px 8px var(--border-color)",
-                  borderRadius: "10px",
-                  margin: "20px",
-                  backgroundColor: "white;",
-                }}
-              >
+              <div className={cardClass} key={wing.id}>
                 <WingCard wing={wing} />
               </div>
             ))}
