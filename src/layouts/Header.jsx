@@ -57,13 +57,13 @@ function Header() {
           <>
             <button
               onClick={dashboardHandler}
-              className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80"
+              className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80 hover:border-[var(--secondary-color)]"
             >
               Dashboard
             </button>
             <button
               onClick={logoutHandler}
-              className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80"
+              className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80 hover:border-[var(--secondary-color)]"
             >
               Logout
             </button>
@@ -82,12 +82,12 @@ function Header() {
         ) : (
           <>
             <Link to="/auth">
-              <button className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80">
+              <button className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80 hover:border-[var(--secondary-color)]">
                 Login
               </button>
             </Link>
             <Link to="/signup">
-              <button className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80 min-w-[100px] whitespace-nowrap">
+              <button className="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md hover:opacity-80 min-w-[100px] whitespace-nowrap hover:border-[var(--secondary-color)]">
                 Sign Up
               </button>
             </Link>

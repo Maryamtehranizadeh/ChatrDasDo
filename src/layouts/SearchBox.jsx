@@ -46,7 +46,7 @@ function SearchBox() {
           ))}
         </select>
         <button
-          className="text-lg bg-[var(--primary-color)] text-[var(--secondary-color)] px-4 py-2 rounded-md hover:opacity-80 w-full md:w-auto"
+          className="text-lg bg-[var(--primary-color)] text-[var(--secondary-color)] px-4 py-2 rounded-md hover:opacity-80 w-full md:w-auto hover:border-[var(--secondary-color)]"
           type="submit"
         >
           Search
@@ -56,7 +56,7 @@ function SearchBox() {
         <select
           name="lang"
           id="lang"
-          className="border-none bg-[var(--primary-color)]"
+          className="border border-[var(--primary-color)] bg-[var(--primary-color)] cursor-pointer hover:border-[var(--secondary-color)]"
         >
           <option value="en">🇬🇧 EN</option>
           <option value="pt">🇵🇹 PT</option>

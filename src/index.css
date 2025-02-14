@@ -21,8 +21,22 @@ button {
   padding: 10px 15px;
   cursor: pointer;
   border: 1px solid var(--primary-color);
+  color: var(--primary-color);
   border-radius: 5px;
+  transition: all 0.3s ease-in-out;
 }
+button:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow on hover */
+}
+
+button:active {
+  transform: scale(0.98); /* Button shrinks slightly when clicked */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Stronger shadow on active state */
+}
+
 input,
 select,
 textarea {
