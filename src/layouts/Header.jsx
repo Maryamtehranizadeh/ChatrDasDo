@@ -41,7 +41,7 @@ function Header() {
       </div>
       <div>
         <Link to="/" className="text-lg md:text-2xl font-bold">
-          <h2 className="whitespace-nowrap hover:opacity-80 duration-800 ease-in-out">
+          <h2 className="p-4 rounded-md whitespace-nowrap transition-colors duration-500 ease-in-out hover:scale-107 hover:text-[var(--primary-color)] hover:bg-[var(--secondary-color)]">
             Air Gear <span className="hidden lg-md:inline">| All in One</span>
           </h2>
         </Link>

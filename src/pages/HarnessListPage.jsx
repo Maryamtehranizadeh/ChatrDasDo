@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import WingCard from "../components/WingCard";
+import GearCard from "../components/GearCard";
 import { getSpecificGear } from "../utils/getAll";
 
 function HarnessListPage() {
@@ -18,28 +17,15 @@ function HarnessListPage() {
   if (isError) {
     return <h3>Error: {error.message}</h3>;
   }
-  // console.log(data?.data)
+  const cardClass =
+    "flex flex-col  m-7 rounded-[20px] shadow-md shadow-[var(--border-color)] transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-[var(--primary-color)]";
+
   return (
-    <div style={{ margin: "40px" }}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-        }}
-      >
+    <div className="m-[40px]">
+      <div className="flex flex-row flex-wrap justify-around">
         {data?.data.map((wing) => (
-          <div
-            key={wing.id}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              border: "1px, solid, var(--border-color)",
-              borderRadius: "10px",
-              margin: "20px",
-            }}
-          >
-            <WingCard wing={wing} />
+          <div key={wing.id} className={cardClass}>
+            <GearCard wing={wing} />
           </div>
         ))}
       </div>
