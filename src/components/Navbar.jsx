@@ -8,7 +8,7 @@ function Navbar({ isOpen, setIsOpen, toggleMenu }) {
   const { allTypes } = useType();
 
   const navLinkClass =
-    "text-left lg-md:flex flex-wrap justify-center lg-md:text-center transition-colors duration-800 ease-in-out";
+    "px-3 py-3 rounded-lg text-left lg-md:flex flex-wrap justify-center lg-md:text-center  transition-colors duration-500 ease-in-out hover:scale-107 hover:text-[var(--primary-color)] hover:bg-[var(--secondary-color)]";
 
   return (
     <nav className="bg-[var(--primary-color)] text-[var(--secondary-color)] text-lg  p-4 ">

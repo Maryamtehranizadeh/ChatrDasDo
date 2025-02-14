@@ -19,7 +19,7 @@ function Allgears({ number }) {
   const limitedData = data?.data.slice(0, number);
 
   const cardClass =
-    "flex flex-col rounded-[20px] m-7 shadow-md shadow-[var(--border-color)]";
+    "flex flex-col rounded-[20px] m-7 shadow-md shadow-[var(--border-color)] transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-[var(--primary-color)]";
 
   return (
     <div style={{ margin: "40px" }}>
