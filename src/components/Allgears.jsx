@@ -48,11 +48,10 @@ function Allgears({ number }) {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  // border: "1px, solid, var(--border-color)",
                   boxShadow: "0 4px 8px var(--border-color)",
-
                   borderRadius: "10px",
                   margin: "20px",
+                  backgroundColor: "white;",
                 }}
               >
                 <WingCard wing={wing} />

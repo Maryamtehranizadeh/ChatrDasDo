@@ -6,9 +6,7 @@ import { Navigate } from "react-router-dom";
 
 function WingCard({ wing }) {
   const navigate = useNavigate();
-  //   console.log(wing)
-  // const { id } = wing;
-  //   console.log(id)
+
   return (
     <div
       style={{
@@ -17,6 +15,7 @@ function WingCard({ wing }) {
         padding: "15px",
         rowGap: "10px",
         borderRadius: "10px",
+        backgroundColor: "white",
       }}
     >
       <h2>{wing.brand}</h2>
