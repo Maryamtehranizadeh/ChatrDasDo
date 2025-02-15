@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllGears } from "../utils/getAll";
 import GearCard from "./GearCard";
+import Loader from "./Loader";
 
 function Allgears({ number }) {
   const { data, isLoading, isError, error } = useQuery({
@@ -11,7 +12,8 @@ function Allgears({ number }) {
   });
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    <Loader />;
+    // return <h1>Loading...</h1>;
   }
   if (isError) {
     return <h3>Error: {error.message}</h3>;
