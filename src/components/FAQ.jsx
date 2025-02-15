@@ -1,6 +1,6 @@
 function FAQ() {
   return (
-    <div className="w-2/3 m-auto mb-20">
+    <div className="m-[50px]">
       <h1>FAQ</h1>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi sunt ut
       iste vitae fugiat eos aperiam veniam a! Ut natus deleniti alias recusandae

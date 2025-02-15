@@ -1,17 +1,14 @@
 function WhoWeAre() {
   return (
-    <div className="m-30 w-auto  md:w-[400px] ">
-      <h1>Who We Are...</h1>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi sunt ut
-      iste vitae fugiat eos aperiam veniam a! Ut natus deleniti alias recusandae
-      beatae accusantium ducimus vel obcaecati velit incidunt! Lorem ipsum dolor
-      sit amet consectetur adipisicing elit. Odio placeat mollitia laboriosam,
-      laudantium doloribus inventore similique sit tenetur neque doloremque
-      quidem velit dolorum eaque dolorem incidunt nulla est veniam vel. Lorem
-      ipsum dolor sit amet, consectetur adipisicing elit. Id libero, natus totam
-      architecto voluptate ipsam rem veritatis praesentium sit impedit aperiam
-      omnis dolores? Praesentium iste repellat corporis ipsa pariatur
-      exercitationem.
+    <div className=" m-6 p-6 w-auto md:w-1/2 ">
+      <h1 className="text-md md:text-xlg">Who We Are...</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur
+        praesentium ipsum odio animi nemo at ad dolore ducimus, dolores beatae
+        consectetur accusantium! Quaerat ipsam similique enim dolore dolorum
+        explicabo accusamus, voluptate officia quam, impedit facilis earum sint
+        dolorem. Quas, quis?
+      </p>
     </div>
   );
 }

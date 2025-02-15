@@ -4,13 +4,13 @@ import FAQ from "../components/FAQ";
 
 function AboutUs() {
   return (
-    <>
-      <div className="flex flex-col md:flex-row justify-evenly align-baseline p-20">
+    <div className="flex flex-col m-auto">
+      <div className="flex flex-col  md:flex-row justify-evenly  ">
         <WhoWeAre />
         <ContactUsForm />
       </div>
       <FAQ />
-    </>
+    </div>
   );
 }
 
