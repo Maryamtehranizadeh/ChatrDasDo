@@ -7,10 +7,6 @@ function ContactUsForm() {
       <button
         type="submit"
         className="bg-[var(--primary-color)] text-[var(--secondary-color)]"
-        // style={{
-        //   backgroundColor: "var(--primary-color)",
-        //   color: "var(--secondary-color)",
-        // }}
       >
         Send
       </button>
