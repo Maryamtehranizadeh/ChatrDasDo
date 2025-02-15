@@ -63,9 +63,9 @@ function SearchBox() {
         </button>
       </form>
 
-      <div className="mt-3 mr-4 md:mt-0 text-[var(--secondary-color)]">
+      <div className="mt-3 mr-4 md:mt-0 text-[var(--secondary-color)] flex flex-row justify-between">
         <select
-          className=" border border-[var(--primary-color)] bg-[var(--primary-color)] cursor-pointer hover:border-[var(--secondary-color)]"
+          className="border-none mx-5 bg-[var(--primary-color)] cursor-pointer "
           name="gear_type_id"
           id="category"
           onChange={typeHandler}
@@ -80,7 +80,7 @@ function SearchBox() {
         <select
           name="lang"
           id="lang"
-          className="border border-[var(--primary-color)] bg-[var(--primary-color)] cursor-pointer hover:border-[var(--secondary-color)]"
+          className="border-none bg-[var(--primary-color)] cursor-pointer "
         >
           <option value="en">🇬🇧 EN</option>
           <option value="pt">🇵🇹 PT</option>

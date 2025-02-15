@@ -2,12 +2,15 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getCertifiers } from "../utils/getAll";
+import Loader from "../components/Loader";
 
 function CertifierDetails() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["certifiers"],
     queryFn: getCertifiers,
   });
+  if (isLoading) return <Loader />;
+  if (isError) console.log(error.message);
   const { id } = useParams();
   const thisCertifier = data?.data.find((certifier) => certifier.id === +id);
 

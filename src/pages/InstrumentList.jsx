@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getSpecificGear } from "../utils/getAll";
 import GearCard from "../components/GearCard";
+import Loader from "../components/Loader";
 
 function InstrumentList() {
   const id = "49e81219-2646-44e2-b36c-3316ff0d26d3";
@@ -12,7 +13,7 @@ function InstrumentList() {
   });
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
   if (isError) {
     return <h3>Error: {error.message}</h3>;

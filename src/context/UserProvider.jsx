@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 import { getUser } from "../utils/getAll";
 import { useAuth } from "./AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../components/Loader";
 
 const UserContext = createContext();
 
@@ -16,7 +17,7 @@ function UserProvider({ children }) {
   });
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
   let isLoggedIn = false;
   let userData = null;

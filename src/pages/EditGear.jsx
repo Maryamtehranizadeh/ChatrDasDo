@@ -19,7 +19,7 @@ function EditGear() {
     queryFn: getItemDetails,
   });
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Loader />;
   if (isError) return <h2>{error?.message}</h2>;
 
   const editHandler = (form) => {

@@ -6,12 +6,12 @@ import { useAuth } from "../context/AuthProvider";
 import { useUser } from "../context/UserProvider";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Loader from "../components/Loader";
 
 function ItemDetails() {
   const { id } = useParams();
   const { loginToken } = useAuth();
   const { isLoggedIn, userData } = useUser();
-  // console.log(userData?.id);
   const navigate = useNavigate();
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gear", id],
@@ -25,7 +25,7 @@ function ItemDetails() {
   }, [data]);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
 
   if (isError) {

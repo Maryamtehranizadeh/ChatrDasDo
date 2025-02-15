@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import GearCard from "../components/GearCard";
 import { getSpecificGear } from "../utils/getAll";
+import Loader from "../components/Loader";
 
 function WingPage() {
   const id = "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c";
@@ -12,7 +13,7 @@ function WingPage() {
   });
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
   if (isError) {
     return <h3>Error: {error.message}</h3>;

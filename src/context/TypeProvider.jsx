@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getGearTypes } from "../utils/getAll";
+import Loader from "../components/Loader";
 
 const TypeContext = createContext();
 
@@ -12,14 +13,14 @@ function TypeProvider({ children }) {
     staleTime: 0,
   });
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
-  //   if (isError) {
-  //     return <h3>Error: {error.message}</h3>;
-  //   }
+  if (isError) {
+    console.log(error);
+    // return <h3>Error: {error.message}</h3>;
+  }
   //   console.log(data?.data);
   const allTypes = data?.data;
-  //   console.log(allTypes);
 
   return (
     <TypeContext.Provider

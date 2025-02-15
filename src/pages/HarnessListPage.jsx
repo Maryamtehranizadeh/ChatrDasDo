@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import GearCard from "../components/GearCard";
 import { getSpecificGear } from "../utils/getAll";
+import Loader from "../components/Loader";
 
 function HarnessListPage() {
   const id = "daad2eed-eb73-4049-9e89-1964a905b3e1";
@@ -12,7 +13,7 @@ function HarnessListPage() {
   });
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
   if (isError) {
     return <h3>Error: {error.message}</h3>;

@@ -1,37 +1,28 @@
-import { Link } from "react-router-dom";
-
 function SecuritySafety() {
   return (
-    <div
-      style={{
-        margin: "50px",
-        marginTop: "50px",
-        display: "flex",
-        flexDirection: "column",
-        rowGap: "40px",
-      }}
-    >
-      <h1>Security and Safety</h1>
+    <div className=" flex flex-col gap-10 m-[50px]">
+      <h1 className="text-lg md:text-3xl">Security and Safety</h1>
 
-      <h2 style={{ fontSize: "1.2rem" }}>
+      <h4 className="text-lg">
         Buyer and seller protection recommendations by PayPal
         <a
           href="https://www.paypal.com/webapps/mpp/paypal-safety-and-security"
           target="blank"
         >
-          <button style={{ marginLeft: "15px" }}>Read Here</button>
+          <button className="border-none">Read Here</button>
         </a>
-      </h2>
+      </h4>
 
-      <h2>
+      <h4 className="text-lg">
         Before using our website please read our{" "}
         <a
           href="/terms-and-conditions"
-          style={{ color: "var(--primary-color)" }}
+          target="blank"
+          className="text-[var(--primary-color)]"
         >
-          Terms and Conditions.
+          <button className="border-none"> Terms and Conditions.</button>
         </a>
-      </h2>
+      </h4>
       <p>
         Our website does not facilitate transactions, handle payments, or offer
         buyer/seller protection. To avoid scams, follow these guidelines: 1.

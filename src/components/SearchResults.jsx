@@ -2,6 +2,7 @@ import { useSearch } from "../context/SearchProvider";
 import { searchedGears } from "../utils/getAll";
 import { useQuery } from "@tanstack/react-query";
 import GearCard from "./GearCard";
+import Loader from "../components/Loader";
 
 function SearchResults() {
   const { queryObject, setQueryObject } = useSearch();
@@ -12,7 +13,7 @@ function SearchResults() {
     staleTime: 0,
   });
   console.log(data?.data);
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Loader />;
   if (isError) {
     console.log(error.message);
   }

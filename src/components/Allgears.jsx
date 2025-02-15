@@ -12,8 +12,7 @@ function Allgears({ number }) {
   });
 
   if (isLoading) {
-    <Loader />;
-    // return <h1>Loading...</h1>;
+    return <Loader />;
   }
   if (isError) {
     return <h3>Error: {error.message}</h3>;

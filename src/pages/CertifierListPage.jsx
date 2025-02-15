@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCertifiers } from "../utils/getAll";
 import { Link } from "react-router-dom";
 import styles from "./CertifierListPage.module.css";
+import Loader from "../components/Loader";
 
 function CertifierListPage() {
   const { data, isLoading, isError, error } = useQuery({
@@ -9,7 +10,7 @@ function CertifierListPage() {
     queryFn: getCertifiers,
   });
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
   if (isError) {
     return <h3>Error: {error.message}</h3>;

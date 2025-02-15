@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getCertifiers } from "../utils/getAll";
 import styles from "./CertificateForm.module.css";
+import Loader from "./Loader";
 
 function CertificateForm({
   changeHandler,
@@ -15,6 +16,9 @@ function CertificateForm({
     refetchOnMount: true,
     staleTime: 0,
   });
+
+  if (isLoading) return <Loader />;
+  if (isError) console.log(error.message);
   //   console.log(data?.data);
   //   console.log(certificate.picture);
   return (

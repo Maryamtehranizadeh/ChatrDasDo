@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 import { deleteGear } from "../utils/deleteAll";
 import { pureBaseURL } from "../config/api";
 import { useNavigate } from "react-router-dom";
-import { useType } from "../context/TypeProvider";
+import Loader from "./Loader";
 
 function MyGearList({ id }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { allTypes } = useType();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["gears", id],
@@ -18,12 +17,10 @@ function MyGearList({ id }) {
     refetchOnMount: true,
     staleTime: 0,
   });
+
   const deleteMutation = useMutation({
     mutationFn: deleteGear,
     onSuccess: (response) => {
-      // console.log(response);
-      // Invalidate and refetch the wings query to reflect the changes after deletion
-      // in the following line instead of gears it was "wings, i changed it but it is still working i dont know why!!!??"
       queryClient.invalidateQueries(["gears"]);
     },
     onError: (error) => {
@@ -32,16 +29,9 @@ function MyGearList({ id }) {
   });
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
-      deleteMutation.mutate(id); // Pass the ID in the correct format for deleteGear
+      deleteMutation.mutate(id);
     }
   };
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
-  if (isError) {
-    return <h3>Error: {error.message}</h3>;
-  }
-  // console.log(data?.data);
 
   const editHandler = (id) => {
     // console.log("edit", id);
@@ -51,6 +41,15 @@ function MyGearList({ id }) {
   const certificateHandler = (id) => {
     navigate("/addcertficate");
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+  if (isError) {
+    console.log(error);
+    return <h3>Error: {error.message}</h3>;
+  }
+  console.log(data?.data);
 
   return (
     <div className={styles.container}>
