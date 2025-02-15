@@ -1,11 +1,9 @@
 import { useState } from "react";
-import styles from "./Login.module.css";
 import axios from "axios";
 import { baseURL } from "../config/api";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
-import { useUser } from "../context/UserProvider";
 import toast from "react-hot-toast";
 
 function Login() {
@@ -37,8 +35,13 @@ function Login() {
   };
 
   return (
-    <form onSubmit={submitHandler} className={styles.form}>
-      <span>To use Air Gear services, please login:</span>
+    <form
+      onSubmit={submitHandler}
+      className="flex flex-col p-[30px] my-[100px] max-w-[500px] m-auto shadow-2xl shadow-[var(--primary-color)] rounded-2xl "
+    >
+      <span className="text-lg mb-[20px] text-[var(--p-color)]">
+        To use Air Gear services, please login:
+      </span>
       <label htmlFor="username">Your Username</label>
       <input
         id="username"
@@ -56,15 +59,15 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button type="submit">Login</button>
-      <span style={{ margin: "20px" }}>
+      <span className="text-sm m-[20px] text-[var(--p-color)]">
         Do not have an account? Please{" "}
-        <Link to="/signup" style={{ color: " var(--primary-color)" }}>
+        <Link to="/signup" className="text-[var(--primary-color)]">
           Sign Up here!
         </Link>
       </span>
-      <span style={{ marginTop: "0px", marginLeft: "20px" }}>
+      <span className="text-sm mt-0 mb-[20px] ml-[20px] text-[var(--p-color)]">
         Forgot your password? Please{" "}
-        <Link to="/reset-password" style={{ color: " var(--primary-color)" }}>
+        <Link to="/reset-password" className="text-[var(--primary-color)]">
           click here!
         </Link>
       </span>
