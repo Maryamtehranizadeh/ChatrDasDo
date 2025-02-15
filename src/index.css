@@ -71,7 +71,7 @@ textarea:focus {
 input:hover,
 select:hover,
 textarea:hover {
-  border: 2px solid var(--primary-color);
+  border: 2px solid var(--primary-color) !important;
   transform: scale(1.02);
 }
 

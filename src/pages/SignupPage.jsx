@@ -1,5 +1,4 @@
 import toast from "react-hot-toast";
-import styles from "./SignupPage.module.css";
 import { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
@@ -76,16 +75,19 @@ function SignupPage() {
         .catch((error) => console.log(error.message));
     }
   };
+
   return (
     <form
       onChange={changeHandler}
       onSubmit={submitHandler}
-      className={styles.form}
+      className="flex flex-col max-w-[1200px] p-[30px] m-auto my-[70px] shadow-2xl shadow-[var(--primary-color)] rounded-2xl  "
     >
-      <h2>Sign Up here to create an account</h2>
+      <h2 className="text-xl flex-wrap text-center m-auto mb-[25px] text-[var(--primary-color)] md:text-2xl">
+        Sign Up here to create an account
+      </h2>
 
-      <div className={styles.twins}>
-        <div className={styles.side}>
+      <div className="flex flex-col md:flex-row justify-evenly items-center">
+        <div className="flex flex-col">
           <label htmlFor="first_name">First Name</label>
           <input type="text" id="first_name" name="first_name" />
           <label htmlFor="last_name">Last Name </label>
@@ -110,20 +112,16 @@ function SignupPage() {
               ))}
           </select>
         </div>
-        <div className={styles.side}>
+        <div className="flex flex-col">
           <label htmlFor="countryCode">Country Code</label>
-          <select
-            id="countryCode"
-            name="countryCode"
-            className={styles.countryCode}
-          >
+          <select id="countryCode" name="countryCode">
             <option value="">{predictedCode || "Code"}</option>
             {countries
               ?.sort((a, b) => a.name.common.localeCompare(b.name.common))
               .map((country) => (
                 <option key={country.cca2} value={predictedCode || ""}>
-                  {country.idd?.root}
-                  {country.idd?.suffixes?.[0] || ""} - {country.cca2}
+                  {country.flag} {country.cca2} {country.idd?.root}
+                  {country.idd?.suffixes?.[0] || ""}
                 </option>
               ))}
           </select>
@@ -138,7 +136,12 @@ function SignupPage() {
         </div>
       </div>
 
-      <button type="submit">Create Acount</button>
+      <button
+        className=" w-[min(100%,200px)] my-5 m-auto md:w-1/3"
+        type="submit"
+      >
+        Create Acount
+      </button>
     </form>
   );
 }

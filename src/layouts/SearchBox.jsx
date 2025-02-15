@@ -28,7 +28,7 @@ function SearchBox() {
   };
 
   return (
-    <div className="w-full bg-[var(--primary-color)] flex flex-col md:flex-row items-baseline justify-between p-4 md:p-6">
+    <div className="w-full bg-[var(--primary-color)] flex flex-col md:flex-row items-baseline justify-between px-4 py-0 md:px-6 md:py-2">
       <form
         className="flex flex-col  md:flex-row items-center  md:space-x-3 w-full md:w-auto"
         onSubmit={submitHandler}
