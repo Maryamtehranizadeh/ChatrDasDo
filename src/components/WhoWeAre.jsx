@@ -1,8 +1,6 @@
-import React from "react";
-
 function WhoWeAre() {
   return (
-    <div style={{ width: "400px", margin: "30px" }}>
+    <div className="m-30 w-auto  md:w-[400px] ">
       <h1>Who We Are...</h1>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi sunt ut
       iste vitae fugiat eos aperiam veniam a! Ut natus deleniti alias recusandae

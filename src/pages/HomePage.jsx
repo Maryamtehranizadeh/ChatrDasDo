@@ -13,19 +13,19 @@ function HomePage() {
           </button>
         </Link>
 
-        <div className="text-[var(--primary-color)] text-lg md:w-2/5  mx-auto ">
+        {/* <div className="text-[var(--primary-color)] text-lg md:w-2/5  mx-auto ">
           {allTypes.map((type) => (
             <Link
               style={{ marginRight: "20px" }}
               key={type.id}
               to={`/${type.name}`}
             >
-              <li className="whitespace-nowrap overflow-hidden text-ellipsis list-none p-3  transition-all duration-700  shadow-sm hover:shadow-lg shadow-[var(--border-color)] hover:shadow-[var(--primary-color)] rounded-lg hover:text-[var(--p-color)]">
+              <li className="whitespace-nowrap overflow-hidden text-ellipsis list-none p-3  transition-all duration-500  shadow-sm hover:shadow-lg shadow-[var(--border-color)] hover:shadow-[var(--primary-color)] hover:sclae-103 rounded-lg">
                 {type.name}: {type.description}
               </li>
             </Link>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -63,7 +63,7 @@ function SearchBox() {
         </button>
       </form>
 
-      <div className=" justify-between mt-3 mr-4 md:mt-0 text-[var(--secondary-color)]">
+      <div className="mt-3 mr-4 md:mt-0 text-[var(--secondary-color)]">
         <select
           className=" border border-[var(--primary-color)] bg-[var(--primary-color)] cursor-pointer hover:border-[var(--secondary-color)]"
           name="gear_type_id"
@@ -72,11 +72,7 @@ function SearchBox() {
         >
           <option value="none">Category</option>
           {allTypes?.map((type) => (
-            <option
-              key={type.id}
-              value={type.name}
-              // onClick={() => setIsOpen(false)}
-            >
+            <option key={type.id} value={type.name}>
               {type.name}
             </option>
           ))}
