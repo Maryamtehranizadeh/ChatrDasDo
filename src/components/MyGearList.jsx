@@ -49,7 +49,7 @@ function MyGearList({ id }) {
   // console.log(data?.data);
 
   return (
-    <div className="flex flex-col p-10 mx-10 gap-y-10">
+    <div className="flex flex-col sm:p-10 mx-10 gap-y-10">
       {data?.data.map((gear) => (
         <div
           className="flex flex-col gap-y-10  bg-[var(--secondary-color)] md:flex-row justify-around  items-center shadow-md transition-all duration-500 ease-in-out hover:shadow-[var(--primary-color)] hover:shadow-lg hover:scale-104 rounded-lg py-5"

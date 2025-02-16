@@ -30,7 +30,7 @@ function Header() {
   };
 
   return (
-    <header className="bg-[var(--primary-color)] text-[var(--secondary-color)] flex justify-between items-baseline px-6 pt-6 pb-2 md:px-8 md:pt-8 md:pb-2">
+    <header className="bg-[var(--primary-color)] text-[var(--secondary-color)] flex justify-between items-baseline px-4 pt-6 pb-2 md:px-8 md:pt-8 md:pb-2">
       <div className="flex justify-between items-center cursor-pointer">
         <button
           className="block lg-md:hidden text-3xl py-1 focus:outline-none text-[var(--seondary-color)] hover:border-[var(--seondary-color)]"
