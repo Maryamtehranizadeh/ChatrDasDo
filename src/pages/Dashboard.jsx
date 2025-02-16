@@ -8,7 +8,7 @@ function Dashboard() {
   return (
     <div className="text-center">
       <h1 className="text-lg  md:text-3xl my-8">
-        Dashboard | Welcome "{userData.username}"
+        Dashboard | Welcome "{userData?.username}"
       </h1>
       <div>
         <MyGearList id={userData?.id} />

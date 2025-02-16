@@ -10,13 +10,13 @@ function GearPhotos({ id, info }) {
       </div>
     );
   return (
-    <div style={{ display: "flex", columnGap: "20px" }}>
+    <div className="flex flex-col gap-y-10  sm:flex-row sm:justify-evenly flex-wrap">
       {info?.data?.pictures.map((item) => (
         <div key={item?.picture_id}>
           <img
+            className="w-60 h-60 rounded-lg m-auto"
             src={`${pureBaseURL}${item.link}`}
             alt="Uploaded Photos"
-            style={{ width: "200px", height: "200px" }}
           />
         </div>
       ))}

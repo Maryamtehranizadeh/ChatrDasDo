@@ -22,6 +22,8 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
     ]);
   };
 
+  // console.log(photos);
+
   const removeHandler = (fileName) => {
     setPhotos((prev) => {
       const updatedPhotos = prev.filter(
@@ -58,7 +60,6 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
         completedDeletes === totalDeletes &&
         completedUploads === totalUploads
       ) {
-        // console.log("All deletions and uploads are done. Navigating...");
         skipHandler();
       }
     };

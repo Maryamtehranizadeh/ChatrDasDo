@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Loader from "./Loader";
 
 function CertificateDetails({ id }) {
-  console.log(id);
+  // console.log(id);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["certificate", id],

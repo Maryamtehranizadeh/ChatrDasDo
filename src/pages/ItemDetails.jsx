@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
 import CertificateDetails from "../components/CertificateDetails";
+import { cardClass } from "../config/twStyles";
 
 function ItemDetails() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ function ItemDetails() {
   });
 
   useEffect(() => {
-    console.log(data?.data);
+    // console.log(data?.data);
   }, [data]);
 
   if (isLoading) {
