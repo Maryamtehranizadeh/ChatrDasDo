@@ -49,12 +49,7 @@ function Filters() {
           onChange={changeHandler}
           id="country"
           name="country"
-          style={{
-            maxWidth: "100%",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
+          className="w-full md:w-[254px] xl:w-[280px]"
         >
           <option value="">Location</option>
           {countries
@@ -69,14 +64,13 @@ function Filters() {
               </option>
             ))}
         </select>
-
-        <label htmlFor="model">Model</label>
+        <hr />
+        <label htmlFor="model"> Model</label>
         <input
           onChange={changeHandler}
           id="model"
           type="text"
           name="model"
-          // placeholder="Model"
           style={{ width: "100%" }}
         />
         <label htmlFor="brand">Brand</label>
@@ -85,7 +79,6 @@ function Filters() {
           id="brand"
           type="text"
           name="brand"
-          // placeholder="Brand"
           style={{ width: "100%" }}
         />
         <label htmlFor="max_price">Maximum Price</label>
@@ -93,7 +86,6 @@ function Filters() {
           onChange={changeHandler}
           type="text"
           name="max_price"
-          // placeholder="Maximum Price"
           style={{ width: "100%" }}
         />
 
