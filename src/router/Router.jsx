@@ -55,7 +55,7 @@ function Router() {
       <Route path="/certifiers" element={<CertifierListPage />} />
       <Route path="/certifierdetails/:id" element={<CertifierDetails />} />
       <Route path="/addgear" element={<AddGearPage />} />
-      <Route path="/addcertficate" element={<AddCertificatePage />} />
+      <Route path="/addcertficate/:id" element={<AddCertificatePage />} />
       <Route path="/addcertifier" element={<AddCertifierPage />} />
       <Route path="/certificates" element={<CertificateListPage />} />
       <Route path="/about-us" element={<AboutUs />} />

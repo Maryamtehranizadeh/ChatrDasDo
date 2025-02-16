@@ -7,6 +7,7 @@ import { useUser } from "../context/UserProvider";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
+import CertificateDetails from "../components/CertificateDetails";
 
 function ItemDetails() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ function ItemDetails() {
   });
 
   useEffect(() => {
-    // console.log(data);
+    console.log(data?.data);
   }, [data]);
 
   if (isLoading) {
@@ -37,6 +38,10 @@ function ItemDetails() {
   };
   const editHandler = () => {
     navigate(`/editgear/${id}`);
+  };
+
+  const certificateHandler = (id) => {
+    navigate(`/addcertficate/${id}`);
   };
   return (
     <div style={{ margin: "40px" }}>
@@ -63,7 +68,20 @@ function ItemDetails() {
           {isLoggedIn && userData.id === data?.data.user && (
             <button onClick={editHandler}>Edit Details</button>
           )}
+          {isLoggedIn &&
+            userData.id === data?.data.user &&
+            data?.data.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c" && (
+              <button
+                onClick={() => certificateHandler(id)}
+                style={{ margin: "40px" }}
+              >
+                Add Certificates
+              </button>
+            )}
         </div>
+      </div>
+      <div>
+        <CertificateDetails id={data?.data.id} />
       </div>
     </div>
   );

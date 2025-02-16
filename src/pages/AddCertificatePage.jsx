@@ -4,9 +4,19 @@ import CertificateForm from "../components/CertificateForm";
 import axios from "axios";
 import { baseURL } from "../config/api";
 import { getCookie } from "../utils/cookie";
+import { useUser } from "../context/UserProvider";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AddCertificatePage() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  // console.log(id);
+  const { userData } = useUser();
+  // console.log(userData);
   const [certificate, setCertificate] = useState({
+    gear: id,
+    user: userData?.id,
     issue_date: "",
     expiration_date: "",
     porosity: 0,
@@ -38,6 +48,7 @@ function AddCertificatePage() {
       })
       .then((response) => {
         console.log(response);
+        navigate(`/itemdetails/${id}`);
       })
       .catch((error) => {
         console.log(error);

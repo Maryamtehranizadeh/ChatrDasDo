@@ -1,11 +1,12 @@
 import { getMyGears } from "../utils/getAll";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import styles from "./MyGearList.module.css";
 import { Link } from "react-router-dom";
 import { deleteGear } from "../utils/deleteAll";
 import { pureBaseURL } from "../config/api";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
+import TrashIcon from "./TrashIcon";
+import PencilIcon from "./PencilIcone";
 
 function MyGearList({ id }) {
   const queryClient = useQueryClient();
@@ -38,10 +39,6 @@ function MyGearList({ id }) {
     navigate(`/editgear/${id}`);
   };
 
-  const certificateHandler = (id) => {
-    navigate("/addcertficate");
-  };
-
   if (isLoading) {
     return <Loader />;
   }
@@ -49,52 +46,61 @@ function MyGearList({ id }) {
     console.log(error);
     return <h3>Error: {error.message}</h3>;
   }
-  console.log(data?.data);
+  // console.log(data?.data);
 
   return (
-    <div className={styles.container}>
+    <div className="flex flex-col p-10 mx-10 gap-y-10">
       {data?.data.map((gear) => (
-        <div className={styles.wing} key={gear.id}>
-          <Link to={`/itemdetails/${gear.id}`}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <img
-                style={{ width: "70px", height: "70px", marginRight: "18px" }}
-                src={
-                  gear.pictures.length === 0
-                    ? `/src/public/logo.png`
-                    : `${pureBaseURL}${gear.pictures[0].link}`
-                }
-                alt="Gear"
-              />
+        <div
+          className="flex flex-col gap-y-5 bg-[var(--secondary-color)] lg:flex-row justify-around  items-center shadow-md transition-all duration-500 ease-in-out hover:shadow-[var(--primary-color)] hover:shadow-lg hover:scale-104 rounded-lg py-5"
+          key={gear.id}
+        >
+          <div className="flex flex-row  w-1/2 m-auto justify-evenly items-center">
+            <div className="flex flex-row justify-evenly w-1/2 items-center ">
+              <Link to={`/itemdetails/${gear.id}`}>
+                <img
+                  className="w-[70px] h-[70px] rounded-md"
+                  src={
+                    gear.pictures.length === 0
+                      ? `/src/public/logo.png`
+                      : `${pureBaseURL}${gear.pictures[0].link}`
+                  }
+                  alt="Gear"
+                />
+              </Link>
               <h3>{gear.name}</h3>
             </div>
-          </Link>
-          <div>
-            Category:{" "}
-            {gear.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c"
-              ? "Wing"
-              : gear.gear_type === "49e81219-2646-44e2-b36c-3316ff0d26d3"
-                ? "Instrument"
-                : "Harness"}
+            <div className=" w-1/2 text-center">
+              Category:{" "}
+              {gear.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c"
+                ? "Wing"
+                : gear.gear_type === "49e81219-2646-44e2-b36c-3316ff0d26d3"
+                  ? "Instrument"
+                  : "Harness"}
+            </div>
           </div>
-          <div>
-            <p>
-              {gear.brand} - {gear.price} {gear.currency}
-            </p>{" "}
-          </div>
-          <div className={styles.buttons}>
-            {gear.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c" && (
-              <button onClick={() => certificateHandler(gear.id)}>
-                Add Certificates
+
+          <div className="flex flex-row w-1/2 m-auto justify-evenly ">
+            <div className="flex flex-row justify-evenly items-center w-1/2 ">
+              <p>{gear.brand}</p>
+              <p>
+                {gear.price} {gear.currency}
+              </p>{" "}
+            </div>
+            <div className="flex flex-row gap-x-3 justify-center items-center w-1/2 ">
+              <button
+                className="text-[var(--primary-color)] hover:text-[var(--secondary-color)]"
+                onClick={() => editHandler(gear.id)}
+              >
+                <PencilIcon />
               </button>
-            )}
-            <button onClick={() => editHandler(gear.id)}>Edit</button>
-            <button onClick={() => deleteHandler(gear.id)}>Delete</button>
+              <button
+                className="text-[var(--primary-color)] hover:text-[var(--secondary-color)]"
+                onClick={() => deleteHandler(gear.id)}
+              >
+                <TrashIcon />
+              </button>
+            </div>
           </div>
         </div>
       ))}

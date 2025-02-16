@@ -40,7 +40,7 @@ function CertificateForm({
       <select name="certifier" id="certifier">
         <option value="none">Certifiers</option>
         {data?.data.map((certifier) => (
-          <option key={certifier.id} value={certifier.name}>
+          <option key={certifier.id} value={certifier.id}>
             {certifier.name}
           </option>
         ))}
