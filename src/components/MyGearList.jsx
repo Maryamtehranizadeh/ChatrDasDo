@@ -52,11 +52,11 @@ function MyGearList({ id }) {
     <div className="flex flex-col p-10 mx-10 gap-y-10">
       {data?.data.map((gear) => (
         <div
-          className="flex flex-col gap-y-5 bg-[var(--secondary-color)] lg:flex-row justify-around  items-center shadow-md transition-all duration-500 ease-in-out hover:shadow-[var(--primary-color)] hover:shadow-lg hover:scale-104 rounded-lg py-5"
+          className="flex flex-col gap-y-10  bg-[var(--secondary-color)] md:flex-row justify-around  items-center shadow-md transition-all duration-500 ease-in-out hover:shadow-[var(--primary-color)] hover:shadow-lg hover:scale-104 rounded-lg py-5"
           key={gear.id}
         >
-          <div className="flex flex-row  w-1/2 m-auto justify-evenly items-center">
-            <div className="flex flex-row justify-evenly w-1/2 items-center ">
+          <div className="flex flex-row w-full md:w-1/2 m-auto md:justify-evenly items-center ">
+            <div className="flex flex-row justify-evenly w-1/2 items-center  ">
               <Link to={`/itemdetails/${gear.id}`}>
                 <img
                   className="w-[70px] h-[70px] rounded-md"
@@ -70,8 +70,8 @@ function MyGearList({ id }) {
               </Link>
               <h3>{gear.name}</h3>
             </div>
-            <div className=" w-1/2 text-center">
-              Category:{" "}
+            <div className=" w-1/2 text-center ">
+              {" "}
               {gear.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c"
                 ? "Wing"
                 : gear.gear_type === "49e81219-2646-44e2-b36c-3316ff0d26d3"
@@ -80,7 +80,7 @@ function MyGearList({ id }) {
             </div>
           </div>
 
-          <div className="flex flex-row w-1/2 m-auto justify-evenly ">
+          <div className="flex flex-row w-full md:w-1/2 m-auto justify-evenly items-center">
             <div className="flex flex-row justify-evenly items-center w-1/2 ">
               <p>{gear.brand}</p>
               <p>
