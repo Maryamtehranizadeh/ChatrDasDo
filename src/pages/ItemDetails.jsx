@@ -45,44 +45,47 @@ function ItemDetails() {
     navigate(`/addcertficate/${id}`);
   };
   return (
-    <div style={{ margin: "40px" }}>
-      <h1>Details about {data?.data.name}:</h1>
-      <div>
-        <div>
+    <div className="m-10 text-center">
+      <h1 className="text-lg sm:text-xl md:text-3xl md:my-10">
+        Details about {data?.data.name}:
+      </h1>
+      <div className="bg-[var(--secondary-color)] shadow-2xl p-10 flex flex-col sm:flex-row rounded-2xl ">
+        <div className=" w-auto sm:w-1/2">
           <GearPhotos id={id} info={data} />
         </div>
-        <h4>Name: {data?.data.name}</h4>
-        <h4>Model: {data?.data.model}</h4>
-        <hr />
-        <p>Brand: {data?.data.brand}</p>
-        <hr />
-        <h4>Certificate: {data?.data.properties.certificate}</h4>
-        <p>Color: {data?.data.properties.color}</p>
-        <p>Weight:{data?.data.properties.weight}</p>
-        <span>
-          {data?.data.price} {data?.data.currency}
-        </span>
-        <div>
-          <button onClick={showCertificate} style={{ margin: "40px" }}>
-            Show Certificate
-          </button>
-          {isLoggedIn && userData.id === data?.data.user && (
-            <button onClick={editHandler}>Edit Details</button>
-          )}
-          {isLoggedIn &&
-            userData.id === data?.data.user &&
-            data?.data.gear_type === "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c" && (
-              <button
-                onClick={() => certificateHandler(id)}
-                style={{ margin: "40px" }}
-              >
-                Add Certificates
-              </button>
+        <div className=" flex flex-col gap-y-10 p-10 w-auto  sm:w-1/2">
+          <h4>Name: {data?.data.name}</h4>
+          <h4>Model: {data?.data.model}</h4>
+          <p>Brand: {data?.data.brand}</p>
+          {/* <h4>Certificate: {data?.data.properties.certificate}</h4> */}
+          <p>Color: {data?.data.properties.color}</p>
+          <p>Weight:{data?.data.properties.weight}</p>
+          <span className="text-2xl text-[var(--primary-color)]">
+            {data?.data.price} {data?.data.currency}
+          </span>
+          <div>
+            <button onClick={showCertificate} style={{ margin: "40px" }}>
+              Show Certificate
+            </button>
+            {isLoggedIn && userData.id === data?.data.user && (
+              <button onClick={editHandler}>Edit Details</button>
             )}
+            {isLoggedIn &&
+              userData.id === data?.data.user &&
+              data?.data.gear_type ===
+                "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c" && (
+                <button
+                  onClick={() => certificateHandler(id)}
+                  style={{ margin: "40px" }}
+                >
+                  Add Certificates
+                </button>
+              )}
+          </div>
+          <div>
+            <CertificateDetails id={data?.data.id} />
+          </div>
         </div>
-      </div>
-      <div>
-        <CertificateDetails id={data?.data.id} />
       </div>
     </div>
   );
