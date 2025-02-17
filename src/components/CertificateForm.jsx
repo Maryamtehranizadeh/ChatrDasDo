@@ -45,7 +45,7 @@ function CertificateForm({
           </option>
         ))}
       </select>
-      <label htmlFor="picture">Photos of the certificate(s)</label>
+      {/* <label htmlFor="picture">Photos of the certificate(s)</label>
       <input
         type="file"
         name="picture"
@@ -84,16 +84,17 @@ function CertificateForm({
             </button>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          columnGap: "20px",
-          alignItems: "center",
-          marginBottom: "20px",
-        }}
+        className="flex flex-row gap-x-[20px] items-center mb-[20px]"
+        // style={{
+        //   display: "flex",
+        //   flexDirection: "row",
+        //   columnGap: "20px",
+        //   alignItems: "center",
+        //   marginBottom: "20px",
+        // }}
       >
         <p>Lines need trim?</p>
         <label htmlFor="trim-yes">Yes</label>

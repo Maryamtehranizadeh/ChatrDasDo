@@ -5,7 +5,8 @@ function GearPhotos({ id, info }) {
   if (info?.data?.pictures?.length === 0)
     return (
       <div>
-        <h2>Item has no photos</h2>
+        <h2 className="text-lg md:2xl">Item has no photos</h2>
+        <img src="/src/public/logo.png" alt="No photo" />
         <hr />
       </div>
     );

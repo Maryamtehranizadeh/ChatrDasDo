@@ -74,10 +74,7 @@ function ItemDetails() {
               userData.id === data?.data.user &&
               data?.data.gear_type ===
                 "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c" && (
-                <button
-                  onClick={() => certificateHandler(id)}
-                  style={{ margin: "40px" }}
-                >
+                <button className="m-10" onClick={() => certificateHandler(id)}>
                   Add Certificates
                 </button>
               )}

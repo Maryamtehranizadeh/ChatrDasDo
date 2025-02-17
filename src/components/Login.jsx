@@ -37,7 +37,7 @@ function Login() {
   return (
     <form
       onSubmit={submitHandler}
-      className="flex flex-col p-[30px] my-[100px] max-w-[500px] m-auto shadow-2xl shadow-[var(--primary-color)] rounded-2xl "
+      className="bg-[var(--secondary-color)] flex flex-col p-[30px] my-[100px] max-w-[500px] m-auto shadow-2xl shadow-[var(--primary-color)] rounded-2xl "
     >
       <span className="text-lg mb-[20px] text-[var(--p-color)]">
         To use Air Gear services, please login:

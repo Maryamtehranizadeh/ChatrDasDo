@@ -23,7 +23,7 @@ function AddCertificatePage() {
     lines_need_trim: null,
     fabric_condition: null,
     certifier: "",
-    picture: [],
+    // picture: [],
   });
 
   const changeHandler = (e) => {
@@ -55,12 +55,13 @@ function AddCertificatePage() {
       });
   };
 
-  const deleteHandler = (id) => {
-    const updatedFiles = certificate.picture.filter(
-      (file) => file.lastModified !== id,
-    );
-    setCertificate((prev) => ({ ...prev, picture: updatedFiles }));
-  };
+  // const deleteHandler = (id) => {
+  //   const updatedFiles = certificate?.picture?.filter(
+  //     (file) => file.lastModified !== id,
+  //   );
+  //   setCertificate((prev) => ({ ...prev, picture: updatedFiles }));
+  // };
+
   // console.log(certificate);
 
   return (
@@ -69,7 +70,7 @@ function AddCertificatePage() {
         changeHandler={changeHandler}
         submitHandler={submitHandler}
         certificate={certificate}
-        deleteHandler={deleteHandler}
+        // deleteHandler={deleteHandler}
       />
     </div>
   );
