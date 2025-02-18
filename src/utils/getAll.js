@@ -74,10 +74,18 @@ const getCertificates = () => {
 
 const getCertificateDetails = ({ queryKey }) => {
   const [, id] = queryKey;
-  return axios.get(`${baseURL}certificates/${id}/`, {
+  return axios.get(`${baseURL}gears/${id}/certificates/`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Token ${getCookie()}`,
+    },
+  });
+};
+const getCertificatePhotos = ({ queryKey }) => {
+  const [, id] = queryKey;
+  return axios.get(`${baseURL}certificates/${id}/pictures/`, {
+    headers: {
+      "Content-Type": "application/json",
     },
   });
 };
@@ -121,4 +129,5 @@ export {
   getSpecificGear,
   searchedGears,
   getCertificateDetails,
+  getCertificatePhotos,
 };

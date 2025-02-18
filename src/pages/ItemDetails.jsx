@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
 import CertificateDetails from "../components/CertificateDetails";
-import { cardClass } from "../config/twStyles";
 
 function ItemDetails() {
   const { id } = useParams();
@@ -44,29 +43,32 @@ function ItemDetails() {
   const certificateHandler = (id) => {
     navigate(`/addcertficate/${id}`);
   };
+  // console.log(userData.id);
   return (
     <div className="m-10 text-center">
       <h1 className="text-lg sm:text-xl md:text-3xl md:my-10">
         Details about {data?.data.name}:
       </h1>
-      <div className="bg-[var(--secondary-color)] shadow-2xl p-10 flex flex-col sm:flex-row rounded-2xl ">
-        <div className=" w-auto sm:w-1/2">
+      <div className="bg-[var(--secondary-color)] shadow-2xl p-10 flex flex-col rounded-2xl ">
+        <div>
           <GearPhotos id={id} info={data} />
         </div>
-        <div className=" flex flex-col gap-y-10 p-10 w-auto  sm:w-1/2">
-          <h4>Name: {data?.data.name}</h4>
-          <h4>Model: {data?.data.model}</h4>
-          <p>Brand: {data?.data.brand}</p>
-          {/* <h4>Certificate: {data?.data.properties.certificate}</h4> */}
-          <p>Color: {data?.data.properties.color}</p>
-          <p>Weight:{data?.data.properties.weight}</p>
+        <div className=" flex flex-col gap-y-10 px-10 w-full text-center">
+          <h4 className="text-xl mt-10 text-[var(--primary-color)] md:text-2xl">
+            Name: {data?.data.name}
+          </h4>
+          <div className="flex flex-row justify-evenly">
+            <h4>Model: {data?.data.model}</h4>
+            <p>Brand: {data?.data.brand}</p>
+          </div>
+          <div className="flex flex-row justify-evenly">
+            <p>Color: {data?.data.properties.color}</p>
+            <p>Weight:{data?.data.properties.weight}</p>
+          </div>
           <span className="text-2xl text-[var(--primary-color)]">
             {data?.data.price} {data?.data.currency}
           </span>
           <div>
-            <button onClick={showCertificate} style={{ margin: "40px" }}>
-              Show Certificate
-            </button>
             {isLoggedIn && userData.id === data?.data.user && (
               <button onClick={editHandler}>Edit Details</button>
             )}
@@ -74,15 +76,18 @@ function ItemDetails() {
               userData.id === data?.data.user &&
               data?.data.gear_type ===
                 "23079e6f-fdbc-40b3-bb49-85f49d7a8b8c" && (
-                <button className="m-10" onClick={() => certificateHandler(id)}>
+                <button
+                  className="ml-10"
+                  onClick={() => certificateHandler(id)}
+                >
                   Add Certificates
                 </button>
               )}
           </div>
-          <div>
-            <CertificateDetails id={data?.data.id} />
-          </div>
         </div>
+      </div>
+      <div>
+        <CertificateDetails id={data?.data.id} />
       </div>
     </div>
   );

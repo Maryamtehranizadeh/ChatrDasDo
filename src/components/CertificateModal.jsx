@@ -1,28 +1,14 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import PhotoModal from "./PhotoModal";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { pureBaseURL, baseURL } from "../config/api";
+import { pureBaseURL } from "../config/api";
 import { getCookie } from "../utils/cookie";
 
-function PhotoModal({ itemId, pictures, setIsModal }) {
+function CertificateModal({ modal, setModal, itemId, pictures, setPictures }) {
+  console.log(pictures);
   const [loadingButton, setLoadingButton] = useState(false);
   const [photos, setPhotos] = useState(pictures || []);
-
-  const navigate = useNavigate();
-
-  const skipHandler = () => {
-    setIsModal(false);
-    navigate(`/itemdetails/${itemId}`);
-  };
-  const photoHandler = (event) => {
-    const selectedPhotos = event.target.files;
-    setPhotos((previousPhotos) => [
-      ...previousPhotos,
-      ...Array.from(selectedPhotos),
-    ]);
-  };
-
-  // console.log(photos);
 
   const removeHandler = (fileName) => {
     setPhotos((prev) => {
@@ -33,15 +19,28 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
     });
   };
 
+  const photoHandler = (e) => {
+    // console.log(e.target.value);
+    const selectedPhotos = e.target.files;
+    setPhotos((previousPhotos) => [
+      ...previousPhotos,
+      ...Array.from(selectedPhotos),
+    ]);
+  };
+
   useEffect(() => {
-    if (photos.length > 0) {
-      // console.log(photos);
-    }
+    console.log(photos.length);
   }, [photos]);
+
+  const skipHandler = () => {
+    setModal(false);
+  };
+  const closeHandler = () => {
+    setModal(false);
+  };
 
   const deletedPhotos = pictures?.filter((pic) => !photos?.includes(pic));
   const addedPhotos = photos?.filter((photo) => !pictures?.includes(photo));
-  const stayingPhotos = pictures?.filter((pic) => photos.includes(pic));
 
   const addPhotoHandler = () => {
     let completedDeletes = 0;
@@ -64,11 +63,14 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
     if (deletedPhotos?.length > 0) {
       deletedPhotos?.forEach((photo) => {
         axios
-          .delete(`${baseURL}gears/${itemId}/pictures/${photo.picture_id}/`, {
-            headers: {
-              Authorization: `Token ${getCookie()}`,
+          .delete(
+            `${baseURL}certificates/${itemId}/pictures/${photo.picture_id}/`,
+            {
+              headers: {
+                Authorization: `Token ${getCookie()}`,
+              },
             },
-          })
+          )
           .then((response) => {
             // console.log(`Deleted photo: ${photo.picture_id}`, response);
             if (response.status === 204) {
@@ -91,7 +93,7 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
         const formData = new FormData();
         formData.append("image", photo);
         axios
-          .post(`${baseURL}gears/${itemId}/pictures/`, formData, {
+          .post(`${baseURL}certificates/${itemId}/pictures/`, formData, {
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Token ${getCookie()}`,
@@ -99,6 +101,7 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
           })
           .then((response) => {
             if (response.status === 201) {
+              console.log(response?.data.id);
               completedUploads++;
               checkCompletion();
             }
@@ -113,10 +116,6 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
     }
   };
 
-  const closeHandler = () => {
-    setIsModal(false);
-  };
-
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
@@ -124,28 +123,24 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
       role="dialog"
       aria-modal="true"
     >
-      <div className="bg-[var(--secondary-color)] rounded-lg shadow-lg p-6 max-w-xl w-full">
+      <div className="text-left bg-[var(--secondary-color)] rounded-lg shadow-lg p-6 max-w-xl w-full">
         <h2
-          className="text-lg font-semibold text-gray-800 "
+          className="text-lg font-semibold text-[var(--primary-color)] "
           style={{ marginBottom: "35px", color: "var(--p-color)" }}
         >
           {pictures?.length > 0
-            ? "Now edit your Item photos"
-            : "Now add some photos of your Item"}
+            ? "Edit your certificate photos"
+            : "Add photo of your certificate"}
         </h2>
+
         <div style={{ marginBottom: "25px" }}>
           <label
+            className=" bg-[var(--primary-color)] text-[var(--secondary-color)] rounded-md py-2 px-3 cursor-pointer"
             htmlFor="photo"
-            style={{
-              backgroundColor: "var(--primary-color)",
-              color: "var(--secondary-color)",
-              borderRadius: "5px",
-              padding: "10px 15px",
-              cursor: "pointer",
-            }}
           >
             Browse
           </label>
+
           <input
             id="photo"
             type="file"
@@ -156,17 +151,14 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
           />
         </div>
         {photos.length > 0 && (
-          <div style={{ marginTop: "10px" }}>
+          <div style={{ marginTop: "10px", backgroundColor: "pink" }}>
             {photos.map((photo, index) => (
               <div
+                className="flex justify-between mb-3"
                 key={photo.picture_id || photo.lastModified}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: "10px",
-                }}
               >
                 <img
+                  className="w-10 h-10 object-cover"
                   src={
                     photo instanceof File || photo instanceof Blob
                       ? URL.createObjectURL(photo)
@@ -222,6 +214,7 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
                   Maybe Later... Skip!
                 </button>
               )}
+
               <button onClick={closeHandler}>Close... Back to the form</button>
             </div>
           )}
@@ -231,4 +224,4 @@ function PhotoModal({ itemId, pictures, setIsModal }) {
   );
 }
 
-export default PhotoModal;
+export default CertificateModal;

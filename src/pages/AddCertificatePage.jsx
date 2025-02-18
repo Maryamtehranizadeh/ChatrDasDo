@@ -40,7 +40,7 @@ function AddCertificatePage() {
     e.preventDefault();
     console.log(certificate);
     axios
-      .post(`${baseURL}certificates/`, certificate, {
+      .post(`${baseURL}gears/${id}/certificates/`, certificate, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Token ${getCookie()}`,

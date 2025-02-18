@@ -103,7 +103,7 @@ function ItemForm({ submitHandler, initialData = {}, initialProperties = {} }) {
         />
       )}
       <button type="submit">
-        {Object.keys(initialData).length === 0 ? "Add Gear" : "Update Gear"}
+        {Object.keys(initialData).length === 0 ? "Add Gear" : "Edit Gear"}
       </button>
     </form>
   );

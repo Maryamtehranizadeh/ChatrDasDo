@@ -8,6 +8,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import PhotoModal from "../components/PhotoModal";
 import toast from "react-hot-toast";
+import Loader from "../components/Loader";
 
 function EditGear() {
   const { id } = useParams();
@@ -23,12 +24,11 @@ function EditGear() {
   if (isError) return <h2>{error?.message}</h2>;
 
   const editHandler = (form) => {
-    // console.log(form);
-    let isFornValid = true;
-    // console.log(form);
+    let isFormValid = true;
+    console.log(form);
     Object.keys(form).forEach((key) => {
       if (!form[key]) {
-        isFornValid = false;
+        isFormValid = false;
         if (key === "gear_type_id") {
           toast.error("Please choose category!");
         } else {
@@ -36,7 +36,7 @@ function EditGear() {
         }
       }
     });
-    if (!isFornValid) return;
+    if (!isFormValid) return;
     axios
       .put(
         `${baseURL}gears/${id}/`,
